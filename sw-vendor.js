@@ -1,11 +1,10 @@
 // ══════════════════════════════════════════════════════
-//  NOURA — SERVICE WORKER
-//  Required for "Add to Home Screen" install prompts to
-//  fire on Chrome/Android. Also caches the app shell so the
-//  UI still loads if the network drops mid-session.
+//  NOURA FOR BUSINESS — SERVICE WORKER
+//  Separate from the consumer app's sw.js — own cache name,
+//  own app shell, so installing one doesn't affect the other.
 // ══════════════════════════════════════════════════════
-const CACHE_NAME = 'noura-shell-v1';
-const APP_SHELL = ['index.html', 'manifest.json', 'favicon.png', 'icons/icon-192.png'];
+const CACHE_NAME = 'noura-vendor-shell-v1';
+const APP_SHELL = ['vendor.html', 'manifest-vendor.json', 'favicon.png', 'icons/icon-192.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -23,8 +22,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Network-first for everything except the cached app shell —
-// live data (restaurants, AI, recipes) should never be stale.
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
