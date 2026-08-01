@@ -3140,14 +3140,5 @@ if ('serviceWorker' in navigator) {
 }
 
 </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw-vendor.js').then(function () {
-      console.log('Vendor service worker registered: /sw-vendor.js');
-    }).catch(function (err) { console.warn('Vendor SW register failed:', err); });
-  });
-}
-</script>
 </body>
 </html>

@@ -4318,14 +4318,5 @@ function openAdminPanel(){   window.open('noura-admin.html','_blank');  }
 function openLanding(){      window.open('noura-landing.html','_blank');}
 
 </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js').then(function () {
-      console.log('Service worker registered: /sw.js');
-    }).catch(function (err) { console.warn('SW register failed:', err); });
-  });
-}
-</script>
 </body>
 </html>
