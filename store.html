@@ -2304,5 +2304,31 @@ function toast(msg) {
 document.addEventListener('DOMContentLoaded', loadStore);
 
 </script>
+<script>
+(function(){
+  function getStoreSlug(){
+    try{
+      const path = location.pathname || '';
+      const m = path.match(/^/store/([^/]+)/);
+      if(m && m[1]) return decodeURIComponent(m[1]);
+      const p = new URLSearchParams(location.search);
+      if(p.has('v')) return p.get('v');
+    }catch(e){}
+    return null;
+  }
+  const STORE_SLUG = getStoreSlug();
+  const STORE_URL = STORE_SLUG ? (location.origin + '/store/' + encodeURIComponent(STORE_SLUG)) : location.href;
+  try{ const s = document.getElementById('share-link'); if(s){ s.textContent = STORE_URL; s.dataset.url = STORE_URL; } }catch(e){}
+  window.NOURA_STORE = window.NOURA_STORE || {}; window.NOURA_STORE.slug = STORE_SLUG; window.NOURA_STORE.url = STORE_URL;
+  window.copyStoreLink = function(){ if(navigator.clipboard) navigator.clipboard.writeText(STORE_URL).catch(()=>{}); };
+  function applyImgFallback(root){ (root||document).querySelectorAll('img').forEach((img)=>{ if(!img._nouraFallbackAttached){ img._nouraFallbackAttached = true; img.onerror = function(){ img.onerror=null; img.src='/icons/icon-192.png'; }; } }); }
+  applyImgFallback();
+  const gallery = document.getElementById('gallery-content');
+  function ensureGalleryEmptyState(){ if(!gallery) return; const hasPhoto = gallery.querySelector('img, [data-photo]'); if(!hasPhoto && gallery.textContent.trim().length===0) gallery.innerHTML = '<div class="empty">No photos uploaded yet.</div>'; }
+  if(gallery){ const mo = new MutationObserver(()=>{ applyImgFallback(gallery); ensureGalleryEmptyState(); }); mo.observe(gallery, { childList:true, subtree:true, characterData:true }); setTimeout(ensureGalleryEmptyState,1100); }
+  const homeMenuPreview = document.getElementById('home-menu-preview');
+  if(homeMenuPreview){ setTimeout(()=>{ if(homeMenuPreview.children.length===0) homeMenuPreview.innerHTML = '<div class="empty">No menu items yet.</div>'; },1100); }
+})();
+</script>
 </body>
 </html>

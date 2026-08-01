@@ -1786,3 +1786,83 @@ Be concise (max 4-6 lines unless a full recipe is requested), warm, and practica
     utils: { lsGet, lsSet, lsDel, uid },
   };
 })();
+
+
+/* NOURA-LAUNCH-FIXES: SERVICES OVERRIDES
+   - Adds vendorService.publishToDirectory() that POSTs to /vendors
+   - Adds restaurantService.getBySlug() that GETs /vendors/slug/{slug}
+   This override is appended at file end and is idempotent.
+*/
+(function(){
+  // Avoid errors if apiRequest is not available
+  if (typeof apiRequest !== 'function') { console.warn('apiRequest not found — services overrides skipped'); return; }
+
+  // vendorService.publishToDirectory override
+  try {
+    if (typeof vendorService !== 'undefined') {
+      vendorService.publishToDirectory = vendorService.publishToDirectory || (async function(){
+        var local = this._get ? this._get() : null;
+        if (!local) return { ok:false, reason:'No local vendor' };
+        var payload = {
+          name: local.businessName || local.name || '',
+          username: local.username || local.slug || (local.businessName ? slugify(local.businessName) : ''),
+          description: local.description || local.bio || '',
+          category: local.category || '',
+          phone: local.phone || '',
+          whatsapp: local.whatsapp || local.whatsappNumber || '',
+          website: local.website || '',
+          address: local.address || '',
+          hours: local.hours || null,
+          priceRange: local.priceRange || null,
+          delivery: !!local.delivery,
+          pickup: !!local.pickup,
+          logoUrl: local.logoUrl || null,
+          coverUrl: local.coverUrl || null,
+          menu: local.menu || []
+        };
+        try {
+          var res = await apiRequest('/vendors', { method: 'POST', body: payload });
+          if (res && (res.ok || res.vendor)) {
+            var v = res.vendor || res;
+            this._set && this._set(v);
+            return { ok:true, vendor: v };
+          } else {
+            return { ok:false, reason: (res && res.reason) ? res.reason : 'Publish failed' };
+          }
+        } catch (err) {
+          console.error('publishToDirectory error', err);
+          return { ok:false, reason: (err && err.message) ? err.message : String(err) };
+        }
+      });
+    } else {
+      console.warn('vendorService not defined — publish override skipped');
+    }
+  } catch(e){ console.error('publish override error', e); }
+
+  // restaurantService.getBySlug override
+  try {
+    if (typeof restaurantService !== 'undefined') {
+      restaurantService.getBySlug = restaurantService.getBySlug || (async function(slug){
+        if (!slug) return { ok:false, reason:'Missing slug' };
+        try {
+          var res = await apiRequest('/vendors/slug/' + encodeURIComponent(slug));
+          if (res && (res.vendor || res.ok)) {
+            var vendor = res.vendor || res;
+            return { ok:true, vendor: vendor };
+          } else if (res && res.status === 404) {
+            return { ok:false, code:404, reason:'Not found' };
+          } else {
+            return { ok:false, reason: (res && res.reason) ? res.reason : 'Failed to load vendor' };
+          }
+        } catch (err) {
+          console.error('getBySlug error', err);
+          return { ok:false, reason: (err && err.message) ? err.message : String(err) };
+        }
+      });
+    } else {
+      console.warn('restaurantService not defined — getBySlug override skipped');
+    }
+  } catch(e){ console.error('getBySlug override error', e); }
+
+  console.log('Noura launch-fixes: services overrides applied');
+})();

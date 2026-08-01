@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "(?<slug>[^.]+)\\.noura\\.app" }
+      ],
+"destination": "/store/:slug"
+    },
+    { "source": "/vendor", "destination": "/vendor.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/store/:slug", "destination": "/store.html?v=:slug" }
+  ]
+}

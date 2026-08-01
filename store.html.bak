@@ -2,56 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0A0805">
-<title>Noura Vendor Portal — Grow Your Food Business Online</title>
-<meta name="description" content="List your restaurant on Noura for free. Manage your digital menu, track orders, reply to reviews, and get discovered by local food lovers across Nigeria.">
-<meta name="keywords" content="Noura vendor, list restaurant Nigeria, food business online, digital menu Nigeria, restaurant management app, sell food online Nigeria">
-<meta name="author" content="Fluxiq Labs">
+<title>Loading… | Noura</title>
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://noura.fluxiqlabs.com/vendor">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://noura.fluxiqlabs.com/vendor">
-<meta property="og:title" content="Noura Vendor Portal — Grow Your Food Business Online">
-<meta property="og:description" content="Free digital storefront for local food vendors — menu, orders, reviews, and analytics in one place.">
-<meta property="og:image" content="https://noura.fluxiqlabs.com/og-vendor.jpg">
-<meta property="og:site_name" content="Noura">
-<meta property="og:locale" content="en_NG">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Noura Vendor Portal — Grow Your Food Business Online">
-<meta name="twitter:description" content="List your restaurant for free and get discovered by local food lovers.">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="manifest" href="manifest-vendor.json">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="mobile-web-app-capable" content="yes">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.page-enter{animation:pageIn .28s cubic-bezier(.16,1,.3,1)}
-.nav-item{transition:all .18s cubic-bezier(.16,1,.3,1) !important}
-.nav-item.active{transform:translateX(2px)}
-
-/* ── SPLASH ── */
-#vs-splash{align-items:center;justify-content:center;overflow:hidden;position:relative;background:var(--bg)}
-.v-splash-ring{position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid #E8943A20;animation:vRingExpand 3s ease-out infinite;z-index:1}
-.v-splash-ring:nth-child(2){animation-delay:.8s;width:320px;height:320px}
-.v-splash-ring:nth-child(3){animation-delay:1.6s;width:440px;height:440px}
-.v-splash-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-.v-slm{width:96px;height:96px;border-radius:28px;background:var(--acs);border:1.5px solid #E8943A50;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;animation:vSplashPop .7s cubic-bezier(.34,1.56,.64,1) both,vRingPulse 1.8s 1s ease-out infinite}
-.v-swm{font-family:'Sora',sans-serif;font-size:44px;font-weight:800;color:var(--t1);letter-spacing:-1.5px;animation:vSplashFade .6s .35s ease both;line-height:1}
-.v-swm span{color:var(--ac)}
-.v-swm small{display:block;font-size:13px;font-weight:500;color:var(--t2);letter-spacing:0;margin-top:6px}
-.v-stag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t2);margin-top:14px;animation:vSplashFade .5s .6s ease both}
-.v-sdots{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);display:flex;gap:8px;animation:vSplashFade .5s .8s ease both;z-index:2}
-.v-sdot{width:6px;height:6px;border-radius:50%;background:var(--bd);transition:all .4s cubic-bezier(.34,1.56,.64,1)}
-.v-sdot.a{background:var(--ac);transform:scale(1.5)}
-@keyframes vSplashPop{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
-@keyframes vSplashFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@keyframes vRingExpand{0%{opacity:.6;transform:scale(.5)}100%{opacity:0;transform:scale(1.4)}}
-@keyframes vRingPulse{0%,100%{box-shadow:0 0 0 0 #E8943A40}50%{box-shadow:0 0 0 18px #E8943A00}}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#0A0805;--sf:#131009;--sfu:#1C1710;--bd:#2A2318;
   --ac:#E8943A;--acs:#E8943A14;--ac2:#F5B56A;
@@ -59,613 +16,213 @@
   --ok:#4CAF50;--er:#E05252;--warn:#F5A623;
   --r:12px;--rf:999px;
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;min-height:100vh}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:inherit}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+.wrap{max-width:560px;margin:0 auto;height:100%;background:var(--bg);position:relative;display:flex;flex-direction:column}
 
-/* ── SCREEN SYSTEM ── */
-.vscreen{display:none;min-height:100vh;flex-direction:column}
-.vscreen.active{display:flex}
+#store-loading,#store-notfound{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center}
+.spinner{width:32px;height:32px;border:3px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:14px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── AUTH SCREENS ── */
-.auth-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:var(--bg)}
-.auth-logo{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:var(--t1);margin-bottom:4px}
-.auth-logo span{color:var(--ac)}
-.auth-sub{font-size:13px;color:var(--t2);margin-bottom:32px}
-.auth-card{width:100%;max-width:420px;background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:28px}
-.auth-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);margin-bottom:6px}
-.auth-desc{font-size:14px;color:var(--t2);margin-bottom:24px;line-height:1.6}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%;background:var(--sfu);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;color:var(--t1);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ac)}
-.field input::placeholder,.field textarea::placeholder{color:var(--t3)}
-.field select option{background:var(--sf)}
-.btn-primary{width:100%;background:var(--ac);color:#0A0805;font-family:'Sora',sans-serif;font-size:15px;font-weight:700;padding:14px;border-radius:10px;border:none;transition:opacity .2s;margin-top:4px}
-.btn-primary:active{opacity:.85}
-.btn-ghost{width:100%;background:transparent;color:var(--t2);font-size:14px;font-weight:500;padding:12px;border-radius:10px;border:1px solid var(--bd);transition:border-color .2s;margin-top:8px}
-.btn-ghost:hover{border-color:var(--t2)}
-.auth-link{text-align:center;margin-top:16px;font-size:13px;color:var(--t2)}
-.auth-link a{color:var(--ac);font-weight:600}
+.topbar{display:flex;align-items:center;gap:10px;padding:14px 16px;flex-shrink:0;border-bottom:1px solid var(--bd);background:var(--bg);position:sticky;top:0;z-index:50}
+.topbar-logo{width:30px;height:30px;border-radius:9px;background:var(--acs);border:1px solid #E8943A40;display:flex;align-items:center;justify-content:center;font-size:15px;overflow:hidden;background-size:cover;background-position:center}
+.topbar-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-btn{width:34px;height:34px;border-radius:50%;background:var(--sfu);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 
-/* ── STATUS SCREENS ── */
-.status-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
-.status-icon{font-size:64px;margin-bottom:20px}
-.status-title{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:var(--t1);margin-bottom:10px}
-.status-body{font-size:15px;color:var(--t2);line-height:1.7;max-width:340px;margin:0 auto 28px}
+.tscreens{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.tscreen{display:none}
+.tscreen.active{display:block;animation:tfade .25s ease}
+@keyframes tfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── SIDEBAR LAYOUT ── */
-.vapp{display:flex;min-height:100vh}
-.sidebar{width:240px;min-height:100vh;background:var(--sf);border-right:1px solid var(--bd);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:50;transition:transform .3s}
-.sidebar-logo{padding:20px 20px 16px;border-bottom:1px solid var(--bd)}
-.sidebar-logo .name{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--t1)}
-.sidebar-logo .name span{color:var(--ac)}
-.sidebar-logo .badge{display:inline-block;background:var(--acs);color:var(--ac);font-size:10px;font-weight:600;padding:2px 8px;border-radius:var(--rf);margin-top:4px}
-.sidebar-nav{flex:1;overflow-y:auto;padding:12px 0}
-.sidebar-nav::-webkit-scrollbar{display:none}
-.nav-section-title{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;padding:14px 20px 6px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:10px 20px;font-size:14px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .15s;border-left:3px solid transparent}
-.nav-item:hover{background:var(--sfu);color:var(--t1)}
-.nav-item.active{background:var(--acs);color:var(--ac);border-left-color:var(--ac);font-weight:600}
-.nav-item .ni{font-size:18px;width:20px;text-align:center}
-.sidebar-footer{padding:16px 20px;border-top:1px solid var(--bd)}
-.sidebar-avatar{display:flex;align-items:center;gap:10px}
-.sa-pic{width:36px;height:36px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:#0A0805;flex-shrink:0}
-.sa-info .sa-name{font-size:13px;font-weight:600;color:var(--t1)}
-.sa-info .sa-role{font-size:11px;color:var(--t2)}
-.main-content{margin-left:240px;flex:1;min-height:100vh;display:flex;flex-direction:column}
-.top-bar{height:60px;background:var(--sf);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:40;flex-shrink:0}
-.top-bar-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--t1)}
-.top-bar-actions{display:flex;gap:10px;align-items:center}
-.icon-btn{width:38px;height:38px;border-radius:10px;background:var(--sfu);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:border-color .2s}
-.icon-btn:hover{border-color:var(--ac)}
-.page-body{flex:1;padding:28px;overflow-y:auto}
+.hero-cover{height:170px;background:linear-gradient(135deg,var(--sfu),var(--sf));display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;background-size:cover;background-position:center}
+.hero-logo{width:72px;height:72px;border-radius:20px;background:var(--sf);border:3px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:32px;position:absolute;left:20px;bottom:-36px;box-shadow:0 4px 16px rgba(0,0,0,.35);overflow:hidden;background-size:cover;background-position:center}
+.hero-body{padding:46px 20px 20px}
+.hero-name{font-family:'Sora',sans-serif;font-size:21px;font-weight:800;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.hero-meta{display:flex;align-items:center;gap:10px;margin-top:6px;flex-wrap:wrap;font-size:13px;color:var(--t2)}
+.pill{padding:3px 10px;border-radius:var(--rf);font-size:11px;font-weight:600}
+.pill.open{background:#4CAF5018;color:var(--ok)}
+.pill.closed{background:#E0525218;color:var(--er)}
+.pill.verified{background:var(--acs);color:var(--ac)}
+.hero-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.hero-btn{flex:1;min-width:90px;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border-radius:var(--r);background:var(--sfu);border:1px solid var(--bd);font-size:13px;font-weight:600;color:var(--t1)}
+.hero-btn.primary{background:var(--ac);color:var(--bg);border-color:var(--ac)}
 
-/* ── CARDS & STATS ── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:28px}
-.stat-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:20px}
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:16px}
-.stat-card .sc-icon{font-size:28px;margin-bottom:10px}
-.stat-card .sc-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:var(--t1);margin-bottom:2px}
-.stat-card .sc-lbl{font-size:12px;color:var(--t2)}
-.stat-card .sc-delta{font-size:11px;color:var(--ok);margin-top:4px;font-weight:600}
+.section{padding:18px 20px}
+.section-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.section-title .see-all{font-size:12px;font-weight:600;color:var(--ac)}
+.about-text{font-size:13px;color:var(--t2);line-height:1.7}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{background:var(--sfu);border:1px solid var(--bd);color:var(--t2);font-size:11px;padding:4px 10px;border-radius:var(--rf)}
+.divider{height:1px;background:var(--bd);margin:4px 20px}
 
-/* ── SECTION HEADER ── */
-.sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.sec-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1)}
-.btn-sm{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none}
-.btn-sm.primary{background:var(--ac);color:#0A0805}
-.btn-sm.ghost{background:var(--sfu);color:var(--t2);border:1px solid var(--bd)}
+.menu-search{width:100%;padding:11px 14px;border-radius:var(--r);background:var(--sfu);border:1px solid var(--bd);color:var(--t1);font-size:13px;margin-bottom:14px}
+.menu-search::placeholder{color:var(--t3)}
+.menu-cat{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 8px}
+.menu-item{display:flex;gap:12px;padding:12px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:8px;align-items:center}
+.menu-item-emoji{font-size:26px;width:44px;text-align:center;flex-shrink:0}
+.menu-item-name{font-size:14px;font-weight:600}
+.menu-item-desc{font-size:12px;color:var(--t2);margin-top:2px}
+.menu-item-price{font-size:14px;font-weight:700;color:var(--ac);flex-shrink:0}
+.menu-item.unavailable{opacity:.5}
+.home-menu-preview{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.home-menu-preview::-webkit-scrollbar{display:none}
+.hmp-card{flex-shrink:0;width:120px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center}
+.hmp-card .e{font-size:28px;margin-bottom:6px}
+.hmp-card .n{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hmp-card .p{font-size:12px;color:var(--ac);font-weight:700;margin-top:2px}
 
-/* ── CHARTS ── */
-.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:28px}
-.chart-card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:20px}
-.chart-card h3{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:16px}
-.chart-wrap{position:relative;height:180px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.gallery-ph{aspect-ratio:1;background:var(--sfu);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--t3);overflow:hidden;background-size:cover;background-position:center}
 
-/* ── MENU ITEMS TABLE ── */
-.menu-table{width:100%;border-collapse:collapse;background:var(--sf);border-radius:16px;overflow:hidden;border:1px solid var(--bd)}
-.menu-table th{background:var(--sfu);padding:12px 16px;font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.8px;text-align:left;border-bottom:1px solid var(--bd)}
-.menu-table td{padding:14px 16px;font-size:14px;color:var(--t1);border-bottom:1px solid var(--bd)}
-.menu-table tr:last-child td{border-bottom:none}
-.menu-table tr:hover td{background:var(--sfu)}
-.avail-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
-.avail-dot.on{background:var(--ok)}
-.avail-dot.off{background:var(--er)}
-.action-row{display:flex;gap:6px}
-.act-btn{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;border:none}
-.act-btn.edit{background:var(--acs);color:var(--ac)}
-.act-btn.del{background:#E0525218;color:var(--er)}
+.review{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.review-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.review-author{font-size:13px;font-weight:600}
+.review-stars{font-size:11px;color:var(--ac)}
+.review-date{font-size:11px;color:var(--t3)}
+.review-text{font-size:13px;color:var(--t2);line-height:1.6}
+.rating-summary{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r)}
+.rating-num{font-family:'Sora',sans-serif;font-size:36px;font-weight:800;color:var(--ac)}
 
-/* ── ORDER CARDS ── */
-.order-list{display:flex;flex-direction:column;gap:12px}
-.order-card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px}
-.order-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.order-id{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1)}
-.order-status{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--rf)}
-.status-pending{background:#F5A62318;color:var(--warn)}
-.status-preparing{background:#2196F318;color:#64B5F6}
-.status-ready{background:#4CAF5018;color:var(--ok)}
-.status-completed{background:var(--sfu);color:var(--t2)}
-.status-cancelled{background:#E0525218;color:var(--er)}
-.order-items{font-size:13px;color:var(--t2);margin-bottom:10px;line-height:1.6}
-.order-footer{display:flex;justify-content:space-between;align-items:center}
-.order-price{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--ac)}
-.order-actions{display:flex;gap:8px}
+.contact-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.contact-row:last-child{border-bottom:none}
+.contact-icon{font-size:18px;width:24px}
 
-/* ── REVIEWS ── */
-.review-list{display:flex;flex-direction:column;gap:12px}
-.review-item{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px}
-.ri-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.ri-author{font-size:14px;font-weight:600;color:var(--t1)}
-.ri-stars{color:var(--ac);font-size:13px}
-.ri-date{font-size:11px;color:var(--t3)}
-.ri-text{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:10px}
-.reply-box{background:var(--sfu);border-radius:10px;padding:12px}
-.reply-input{width:100%;background:transparent;border:none;color:var(--t1);font-size:13px;font-family:inherit;outline:none;resize:none}
-.reply-input::placeholder{color:var(--t3)}
+.share-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px;text-align:center}
+.share-link{background:var(--sfu);border:1px solid var(--bd);border-radius:var(--r);padding:10px 14px;font-size:12px;color:var(--t2);word-break:break-all;margin-bottom:12px}
+.share-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.share-btn{display:flex;align-items:center;gap:6px;padding:10px 16px;border-radius:var(--rf);background:var(--sfu);border:1px solid var(--bd);font-size:12px;font-weight:600}
+#qr-img{width:130px;height:130px;border-radius:var(--r);margin:14px auto 0;display:block;background:#fff;padding:8px}
 
-/* ── PROMOTIONS ── */
-.promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.promo-card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px}
-.promo-type{font-size:11px;font-weight:600;color:var(--ac);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-.promo-val{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:var(--t1);margin-bottom:4px}
-.promo-desc{font-size:13px;color:var(--t2);margin-bottom:12px}
-.promo-exp{font-size:11px;color:var(--t3)}
+.store-footer{text-align:center;padding:24px 20px 30px;font-size:12px;color:var(--t3)}
+.store-footer a{color:var(--ac);font-weight:600}
 
-/* ── ONBOARDING STEPPER ── */
-.onboard-wrap{max-width:540px;margin:0 auto;padding:40px 24px}
-.step-bar{display:flex;gap:0;margin-bottom:32px}
-.step{flex:1;height:4px;border-radius:2px;background:var(--bd);transition:background .3s}
-.step.done{background:var(--ac)}
-.step.active{background:var(--ac2)}
-.onboard-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);margin-bottom:6px}
-.onboard-sub{font-size:14px;color:var(--t2);margin-bottom:28px;line-height:1.6}
-.hours-grid{display:grid;grid-template-columns:1fr 1fr 80px;gap:8px;align-items:center;margin-bottom:8px}
-.hours-label{font-size:13px;color:var(--t2)}
-.hours-input{background:var(--sfu);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;color:var(--t1);font-size:13px;font-family:inherit;width:100%;outline:none}
-.hours-input:focus{border-color:var(--ac)}
-.tog-wrap{display:flex;align-items:center;gap:6px}
-.tog{width:36px;height:20px;border-radius:10px;background:var(--bd);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
-.tog::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .2s}
-.tog.on{background:var(--ac)}
-.tog.on::after{transform:translateX(16px)}
+.empty{text-align:center;padding:24px;color:var(--t3);font-size:13px;background:var(--sf);border:1px dashed var(--bd);border-radius:var(--r)}
 
-/* ── MODAL ── */
-.v-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
-.v-modal.on{display:flex}
-.v-modal-box{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
-.v-modal-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--t1);margin-bottom:20px}
-.v-modal-actions{display:flex;gap:10px;margin-top:20px}
-.v-modal-actions button{flex:1}
+.bnav{position:sticky;bottom:0;left:0;right:0;height:64px;background:var(--sf);border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-around;flex-shrink:0;z-index:50}
+.nb{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--t3);font-size:10px;font-weight:600;flex:1;padding:6px 0}
+.nb .ico{font-size:19px}
+.nb.active{color:var(--ac)}
 
-/* ── TOAST ── */
-#v-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:var(--bg);font-size:14px;font-weight:600;padding:12px 24px;border-radius:var(--rf);opacity:0;transition:all .3s;z-index:999;pointer-events:none;white-space:nowrap}
-#v-install-banner{position:fixed;left:12px;right:12px;bottom:-140px;max-width:400px;margin:0 auto;background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;z-index:998;box-shadow:0 8px 28px rgba(0,0,0,.4);transition:bottom .4s cubic-bezier(.16,1,.3,1)}
-#v-install-banner.on{bottom:20px}
-#v-install-banner .ib-icon{width:44px;height:44px;border-radius:12px;background:var(--acs);border:1px solid #E8943A40;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-#v-install-banner .ib-body{flex:1;min-width:0}
-#v-install-banner .ib-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--t1)}
-#v-install-banner .ib-sub{font-size:11px;color:var(--t2);margin-top:1px}
-#v-install-banner .ib-install{background:var(--ac);color:var(--bg);border:none;border-radius:999px;padding:9px 16px;font-size:12px;font-weight:700;flex-shrink:0}
-#v-install-banner .ib-close{background:none;border:none;color:var(--t3);font-size:18px;padding:4px;flex-shrink:0}
-#v-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ── MOBILE SIDEBAR ── */
-.mobile-bar{display:none;height:60px;background:var(--sf);border-bottom:1px solid var(--bd);align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:40}
-.burger{background:none;border:none;color:var(--t1);font-size:20px;padding:4px}
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:49}
-@media(max-width:768px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .main-content{margin-left:0}
-  .mobile-bar{display:flex}
-  .top-bar{display:none}
-  .sidebar-overlay.on{display:block}
-  .page-body{padding:20px}
-}
+#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:var(--bg);font-size:13px;font-weight:600;padding:11px 22px;border-radius:var(--rf);opacity:0;transition:all .3s;z-index:999;pointer-events:none;white-space:nowrap;max-width:88vw}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- ══ SPLASH ═══════════════════════════════════════ -->
-<div class="vscreen active" id="vs-splash">
-  <div class="v-splash-ring"></div>
-  <div class="v-splash-ring"></div>
-  <div class="v-splash-ring"></div>
-  <div class="v-splash-center">
-    <div class="v-slm">🏪</div>
-    <div class="v-swm">noura<span>.</span><small>for business</small></div>
-    <div class="v-stag">Grow your food business</div>
+<div class="wrap">
+  <div id="store-loading">
+    <div class="spinner"></div>
+    <div style="font-size:13px;color:var(--t2)">Loading page…</div>
   </div>
-  <div class="v-sdots">
-    <div class="v-sdot a" id="vsd0"></div>
-    <div class="v-sdot" id="vsd1"></div>
-    <div class="v-sdot" id="vsd2"></div>
-  </div>
-</div>
 
-<!-- ══ AUTH: WELCOME ═══════════════════════════════ -->
-<div class="vscreen" id="vs-welcome">
-  <div class="auth-wrap">
-    <div class="auth-logo">noura<span>.</span> <span style="font-size:14px;color:var(--t2);font-weight:400">for business</span></div>
-    <div class="auth-sub">Manage your restaurant on Noura</div>
-    <div class="auth-card" style="text-align:center">
-      <div style="font-size:56px;margin-bottom:16px">🏪</div>
-      <div class="auth-title">Welcome, Vendor</div>
-      <div class="auth-desc">Join thousands of food businesses growing with Noura. Set up your profile, manage your menu, and connect with customers.</div>
-      <button class="btn-primary" onclick="vgt('vs-login')">Log In to Your Business</button>
-      <button class="btn-ghost" onclick="vgt('vs-register')">Create a Vendor Account</button>
+  <div id="store-notfound" style="display:none">
+    <div style="font-size:48px;margin-bottom:14px">🔍</div>
+    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px">This page doesn't exist</div>
+    <div style="font-size:13px;color:var(--t2);max-width:280px;line-height:1.6;margin-bottom:20px">The vendor you're looking for isn't on Noura yet, or the link is incorrect.</div>
+    <a href="index.html" style="background:var(--ac);color:var(--bg);padding:12px 24px;border-radius:var(--rf);font-size:13px;font-weight:700">Discover food on Noura →</a>
+  </div>
+
+  <div id="store-app" style="display:none;flex:1;min-height:0;flex-direction:column">
+    <div class="topbar">
+      <div class="topbar-logo" id="tb-logo">🍽️</div>
+      <div class="topbar-name" id="tb-name">Loading…</div>
+      <button class="topbar-btn" onclick="switchTab('share')">📤</button>
     </div>
-  </div>
-</div>
 
-<!-- ══ AUTH: LOGIN ══════════════════════════════════ -->
-<div class="vscreen" id="vs-login">
-  <div class="auth-wrap">
-    <div class="auth-logo">noura<span>.</span></div>
-    <div class="auth-card">
-      <div class="auth-title">Vendor Login</div>
-      <div class="auth-desc">Access your business dashboard</div>
-      <div class="field"><label>Business Email</label><input type="email" id="vl-email" placeholder="hello@yourbusiness.com"></div>
-      <div class="field"><label>Password</label><input type="password" id="vl-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doVendorLogin()"></div>
-      <button class="btn-primary" onclick="doVendorLogin()">Log In</button>
-      <div class="auth-link">Forgot password? <a onclick="vgt('vs-forgot')" style="cursor:pointer">Reset it</a></div>
-      <div class="auth-link" style="margin-top:8px">New vendor? <a onclick="vgt('vs-register')" style="cursor:pointer">Create account</a></div>
-    </div>
-  </div>
-</div>
+    <div class="tscreens">
 
-<!-- ══ AUTH: REGISTER ═══════════════════════════════ -->
-<div class="vscreen" id="vs-register">
-  <div class="auth-wrap" style="padding:40px 24px">
-    <div class="auth-logo">noura<span>.</span></div>
-    <div class="auth-card">
-      <div class="auth-title">Create Vendor Account</div>
-      <div class="auth-desc">Start your journey with Noura</div>
-      <div class="field"><label>Business Name</label><input type="text" id="vr-bname" placeholder="e.g. Mama Tee Kitchen"></div>
-      <div class="field"><label>Your Full Name</label><input type="text" id="vr-name" placeholder="Your name"></div>
-      <div class="field"><label>Business Email</label><input type="email" id="vr-email" placeholder="hello@yourbusiness.com"></div>
-      <div class="field"><label>Password</label><input type="password" id="vr-pass" placeholder="Min. 6 characters"></div>
-      <div class="field">
-        <label>Business Category</label>
-        <select id="vr-cat">
-          <option value="">Select category</option>
-          <option>Nigerian Restaurant</option><option>Fast Food</option>
-          <option>Shawarma & Grills</option><option>Bakery & Pastries</option>
-          <option>Seafood</option><option>Continental</option>
-          <option>Ghanaian Restaurant</option><option>Kenyan Restaurant</option>
-          <option>Healthy Food</option><option>Café & Drinks</option>
-          <option>Home Chef</option><option>Catering</option>
-        </select>
+      <div class="tscreen active" id="tab-home">
+        <div class="hero-cover" id="hero-cover">
+          <div class="hero-logo" id="hero-logo">🍽️</div>
+        </div>
+        <div class="hero-body">
+          <div class="hero-name" id="hero-name"></div>
+          <div class="hero-meta" id="hero-meta"></div>
+          <div class="hero-actions" id="hero-actions"></div>
+        </div>
+
+        <div class="section" id="section-about">
+          <div class="section-title">📖 About</div>
+          <div class="about-text" id="about-text"></div>
+          <div class="tag-row" id="about-tags"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+          <div class="section-title">🍽️ Popular on the menu <span class="see-all" onclick="switchTab('menu')">See full menu →</span></div>
+          <div class="home-menu-preview" id="home-menu-preview"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section" id="section-gallery">
+          <div class="section-title">📸 Gallery</div>
+          <div id="gallery-content"></div>
+        </div>
+
+        <div class="store-footer">
+          🍽️ Powered by <a href="landing.html">Noura</a> — food discovery for Africa
+        </div>
       </div>
-      <button class="btn-primary" onclick="doVendorRegister()">Create Account</button>
-      <div class="auth-link">Already a vendor? <a onclick="vgt('vs-login')" style="cursor:pointer">Log in</a></div>
-    </div>
-  </div>
-</div>
 
-<!-- ══ AUTH: FORGOT ═════════════════════════════════ -->
-<div class="vscreen" id="vs-forgot">
-  <div class="auth-wrap">
-    <div class="auth-logo">noura<span>.</span></div>
-    <div class="auth-card">
-      <div class="auth-title">Reset Password</div>
-      <div class="auth-desc">Enter your business email and we'll send you a reset link.</div>
-      <div class="field"><label>Business Email</label><input type="email" id="vf-email" placeholder="hello@yourbusiness.com"></div>
-      <button class="btn-primary" onclick="doVendorForgot()">Send Reset Link</button>
-      <button class="btn-ghost" onclick="vgt('vs-login')">Back to Login</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ STATUS: PENDING ══════════════════════════════ -->
-<div class="vscreen" id="vs-pending">
-  <div class="status-wrap">
-    <div class="status-icon">⏳</div>
-    <div class="status-title">Account Under Review</div>
-    <div class="status-body">Your vendor application has been submitted. Our team will review your business details within 24–48 hours. You'll receive an email once approved.</div>
-    <button class="btn-primary" style="max-width:280px" onclick="vgt('vs-welcome')">Back to Home</button>
-  </div>
-</div>
-
-<!-- ══ ONBOARDING ════════════════════════════════════ -->
-<div class="vscreen" id="vs-onboarding">
-  <div class="auth-wrap" style="padding-top:40px;padding-bottom:40px">
-    <div class="onboard-wrap" style="width:100%">
-      <!-- Step bar -->
-      <div class="step-bar" id="ob-steps">
-        <div class="step active" id="obs-0"></div>
-        <div class="step" id="obs-1"></div>
-        <div class="step" id="obs-2"></div>
-        <div class="step" id="obs-3"></div>
-        <div class="step" id="obs-4"></div>
-        <div class="step" id="obs-5"></div>
+      <div class="tscreen" id="tab-menu">
+        <div class="section">
+          <input class="menu-search" id="menu-search" placeholder="🔍 Search the menu..." oninput="renderMenu(this.value)">
+          <div id="menu-list"></div>
+        </div>
       </div>
-      <div id="ob-content"></div>
-    </div>
-  </div>
-</div>
 
-<!-- ══ MAIN APP ══════════════════════════════════════ -->
-<div class="vscreen" id="vs-app">
-  <!-- Mobile top bar -->
-  <div class="mobile-bar">
-    <button class="burger" onclick="toggleSidebar()">☰</button>
-    <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1)" id="mob-title">Dashboard</div>
-  </div>
-  <div class="sidebar-overlay" id="sb-overlay" onclick="toggleSidebar()"></div>
-
-  <div class="vapp">
-    <!-- Sidebar -->
-    <div class="sidebar" id="vb-sidebar">
-      <div class="sidebar-logo">
-        <div class="name">noura<span>.</span></div>
-        <div class="badge">Vendor Portal</div>
+      <div class="tscreen" id="tab-reviews">
+        <div class="section">
+          <div id="reviews-content"></div>
+        </div>
       </div>
-      <nav class="sidebar-nav">
-        <div class="nav-section-title">Main</div>
-        <div class="nav-item active" onclick="showPage('pg-dashboard',this,'Dashboard')"><span class="ni">📊</span>Dashboard</div>
-        <div class="nav-item" onclick="showPage('pg-menu',this,'Menu')"><span class="ni">🍽️</span>Menu</div>
-        <div class="nav-item" onclick="showPage('pg-orders',this,'Orders')"><span class="ni">📦</span>Orders <span id="order-badge" style="background:var(--er);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--rf);margin-left:4px">3</span></div>
-        <div class="nav-section-title">Insights</div>
-        <div class="nav-item" onclick="showPage('pg-analytics',this,'Analytics')"><span class="ni">📈</span>Analytics</div>
-        <div class="nav-item" onclick="showPage('pg-reviews',this,'Reviews')"><span class="ni">⭐</span>Reviews</div>
-        <div class="nav-section-title">Marketing</div>
-        <div class="nav-item" onclick="showPage('pg-promotions',this,'Promotions')"><span class="ni">🎁</span>Promotions</div>
-        <div class="nav-section-title">Account</div>
-        <div class="nav-item" onclick="showPage('pg-settings',this,'Settings')"><span class="ni">⚙️</span>Settings</div>
-        <div class="nav-item" onclick="window.open('noura.html','_blank')"><span class="ni">📱</span>Open App</div>
-      <div class="nav-item" onclick="doVendorLogout()"><span class="ni">🚪</span>Log Out</div>
-      </nav>
-      <div class="sidebar-footer">
-        <div class="sidebar-avatar">
-          <div class="sa-pic" id="v-avatar">M</div>
-          <div class="sa-info">
-            <div class="sa-name" id="v-bname">My Restaurant</div>
-            <div class="sa-role">Free Plan · <span style="color:var(--ac);cursor:pointer" onclick="showPage('pg-settings',null,'Settings')">Upgrade</span></div>
+
+      <div class="tscreen" id="tab-info">
+        <div class="section" id="section-hours">
+          <div class="section-title">🕐 Hours</div>
+          <div class="about-text" id="hours-text"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="section" id="section-contact">
+          <div class="section-title">📞 Contact</div>
+          <div id="contact-content"></div>
+        </div>
+      </div>
+
+      <div class="tscreen" id="tab-share">
+        <div class="section">
+          <div class="section-title">📤 Share this page</div>
+          <div class="share-card">
+            <div class="share-link" id="share-link"></div>
+            <div class="share-btns">
+              <button class="share-btn" onclick="copyLink()">🔗 Copy Link</button>
+              <button class="share-btn" onclick="shareWhatsApp()">💬 WhatsApp</button>
+            </div>
+            <img id="qr-img" alt="QR code to this page">
+            <div style="font-size:11px;color:var(--t3);margin-top:8px">Scan to view this page</div>
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- Main content -->
-    <div class="main-content">
-      <div class="top-bar">
-        <div class="top-bar-title" id="page-title">Dashboard</div>
-        <div class="top-bar-actions">
-          <div class="icon-btn" style="position:relative" onclick="openVendorNotifs()">🔔<span id="v-notif-dot" style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;border-radius:50%;background:var(--er);border:1.5px solid var(--sf)"></span></div>
-          <div class="icon-btn" onclick="window.open('index.html','_blank')">👁️</div>
-        </div>
-      </div>
-      <div class="page-body">
-
-        <!-- DASHBOARD -->
-        <div id="pg-dashboard">
-          <div class="card" style="background:linear-gradient(135deg,var(--acs),var(--sf));border-color:#E8943A40;margin-bottom:20px">
-            <div style="padding:16px;display:flex;flex-direction:column;gap:10px">
-              <div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">🌐</span><div style="font-weight:700;font-size:15px;color:var(--t1)">Your Noura Page is live</div></div>
-              <div style="font-size:12px;color:var(--t2);word-break:break-all" id="my-page-link">—</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <button class="btn-sm primary" onclick="viewMyPage()">👁️ View Page</button>
-                <button class="btn-sm ghost" onclick="copyMyPageLink()">🔗 Copy Link</button>
-                <button class="btn-sm ghost" onclick="shareMyPageWhatsApp()">💬 Share</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="stats-grid">
-            <div class="stat-card"><div class="sc-icon">👁️</div><div class="sc-val" id="st-views">0</div><div class="sc-lbl">Profile Views</div><div class="sc-delta">↑ this week</div></div>
-            <div class="stat-card"><div class="sc-icon">❤️</div><div class="sc-val" id="st-favs">0</div><div class="sc-lbl">Saved by Users</div><div class="sc-delta">↑ this week</div></div>
-            <div class="stat-card"><div class="sc-icon">⭐</div><div class="sc-val" id="st-rating">—</div><div class="sc-lbl">Avg Rating</div></div>
-            <div class="stat-card"><div class="sc-icon">🍽️</div><div class="sc-val" id="st-meals">0</div><div class="sc-lbl">Menu Items</div></div>
-          </div>
-
-          <div class="chart-grid">
-            <div class="chart-card"><h3>📈 Profile Views (7 days)</h3><div class="chart-wrap"><canvas id="chart-views"></canvas></div></div>
-            <div class="chart-card"><h3>⭐ Rating Trend</h3><div class="chart-wrap"><canvas id="chart-rating"></canvas></div></div>
-          </div>
-
-          <div class="sec-header"><div class="sec-title">Recent Orders</div><button class="btn-sm ghost" onclick="showPage('pg-orders',null,'Orders')">See all →</button></div>
-          <div class="order-list" id="dash-orders"></div>
-
-          <div style="margin-top:24px">
-            <div class="sec-header"><div class="sec-title">Quick Actions</div></div>
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <button class="btn-sm primary" onclick="openAddMealModal()">➕ Add Meal</button>
-              <button class="btn-sm ghost" onclick="showPage('pg-promotions',null,'Promotions')">🎁 Create Promotion</button>
-              <button class="btn-sm ghost" onclick="showPage('pg-reviews',null,'Reviews')">⭐ View Reviews</button>
-              <button class="btn-sm ghost" onclick="showPage('pg-settings',null,'Settings')">✏️ Edit Profile</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- MENU -->
-        <div id="pg-menu" style="display:none">
-          <div class="sec-header">
-            <div class="sec-title">Menu Management</div>
-            <button class="btn-sm primary" onclick="openAddMealModal()">➕ Add Item</button>
-          </div>
-          <!-- Category filter -->
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="menu-cat-filter">
-            <button class="btn-sm primary" onclick="filterMenu('all',this)">All</button>
-            <button class="btn-sm ghost" onclick="filterMenu('Breakfast',this)">🌅 Breakfast</button>
-            <button class="btn-sm ghost" onclick="filterMenu('Lunch',this)">☀️ Lunch</button>
-            <button class="btn-sm ghost" onclick="filterMenu('Dinner',this)">🌇 Dinner</button>
-            <button class="btn-sm ghost" onclick="filterMenu('Snacks',this)">🍿 Snacks</button>
-            <button class="btn-sm ghost" onclick="filterMenu('Drinks',this)">🥤 Drinks</button>
-          </div>
-          <div style="overflow-x:auto">
-            <table class="menu-table" id="menu-table">
-              <thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
-              <tbody id="menu-tbody"></tbody>
-            </table>
-          </div>
-          <div id="menu-empty" class="emst" style="display:none;padding:60px 20px;text-align:center">
-            <div style="font-size:48px;margin-bottom:12px">🍽️</div>
-            <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--t1);margin-bottom:8px">No menu items yet</div>
-            <div style="font-size:14px;color:var(--t2);margin-bottom:20px">Add your first meal to get started</div>
-            <button class="btn-sm primary" onclick="openAddMealModal()">➕ Add First Item</button>
-          </div>
-        </div>
-
-        <!-- ORDERS -->
-        <div id="pg-orders" style="display:none">
-          <div class="sec-header"><div class="sec-title">Orders</div></div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-            <button class="btn-sm primary" onclick="filterOrders('all',this)">All</button>
-            <button class="btn-sm ghost" onclick="filterOrders('Pending',this)">⏳ Pending</button>
-            <button class="btn-sm ghost" onclick="filterOrders('Preparing',this)">🔥 Preparing</button>
-            <button class="btn-sm ghost" onclick="filterOrders('Ready',this)">✅ Ready</button>
-            <button class="btn-sm ghost" onclick="filterOrders('Completed',this)">📦 Completed</button>
-          </div>
-          <div class="order-list" id="orders-list"></div>
-        </div>
-
-        <!-- ANALYTICS -->
-        <div id="pg-analytics" style="display:none">
-          <div class="stats-grid">
-            <div class="stat-card"><div class="sc-icon">👁️</div><div class="sc-val">247</div><div class="sc-lbl">Total Views</div></div>
-            <div class="stat-card"><div class="sc-icon">🔍</div><div class="sc-val">89</div><div class="sc-lbl">Menu Clicks</div></div>
-            <div class="stat-card"><div class="sc-icon">❤️</div><div class="sc-val">34</div><div class="sc-lbl">Saved</div></div>
-            <div class="stat-card"><div class="sc-icon">👥</div><div class="sc-val">12</div><div class="sc-lbl">Repeat Visitors</div></div>
-          </div>
-          <div class="chart-grid">
-            <div class="chart-card"><h3>📅 Weekly Views</h3><div class="chart-wrap"><canvas id="chart-weekly"></canvas></div></div>
-            <div class="chart-card"><h3>🍽️ Popular Items</h3><div class="chart-wrap"><canvas id="chart-popular"></canvas></div></div>
-          </div>
-          <div class="chart-card" style="margin-bottom:16px"><h3>📈 Monthly Growth</h3><div class="chart-wrap"><canvas id="chart-growth"></canvas></div></div>
-        </div>
-
-        <!-- REVIEWS -->
-        <div id="pg-reviews" style="display:none">
-          <div class="sec-header">
-            <div class="sec-title">Customer Reviews</div>
-            <div style="display:flex;gap:8px">
-              <button class="btn-sm ghost" onclick="sortReviews('newest',this)">Newest</button>
-              <button class="btn-sm ghost" onclick="sortReviews('highest',this)">⭐ Highest</button>
-              <button class="btn-sm ghost" onclick="sortReviews('lowest',this)">↓ Lowest</button>
-            </div>
-          </div>
-          <div class="review-list" id="reviews-list"></div>
-        </div>
-
-        <!-- PROMOTIONS -->
-        <div id="pg-promotions" style="display:none">
-          <div class="sec-header">
-            <div class="sec-title">Promotions</div>
-            <button class="btn-sm primary" onclick="openPromoModal()">➕ Create Promo</button>
-          </div>
-          <div class="promo-grid" id="promo-grid"></div>
-        </div>
-
-        <!-- SETTINGS -->
-        <div id="pg-settings" style="display:none">
-          <div style="max-width:580px">
-            <div class="card" id="v-ssec-install" style="display:none;margin-bottom:20px">
-              <div style="padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="installVendorApp()">
-                <div style="font-size:24px">📲</div>
-                <div style="flex:1"><div style="font-size:14px;font-weight:600;color:var(--t1)">Install Noura for Business</div><div style="font-size:12px;color:var(--t2)">Add to your home screen for quick access</div></div>
-                <div style="color:var(--ac);font-size:13px;font-weight:600">Install</div>
-              </div>
-            </div>
-            <div class="sec-title" style="margin-bottom:20px">Business Profile</div>
-            <div class="field"><label>Business Name</label><input type="text" id="s-bname" placeholder="Your business name"></div>
-            <div class="field"><label>Description</label><textarea id="s-desc" rows="3" placeholder="Tell customers about your business…"></textarea></div>
-            <div class="field"><label>Category</label>
-              <select id="s-cat">
-                <option>Nigerian Restaurant</option><option>Fast Food</option>
-                <option>Shawarma & Grills</option><option>Bakery & Pastries</option>
-                <option>Seafood</option><option>Continental</option><option>Healthy Food</option>
-              </select>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-              <div class="field"><label>Phone</label><input type="tel" id="s-phone" placeholder="+234..."></div>
-              <div class="field"><label>WhatsApp</label><input type="tel" id="s-wa" placeholder="+234..."></div>
-            </div>
-            <div class="field"><label>Website (optional)</label><input type="url" id="s-web" placeholder="yourbusiness.com"></div>
-            <div class="field"><label>Address</label><input type="text" id="s-addr" placeholder="Street, City, Country"></div>
-            <div class="field"><label>Price Range</label>
-              <select id="s-price">
-                <option>Budget (₦500–₦2,000)</option>
-                <option>Mid-range (₦2,000–₦5,000)</option>
-                <option>Premium (₦5,000+)</option>
-              </select>
-            </div>
-
-            <div class="sec-title" style="margin:24px 0 16px">Business Hours</div>
-            <div id="hours-grid">
-              <!-- Generated by JS -->
-            </div>
-
-            <div class="sec-title" style="margin:24px 0 16px">Notifications</div>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--sfu);border-radius:10px;border:1px solid var(--bd)">
-                <div><div style="font-size:14px;font-weight:500;color:var(--t1)">New Reviews</div><div style="font-size:12px;color:var(--t2)">Get notified when someone reviews you</div></div>
-                <div class="tog on" onclick="this.classList.toggle('on')"></div>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--sfu);border-radius:10px;border:1px solid var(--bd)">
-                <div><div style="font-size:14px;font-weight:500;color:var(--t1)">Profile Views</div><div style="font-size:12px;color:var(--t2)">Weekly summary of your profile traffic</div></div>
-                <div class="tog on" onclick="this.classList.toggle('on')"></div>
-              </div>
-            </div>
-
-            <button class="btn-primary" onclick="saveVendorSettings()">Save Changes</button>
-            <button class="btn-ghost" style="margin-top:10px;color:var(--er);border-color:#E0525230" onclick="if(confirm('Delete your business? This cannot be undone.'))doVendorLogout()">⚠️ Delete Business</button>
-          </div>
-        </div>
-
-      </div><!-- /page-body -->
-    </div><!-- /main-content -->
-  </div><!-- /vapp -->
-</div><!-- /vs-app -->
-
-<!-- ══ MODALS ════════════════════════════════════════ -->
-
-<!-- Add/Edit Meal -->
-<div class="v-modal" id="mod-add-meal">
-  <div class="v-modal-box">
-    <div class="v-modal-title" id="add-meal-title">Add Menu Item</div>
-    <div class="field"><label>Item Name</label><input type="text" id="m-name" placeholder="e.g. Jollof Rice & Chicken"></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="field"><label>Price</label><input type="text" id="m-price" placeholder="₦1,500"></div>
-      <div class="field"><label>Category</label>
-        <select id="m-cat">
-          <option>Breakfast</option><option>Lunch</option><option>Dinner</option>
-          <option>Snacks</option><option>Drinks</option><option>Desserts</option>
-        </select>
-      </div>
-    </div>
-    <div class="field"><label>Description</label><textarea id="m-desc" rows="2" placeholder="Describe this dish…"></textarea></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="field"><label>Emoji Icon</label><input type="text" id="m-emoji" placeholder="🍗" maxlength="4"></div>
-      <div class="field"><label>Prep Time</label><input type="text" id="m-time" placeholder="15–20 min"></div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--sfu);border-radius:10px;border:1px solid var(--bd);margin-bottom:4px">
-      <div style="flex:1"><div style="font-size:14px;font-weight:500;color:var(--t1)">Available Now</div><div style="font-size:12px;color:var(--t2)">Toggle off if this item is sold out</div></div>
-      <div class="tog on" id="m-avail" onclick="this.classList.toggle('on')"></div>
-    </div>
-    <div class="v-modal-actions">
-      <button class="btn-sm ghost" onclick="closeVMod('mod-add-meal')">Cancel</button>
-      <button class="btn-sm primary" onclick="saveMeal()">Save Item</button>
+    <div class="bnav">
+      <div class="nb active" id="nb-home" onclick="switchTab('home')"><div class="ico">🏠</div>Home</div>
+      <div class="nb" id="nb-menu" onclick="switchTab('menu')"><div class="ico">🍽️</div>Menu</div>
+      <div class="nb" id="nb-reviews" onclick="switchTab('reviews')"><div class="ico">⭐</div>Reviews</div>
+      <div class="nb" id="nb-info" onclick="switchTab('info')"><div class="ico">ℹ️</div>Info</div>
     </div>
   </div>
 </div>
 
-<!-- Promo Modal -->
-<div class="v-modal" id="mod-vendor-notifs">
-  <div class="v-modal-box">
-    <div class="v-modal-title">Notifications</div>
-    <div id="v-notifs-list" style="max-height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin:12px 0"></div>
-    <div class="v-modal-actions">
-      <button class="btn-sm ghost" onclick="closeVMod('mod-vendor-notifs')">Close</button>
-    </div>
-  </div>
-</div>
-
-<div class="v-modal" id="mod-promo">
-  <div class="v-modal-box">
-    <div class="v-modal-title">Create Promotion</div>
-    <div class="field"><label>Promo Type</label>
-      <select id="p-type">
-        <option>Percentage Discount</option><option>Fixed Amount Off</option>
-        <option>Buy One Get One</option><option>Happy Hour</option><option>Featured Meal</option>
-      </select>
-    </div>
-    <div class="field"><label>Value / Title</label><input type="text" id="p-val" placeholder="e.g. 20% or ₦500 off"></div>
-    <div class="field"><label>Description</label><input type="text" id="p-desc" placeholder="e.g. Weekend special on all meals"></div>
-    <div class="field"><label>Expires</label><input type="date" id="p-exp"></div>
-    <div class="v-modal-actions">
-      <button class="btn-sm ghost" onclick="closeVMod('mod-promo')">Cancel</button>
-      <button class="btn-sm primary" onclick="savePromo()">Create Promo</button>
-    </div>
-  </div>
-</div>
-
-<div id="v-toast"></div>
+<div id="toast"></div>
 
 <script>
-/* ===== config ===== */
+/* config */
 /**
  * ══════════════════════════════════════════════════════════════
  *  NOURA — ENVIRONMENT CONFIG
@@ -763,7 +320,7 @@ window.NOURA_ENV = {
 
 </script>
 <script>
-/* ===== services ===== */
+/* services */
 /**
  * ══════════════════════════════════════════════════════════════
  *  NOURA — SERVICE LAYER  (services.js)
@@ -2555,599 +2112,197 @@ Be concise (max 4-6 lines unless a full recipe is requested), warm, and practica
 
 </script>
 <script>
-/* ===== vendor app ===== */
+/* store app */
 // ══════════════════════════════════════════════════════
-//  NOURA — VENDOR PORTAL
-//  UI / screen logic only. All data through window.Services.
+//  NOURA — VENDOR STOREFRONT (public page)
+//  Multi-tab modern layout: Home / Menu / Reviews / Info / Share
 // ══════════════════════════════════════════════════════
 if (!window.Services) {
-  document.body.innerHTML = '<div style="padding:40px 24px;color:#F2EDE4;font-family:sans-serif;text-align:center"><h2 style="margin-bottom:12px">⚠️ Vendor Portal couldn\'t start</h2><p style="color:#8A7D6A;line-height:1.6">The service layer failed to load.</p></div>';
+  document.getElementById('store-loading').innerHTML = '<div style="color:#F2EDE4">⚠️ This page failed to load. Please refresh.</div>';
   throw new Error('window.Services is missing.');
 }
 const S = window.Services;
 function el(id){ return document.getElementById(id); }
 
-// ── Screen / page routing ────────────────────────────
-function vgt(screenId) {
-  document.querySelectorAll('.vscreen').forEach(s => s.classList.remove('active'));
-  el(screenId)?.classList.add('active');
-}
-function showPage(pageId, navEl, title, fromPop) {
-  document.querySelectorAll('.page-body > div').forEach(p => { p.style.display='none'; p.classList.remove('page-enter'); });
-  const page = el(pageId);
-  if (page) { page.style.display = ''; void page.offsetWidth; page.classList.add('page-enter'); }
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if (navEl) navEl.classList.add('active');
-  if (el('page-title')) el('page-title').textContent = title;
-  if (el('mob-title'))  el('mob-title').textContent  = title;
-  el('vb-sidebar')?.classList.remove('open');
-  el('sb-overlay')?.classList.remove('on');
+let STORE = null;
+let currentTab = 'home';
 
-  if (!fromPop) {
-    if (pageId === 'pg-dashboard') {
-      history.replaceState({ vendorPage: 'pg-dashboard' }, '', '#dashboard');
-    } else if (history.state && history.state.vendorPage && history.state.vendorPage !== 'pg-dashboard') {
-      history.replaceState({ vendorPage: pageId, title }, '', '#' + pageId.replace('pg-',''));
-    } else {
-      history.pushState({ vendorPage: pageId, title }, '', '#' + pageId.replace('pg-',''));
-    }
-  }
-
-  if (pageId === 'pg-menu')       renderMenu();
-  if (pageId === 'pg-orders')     renderOrders('all');
-  if (pageId === 'pg-reviews')    renderReviews();
-  if (pageId === 'pg-promotions') renderPromos();
-  if (pageId === 'pg-analytics')  renderAnalytics();
-  if (pageId === 'pg-settings')   loadSettings();
+function getParam(name) {
+  return new URLSearchParams(location.search).get(name);
 }
-window.addEventListener('popstate', (e) => {
-  if (!S.vendor.getVendor()?.setupDone) return;
-  const state = e.state;
-  if (state && state.vendorPage) {
-    const navEl = document.querySelector(`.nav-item[onclick*="'${state.vendorPage}'"]`);
-    showPage(state.vendorPage, navEl, state.title || 'Dashboard', true);
+
+/** The vendor slug can arrive three ways depending on how far your
+ *  domain setup has progressed:
+ *    1. ?v=slug              — works everywhere, no domain needed (default)
+ *    2. /store/slug          — clean path, needs the vercel.json rewrite
+ *    3. slug.noura.app       — subdomain, needs a real custom domain connected
+ *  Browsers never see the rewritten destination URL, only what's in
+ *  the address bar — so this checks all three instead of assuming one. */
+function resolveVendorSlug() {
+  const fromQuery = getParam('v');
+  if (fromQuery) return fromQuery;
+
+  const pathMatch = location.pathname.match(/\/store\/([^/?#]+)/);
+  if (pathMatch) return pathMatch[1];
+
+  const hostParts = location.hostname.split('.');
+  if (hostParts.length > 2 && hostParts[0] !== 'www') return hostParts[0]; // slug.noura.app
+
+  return null;
+}
+
+async function loadStore() {
+  const key = resolveVendorSlug();
+  if (!key) { showNotFound(); return; }
+
+  let res = await S.restaurants.getBySlug(key);
+  if (!res.ok) res = await S.restaurants.get(key); // fallback: allow raw id too
+  if (!res.ok || !res.restaurant) { showNotFound(); return; }
+
+  STORE = res.restaurant;
+  document.title = STORE.name + ' | Noura';
+  renderStore(STORE);
+  el('store-loading').style.display = 'none';
+  const app = el('store-app'); app.style.display = 'flex';
+}
+
+function showNotFound() {
+  el('store-loading').style.display = 'none';
+  el('store-notfound').style.display = 'flex';
+}
+
+// ── Tab navigation ──────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tscreen').forEach(s => s.classList.remove('active'));
+  el('tab-' + tab)?.classList.add('active');
+  document.querySelectorAll('.nb').forEach(n => n.classList.remove('active'));
+  el('nb-' + tab)?.classList.add('active'); // no-op for 'share' — intentionally not a bottom-nav tab
+  el('.tscreens')?.scrollTo?.(0, 0);
+  const scroller = document.querySelector('.tscreens');
+  if (scroller) scroller.scrollTop = 0;
+}
+
+function renderStore(r) {
+  // Top bar
+  if (r.logoUrl) { el('tb-logo').style.backgroundImage = `url('${r.logoUrl}')`; el('tb-logo').textContent = ''; }
+  else { el('tb-logo').textContent = r.emoji || '🍽️'; }
+  el('tb-name').textContent = r.name;
+
+  // Hero
+  if (r.coverUrl) el('hero-cover').style.backgroundImage = `url('${r.coverUrl}')`;
+  if (r.logoUrl) { el('hero-logo').style.backgroundImage = `url('${r.logoUrl}')`; el('hero-logo').textContent = ''; }
+  else { el('hero-logo').textContent = r.emoji || '🍽️'; }
+
+  el('hero-name').innerHTML = `${r.name} ${r.verified ? '<span class="pill verified">✓ Verified</span>' : ''}`;
+  el('hero-meta').innerHTML = `
+    ${r.rating ? `<span>⭐ ${r.rating} ${r.reviews ? `(${r.reviews})` : ''}</span>` : '<span>No ratings yet</span>'}
+    <span class="pill ${r.open ? 'open' : 'closed'}">${r.open ? '● Open now' : '● Closed'}</span>
+    ${r.cuisine ? `<span>${r.cuisine}</span>` : ''}
+  `;
+
+  const actions = [];
+  if (r.phone) actions.push(`<a class="hero-btn primary" href="tel:${r.phone}">📞 Call</a>`);
+  if (r.whatsapp) actions.push(`<a class="hero-btn" href="https://wa.me/${r.whatsapp.replace(/[^0-9]/g,'')}" target="_blank">💬 WhatsApp</a>`);
+  actions.push(`<button class="hero-btn" onclick="switchTab('share')">📤 Share</button>`);
+  el('hero-actions').innerHTML = actions.join('');
+
+  // About
+  el('about-text').textContent = r.desc || `${r.name} is on Noura — discover their menu, hours, and how to reach them below.`;
+  el('about-tags').innerHTML = (r.tags || []).map(t => `<span class="tag">${t}</span>`).join('') + (r.area ? `<span class="tag">📍 ${r.area}</span>` : '');
+
+  // Home menu preview (first 6 available items)
+  const menu = r.menu || [];
+  const preview = menu.filter(m => m.available !== false).slice(0, 6);
+  el('home-menu-preview').innerHTML = preview.length
+    ? preview.map(m => `<div class="hmp-card" onclick="switchTab('menu')"><div class="e">${m.emoji || '🍽️'}</div><div class="n">${m.name}</div><div class="p">${m.price || ''}</div></div>`).join('')
+    : `<div class="empty" style="width:100%">Menu coming soon — this vendor hasn't added items yet.</div>`;
+
+  // Full menu tab
+  renderMenu('');
+
+  // Gallery — real logo/cover if uploaded, honest empty state otherwise
+  const galleryImgs = [r.coverUrl, r.logoUrl].filter(Boolean);
+  el('gallery-content').innerHTML = galleryImgs.length
+    ? `<div class="gallery-grid">${galleryImgs.map(u => `<div class="gallery-ph" style="background-image:url('${u}')"></div>`).join('')}</div>`
+    : `<div class="empty">📷 No photos uploaded yet.</div>`;
+
+  // Reviews
+  const reviews = r.reviews_data || [];
+  if (reviews.length) {
+    const avg = (reviews.reduce((a,rv)=>a+rv.stars,0) / reviews.length).toFixed(1);
+    el('reviews-content').innerHTML = `
+      <div class="rating-summary"><div class="rating-num">${avg}</div><div><div style="color:var(--ac)">${'⭐'.repeat(Math.round(avg))}</div><div style="font-size:12px;color:var(--t2)">${reviews.length} review${reviews.length===1?'':'s'}</div></div></div>
+      ${reviews.map(rv => `<div class="review"><div class="review-top"><div><div class="review-author">${rv.author}</div><div class="review-stars">${'⭐'.repeat(rv.stars)}</div></div><div class="review-date">${rv.date}</div></div><div class="review-text">${rv.text}</div></div>`).join('')}
+    `;
   } else {
-    const navEl = document.querySelector(`.nav-item[onclick*="'pg-dashboard'"]`);
-    showPage('pg-dashboard', navEl, 'Dashboard', true);
+    el('reviews-content').innerHTML = `<div class="empty">No reviews yet — be the first to visit and leave one on the Noura app!</div>`;
   }
-});
-function toggleSidebar() {
-  el('vb-sidebar')?.classList.toggle('open');
-  el('sb-overlay')?.classList.toggle('on');
+
+  // Hours
+  el('hours-text').textContent = r.hours || 'Hours not listed yet — contact the business directly to confirm.';
+
+  // Contact
+  const contactRows = [];
+  if (r.phone) contactRows.push(`<div class="contact-row"><span class="contact-icon">📞</span><a href="tel:${r.phone}">${r.phone}</a></div>`);
+  if (r.whatsapp) contactRows.push(`<div class="contact-row"><span class="contact-icon">💬</span><a href="https://wa.me/${r.whatsapp.replace(/[^0-9]/g,'')}" target="_blank">${r.whatsapp}</a></div>`);
+  if (r.email) contactRows.push(`<div class="contact-row"><span class="contact-icon">📧</span><a href="mailto:${r.email}">${r.email}</a></div>`);
+  if (r.area) contactRows.push(`<div class="contact-row"><span class="contact-icon">📍</span><a href="https://maps.google.com/?q=${encodeURIComponent(r.name+' '+r.area)}" target="_blank">${r.area} — Get Directions</a></div>`);
+  if (r.instagram) contactRows.push(`<div class="contact-row"><span class="contact-icon">📷</span><a href="https://instagram.com/${r.instagram.replace('@','')}" target="_blank">@${r.instagram.replace('@','')}</a></div>`);
+  if (r.website) contactRows.push(`<div class="contact-row"><span class="contact-icon">🌐</span><a href="https://${r.website.replace(/^https?:\/\//,'')}" target="_blank">${r.website}</a></div>`);
+  el('contact-content').innerHTML = contactRows.length ? contactRows.join('') : `<div class="empty">No contact details added yet.</div>`;
+
+  // Share
+  const shareUrl = location.origin + '/store/' + (r.slug || r.id);
+  el('share-link').textContent = shareUrl;
+  el('qr-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=' + encodeURIComponent(shareUrl);
 }
 
-// ── AUTH ─────────────────────────────────────────────
-async function doVendorLogin() {
-  const email = el('vl-email')?.value.trim();
-  const pass  = el('vl-pass')?.value;
-  if (!email || !email.includes('@')) { vToast('Enter a valid email'); return; }
-  if (!pass || pass.length < 6)       { vToast('Password must be 6+ characters'); return; }
-  const res = await S.vendor.login(email, pass);
-  if (!res.ok) { vToast(res.reason === 'not_found' ? 'No account found. Please register first.' : 'Login failed — check your details.'); return; }
-  initApp(res.vendor);
-}
+function renderMenu(query) {
+  if (!STORE) return;
+  const menu = STORE.menu || [];
+  const q = (query || '').toLowerCase();
+  const filtered = q ? menu.filter(m => m.name.toLowerCase().includes(q) || (m.cat||'').toLowerCase().includes(q)) : menu;
 
-async function doVendorRegister() {
-  const businessName = el('vr-bname')?.value.trim();
-  const ownerName     = el('vr-name')?.value.trim();
-  const email         = el('vr-email')?.value.trim();
-  const password      = el('vr-pass')?.value;
-  const category      = el('vr-cat')?.value;
-  if (!businessName) { vToast('Enter your business name'); return; }
-  if (!ownerName)     { vToast('Enter your full name'); return; }
-  if (!email.includes('@')) { vToast('Enter a valid email'); return; }
-  if (password.length < 6)  { vToast('Password must be 6+ characters'); return; }
-  if (!category)      { vToast('Select a category'); return; }
-  const res = await S.vendor.register({ businessName, ownerName, email, password, category });
-  if (!res.ok) { vToast('Could not create account — try again.'); return; }
-  if (res.reason === 'confirm_email') { vToast('Check your email to confirm your account, then log in 📧'); vgt('vs-login'); return; }
-  vgt('vs-onboarding');
-  startOnboarding();
-}
+  if (!menu.length) { el('menu-list').innerHTML = `<div class="empty">Menu coming soon — this vendor hasn't added items yet.</div>`; return; }
+  if (!filtered.length) { el('menu-list').innerHTML = `<div class="empty">No items match "${query}"</div>`; return; }
 
-async function doVendorForgot() {
-  const email = el('vf-email')?.value.trim();
-  if (!email.includes('@')) { vToast('Enter a valid email'); return; }
-  await S.vendor.forgotPassword(email);
-  vToast('Reset link sent to ' + email + ' 📬');
-  setTimeout(() => vgt('vs-login'), 1500);
-}
+  const byCat = {};
+  filtered.forEach(m => { const c = m.cat || 'Menu'; (byCat[c] = byCat[c] || []).push(m); });
 
-async function doVendorLogout() { await S.vendor.logout(); vgt('vs-welcome'); }
-
-function initApp(vendor) {
-  vgt('vs-app');
-  if (el('v-avatar')) el('v-avatar').textContent = vendor.initial || vendor.businessName?.charAt(0) || 'V';
-  if (el('v-bname'))  el('v-bname').textContent  = vendor.businessName || 'My Restaurant';
-  history.replaceState({ vendorPage: 'pg-dashboard' }, '', '#dashboard');
-  checkBroadcasts();
-  renderDashboard();
-}
-async function renderVendorNotifBadge() {
-  const { notifications } = await S.notifications.list();
-  const dot = el('v-notif-dot');
-  if (dot) dot.style.display = notifications.some(n => n.unread) ? 'block' : 'none';
-}
-async function openVendorNotifs() {
-  const { notifications } = await S.notifications.list();
-  const list = el('v-notifs-list');
-  if (list) {
-    list.innerHTML = notifications.length
-      ? notifications.map(n => `<div style="padding:12px;background:${n.unread?'var(--acs)':'var(--sfu)'};border:1px solid ${n.unread?'#E8943A30':'var(--bd)'};border-radius:10px"><div style="font-size:13px;font-weight:600;color:var(--t1);margin-bottom:2px">${n.title}</div><div style="font-size:12px;color:var(--t2)">${n.msg||''}</div><div style="font-size:11px;color:var(--t3);margin-top:4px">${n.time}</div></div>`).join('')
-      : `<div style="text-align:center;padding:30px 10px;color:var(--t3);font-size:13px">No notifications yet</div>`;
-  }
-  await S.notifications.markAllRead();
-  renderVendorNotifBadge();
-  openVMod('mod-vendor-notifs');
-}
-
-async function checkBroadcasts() {
-  const before = (await S.notifications.list()).notifications.length;
-  await S.notifications.pullBroadcastsForVendor();
-  const { notifications: after } = await S.notifications.list();
-  if (after.length > before) vToast('📢 ' + after[0].title);
-  renderVendorNotifBadge();
-}
-
-function viewMyPage() {
-  const v = S.vendor.getVendor();
-  if (!v?.slug) { vToast('Finish onboarding first to get your page'); return; }
-  window.open('store.html?v=' + v.slug, '_blank');
-}
-function copyMyPageLink() {
-  const link = el('my-page-link')?.textContent;
-  if (!link || link === '—') { vToast('Finish onboarding first to get your page'); return; }
-  navigator.clipboard?.writeText(link).then(() => vToast('Link copied 🔗')).catch(() => vToast('Could not copy'));
-}
-function shareMyPageWhatsApp() {
-  const link = el('my-page-link')?.textContent;
-  if (!link || link === '—') { vToast('Finish onboarding first to get your page'); return; }
-  const v = S.vendor.getVendor();
-  window.open('https://wa.me/?text=' + encodeURIComponent(`Check out ${v?.businessName || 'my business'} on Noura: ${link}`), '_blank');
-}
-
-// ── ONBOARDING ───────────────────────────────────────
-let obStep = 0;
-const OB_STEPS = [
-  { title: '1️⃣ Business Information', sub: 'Tell us about your restaurant', html: `
-      <div class="field"><label>Business Name</label><input type="text" id="ob-bname" placeholder="e.g. Mama Tee Kitchen"></div>
-      <div class="field"><label>Description</label><textarea id="ob-desc" rows="3" placeholder="Tell customers what makes your food special…"></textarea></div>
-      <div class="field"><label>Category</label><select id="ob-cat"><option>Nigerian Restaurant</option><option>Fast Food</option><option>Shawarma & Grills</option><option>Bakery & Pastries</option><option>Seafood</option><option>Continental</option><option>Healthy Food</option></select></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label>Phone</label><input type="tel" id="ob-phone" placeholder="+234..."></div><div class="field"><label>Email</label><input type="email" id="ob-email" placeholder="hello@..."></div></div>` },
-  { title: '2️⃣ Location', sub: 'Where are you located?', html: `
-      <div class="field"><label>Country</label><select id="ob-country"><option>Nigeria</option><option>Ghana</option><option>Kenya</option><option>South Africa</option><option>Other</option></select></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label>State / Region</label><input type="text" id="ob-state" placeholder="Lagos"></div><div class="field"><label>City</label><input type="text" id="ob-city" placeholder="Lekki"></div></div>
-      <div class="field"><label>Street Address</label><input type="text" id="ob-addr" placeholder="23 Allen Avenue..."></div>
-      <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:12px;height:140px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px">📍 Map integration coming soon</div>` },
-  { title: '3️⃣ Branding', sub: 'Make your profile stand out', html: `
-      <div style="display:flex;gap:16px;margin-bottom:20px">
-        <label id="ob-cover-box" style="flex:1;background:var(--sfu);border:1px solid var(--bd);border-radius:12px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--t2);font-size:13px;overflow:hidden;background-size:cover;background-position:center">
-          <div class="ob-photo-ph"><div style="font-size:32px">🖼️</div>Cover Photo</div>
-          <input type="file" accept="image/*" style="display:none" onchange="uploadOnboardingPhoto(this,'cover')">
-        </label>
-        <label id="ob-logo-box" style="width:120px;background:var(--sfu);border:1px solid var(--bd);border-radius:12px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--t2);font-size:13px;overflow:hidden;background-size:cover;background-position:center">
-          <div class="ob-photo-ph"><div style="font-size:32px">🪪</div>Logo</div>
-          <input type="file" accept="image/*" style="display:none" onchange="uploadOnboardingPhoto(this,'logo')">
-        </label>
-      </div>
-      <div class="field"><label>Business Emoji (shown until you upload a logo)</label><input type="text" id="ob-emoji" placeholder="🍗" maxlength="4" value="🍽️"></div>
-      <div class="field"><label>Price Range</label><select id="ob-price"><option>Budget (₦500–₦2,000)</option><option>Mid-range (₦2,000–₦5,000)</option><option>Premium (₦5,000+)</option></select></div>` },
-  { title: '4️⃣ Business Hours', sub: 'When are you open?', html: `<div id="ob-hours-grid" style="display:flex;flex-direction:column;gap:8px"></div>` },
-  { title: '5️⃣ Social & Contact', sub: 'Help customers reach you', html: `
-      <div class="field"><label>WhatsApp Number</label><input type="tel" id="ob-wa" placeholder="+234..."></div>
-      <div class="field"><label>Instagram</label><input type="text" id="ob-ig" placeholder="@yourhandle"></div>
-      <div class="field"><label>Facebook</label><input type="text" id="ob-fb" placeholder="facebook.com/yourpage"></div>
-      <div class="field"><label>Website (optional)</label><input type="url" id="ob-web" placeholder="yourbusiness.com"></div>` },
-  { title: '🎉 You\'re all set!', sub: 'Your vendor profile is ready. Start adding your menu!', html: `
-      <div style="text-align:center;padding:20px 0">
-        <div style="font-size:64px;margin-bottom:16px">🚀</div>
-        <div style="font-size:15px;color:var(--t2);line-height:1.7;margin-bottom:24px">Your business profile has been created. Add your menu items and start appearing on Noura's restaurant discovery.</div>
-        <div style="display:flex;flex-direction:column;gap:10px;text-align:left">
-          <div style="padding:12px 16px;background:var(--acs);border-radius:10px;font-size:14px;color:var(--t1)">✅ Business profile created</div>
-          <div style="padding:12px 16px;background:var(--sfu);border:1px solid var(--bd);border-radius:10px;font-size:14px;color:var(--t2)">⏳ Add menu items (next step)</div>
-          <div style="padding:12px 16px;background:var(--sfu);border:1px solid var(--bd);border-radius:10px;font-size:14px;color:var(--t2)">⏳ Appear on Noura (after approval)</div>
+  el('menu-list').innerHTML = Object.entries(byCat).map(([cat, items]) => `
+    <div class="menu-cat">${cat}</div>
+    ${items.map(m => `
+      <div class="menu-item ${m.available === false ? 'unavailable' : ''}">
+        <div class="menu-item-emoji">${m.emoji || '🍽️'}</div>
+        <div style="flex:1;min-width:0">
+          <div class="menu-item-name">${m.name}${m.available === false ? ' (Sold Out)' : ''}</div>
+          ${m.desc ? `<div class="menu-item-desc">${m.desc}</div>` : ''}
         </div>
-      </div>` }
-];
-
-async function uploadOnboardingPhoto(input, kind) {
-  const file = input.files?.[0]; if (!file) return;
-  const box = el(kind === 'cover' ? 'ob-cover-box' : 'ob-logo-box');
-  if (box) box.style.opacity = '0.5';
-  const res = await S.media.uploadVendorPhoto(file, kind);
-  if (box) box.style.opacity = '1';
-  if (!res.ok) { vToast(res.reason === 'no_backend' ? 'Photo upload needs a connected backend' : 'Upload failed — try again'); return; }
-  if (box) { box.style.backgroundImage = `url('${res.url}')`; const ph = box.querySelector('.ob-photo-ph'); if (ph) ph.style.display = 'none'; }
-  vToast((kind === 'cover' ? 'Cover photo' : 'Logo') + ' uploaded ✅');
-}
-
-function startOnboarding() { obStep = 0; renderObStep(); }
-function renderObStep() {
-  const step = OB_STEPS[obStep], isLast = obStep === OB_STEPS.length - 1;
-  OB_STEPS.forEach((_,i) => { const e2=el('obs-'+i); if(e2){ e2.classList.remove('active','done'); if(i<obStep)e2.classList.add('done'); else if(i===obStep)e2.classList.add('active'); } });
-  el('ob-content').innerHTML = `
-    <div class="onboard-title">${step.title}</div>
-    <div class="onboard-sub">${step.sub}</div>
-    ${step.html}
-    <div style="display:flex;gap:10px;margin-top:24px">
-      ${obStep > 0 ? '<button class="btn-sm ghost" onclick="obBack()" style="flex:1">← Back</button>' : ''}
-      <button class="btn-sm primary" onclick="obNext()" style="flex:2">${isLast ? 'Go to Dashboard 🚀' : 'Continue →'}</button>
-    </div>`;
-  if (obStep === 3) buildHoursGrid('ob-hours-grid');
-}
-async function obNext() {
-  if (obStep < OB_STEPS.length - 1) { obStep++; renderObStep(); return; }
-  const patch = {
-    setupDone: true,
-    desc:  el('ob-desc')?.value || '', category: el('ob-cat')?.value || '',
-    phone: el('ob-phone')?.value || '', email: el('ob-email')?.value || '',
-    country: el('ob-country')?.value || '', state: el('ob-state')?.value || '', city: el('ob-city')?.value || '', address: el('ob-addr')?.value || '',
-    emoji: el('ob-emoji')?.value || '🍽️', priceRange: el('ob-price')?.value || '',
-    whatsapp: el('ob-wa')?.value || '', instagram: el('ob-ig')?.value || '', facebook: el('ob-fb')?.value || '', website: el('ob-web')?.value || '',
-  };
-  const res = await S.vendor.updateProfile(patch);
-  initApp(res.vendor);
-}
-function obBack(){ if(obStep>0){obStep--;renderObStep();} }
-
-function buildHoursGrid(containerId) {
-  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const container = el(containerId); if (!container) return;
-  container.innerHTML = days.map(d => `
-    <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--sfu);border-radius:10px;border:1px solid var(--bd)">
-      <div style="width:36px;font-size:13px;font-weight:600;color:var(--t2)">${d}</div>
-      <input type="time" value="08:00" style="flex:1;background:transparent;border:none;color:var(--t1);font-size:13px;font-family:inherit;outline:none">
-      <div style="font-size:12px;color:var(--t3)">to</div>
-      <input type="time" value="22:00" style="flex:1;background:transparent;border:none;color:var(--t1);font-size:13px;font-family:inherit;outline:none">
-      <div class="tog on" onclick="this.classList.toggle('on')"></div>
-    </div>`).join('');
-}
-
-// ── DASHBOARD  (real numbers only — no Math.random placeholders) ──
-async function renderDashboard() {
-  const { menuItems, totalOrders, avgRating, live, views, favourites } = await S.vendorAnalytics.summary();
-  if (el('st-views'))  el('st-views').textContent  = live ? views : '—';
-  if (el('st-favs'))   el('st-favs').textContent   = live ? favourites : '—';
-  if (el('st-meals'))  el('st-meals').textContent  = menuItems;
-  if (el('st-rating')) el('st-rating').textContent = avgRating || '—';
-
-  const v = S.vendor.getVendor();
-  const linkEl = el('my-page-link');
-  if (linkEl && v?.slug) linkEl.textContent = location.origin + location.pathname.replace('vendor.html','store.html') + '?v=' + v.slug;
-
-  const orders = await S.vendorOrders.list();
-  const dashOrders = el('dash-orders');
-  if (dashOrders) {
-    const pending = orders.filter(o=>o.status!=='Completed'&&o.status!=='Cancelled').slice(0,3);
-    dashOrders.innerHTML = pending.length ? pending.map(orderCardHTML).join('') : '<div style="color:var(--t3);font-size:14px;padding:12px 0">No pending orders</div>';
-  }
-
-  const { live: trendsLive, weekly } = await S.vendorAnalytics.trends();
-  const viewsCanvas = el('chart-views'), ratingCanvas = el('chart-rating');
-  if (trendsLive && weekly) {
-    renderChart('chart-views', 'line', weekly.labels, weekly.values, '#E8943A');
-  } else {
-    hideChartWithNotice(viewsCanvas, 'Order history will appear here once your first order comes in.');
-  }
-  hideChartWithNotice(ratingCanvas, totalOrders ? null : 'Rating trend will build up as reviews come in.');
-}
-
-function hideChartWithNotice(canvas, notice) {
-  if (!canvas) return;
-  if (chartInstances[canvas.id]) { chartInstances[canvas.id].destroy(); delete chartInstances[canvas.id]; }
-  const parent = canvas.parentElement;
-  let n = parent.querySelector('.chart-empty-notice');
-  if (!notice) { canvas.style.display=''; if(n) n.remove(); return; }
-  canvas.style.display = 'none';
-  if (!n) { n = document.createElement('div'); n.className='chart-empty-notice'; n.style.cssText='padding:30px 16px;text-align:center;color:var(--t3);font-size:13px'; parent.appendChild(n); }
-  n.textContent = notice;
-}
-
-// ── MENU ─────────────────────────────────────────────
-let activeMenuCat = 'all';
-let editMealIdx   = -1;
-
-async function renderMenu(cat) {
-  cat = cat || activeMenuCat;
-  const menu  = await S.vendorMenu.list();
-  const shown = cat === 'all' ? menu : menu.filter(m => m.cat === cat);
-  const tbody = el('menu-tbody'), empty = el('menu-empty'), table = el('menu-table');
-  if (!tbody) return;
-  if (!menu.length) { if(table)table.style.display='none'; if(empty)empty.style.display='block'; return; }
-  if(table)table.style.display=''; if(empty)empty.style.display='none';
-  tbody.innerHTML = shown.map((m,i) => `
-    <tr>
-      <td><span style="font-size:20px;margin-right:8px">${m.emoji||'🍽️'}</span><strong>${m.name}</strong>${m.time?`<div style="font-size:11px;color:var(--t3)">⏱ ${m.time}</div>`:''}</td>
-      <td><span style="background:var(--sfu);color:var(--t2);font-size:11px;padding:2px 8px;border-radius:var(--rf)">${m.cat}</span></td>
-      <td style="color:var(--ac);font-weight:600">${m.price}</td>
-      <td><span class="avail-dot ${m.available?'on':'off'}"></span>${m.available?'Available':'Unavailable'}</td>
-      <td><div class="action-row">
-        <button class="act-btn edit" onclick="editMeal(${i})">✏️ Edit</button>
-        <button class="act-btn" style="background:var(--sfu);color:var(--t2)" onclick="toggleAvail(${i})">${m.available?'Disable':'Enable'}</button>
-        <button class="act-btn del" onclick="deleteMeal(${i})">🗑</button>
-      </div></td>
-    </tr>`).join('');
-  if (el('st-meals')) el('st-meals').textContent = menu.length;
-}
-
-function filterMenu(cat, btn) {
-  activeMenuCat = cat;
-  document.querySelectorAll('#menu-cat-filter .btn-sm').forEach(b => { b.className='btn-sm ghost'; });
-  if (btn) btn.className = 'btn-sm primary';
-  renderMenu(cat);
-}
-
-function openAddMealModal() {
-  editMealIdx = -1;
-  el('add-meal-title').textContent = 'Add Menu Item';
-  ['m-name','m-price','m-desc','m-time'].forEach(id => { const e2=el(id); if(e2)e2.value=''; });
-  if (el('m-emoji')) el('m-emoji').value='🍽️';
-  el('m-avail')?.classList.add('on');
-  openVMod('mod-add-meal');
-}
-
-async function editMeal(idx) {
-  const menu = await S.vendorMenu.list(); const m = menu[idx]; if (!m) return;
-  editMealIdx = idx;
-  el('add-meal-title').textContent = 'Edit Menu Item';
-  el('m-name').value  = m.name;
-  el('m-price').value = m.price;
-  el('m-cat').value   = m.cat;
-  el('m-desc').value  = m.desc  || '';
-  el('m-emoji').value = m.emoji || '🍽️';
-  el('m-time').value  = m.time  || '';
-  el('m-avail')?.classList.toggle('on', m.available);
-  openVMod('mod-add-meal');
-}
-
-async function saveMeal() {
-  const name  = el('m-name')?.value.trim();
-  const price = el('m-price')?.value.trim();
-  if (!name)  { vToast('Enter a name');  return; }
-  if (!price) { vToast('Enter a price'); return; }
-  const meal = {
-    name, price, cat: el('m-cat')?.value || 'Lunch', desc: el('m-desc')?.value || '',
-    emoji: el('m-emoji')?.value || '🍽️', time: el('m-time')?.value || '',
-    available: el('m-avail')?.classList.contains('on') ?? true,
-  };
-  await S.vendorMenu.save(meal, editMealIdx);
-  vToast(editMealIdx >= 0 ? 'Meal updated ✅' : 'Meal added ✅ — now live on Noura');
-  closeVMod('mod-add-meal');
-  renderMenu();
-}
-
-async function toggleAvail(idx) { const { menu } = await S.vendorMenu.toggleAvailable(idx); renderMenu(); vToast(menu[idx].available ? 'Item enabled ✅' : 'Item disabled'); }
-async function deleteMeal(idx) { if (!confirm('Delete this menu item?')) return; await S.vendorMenu.remove(idx); renderMenu(); vToast('Item deleted'); }
-
-// ── ORDERS  (empty until real orders exist — no ORD-001 samples) ──
-function orderCardHTML(o) {
-  const statusClass = {Pending:'status-pending',Preparing:'status-preparing',Ready:'status-ready',Completed:'status-completed',Cancelled:'status-cancelled'}[o.status] || '';
-  return `<div class="order-card">
-    <div class="order-header">
-      <div><div class="order-id">${o.id}</div><div style="font-size:12px;color:var(--t3)">${o.time||''}</div></div>
-      <div class="order-status ${statusClass}">${o.status}</div>
-    </div>
-    <div style="font-size:14px;font-weight:500;color:var(--t1);margin-bottom:4px">${o.customer}</div>
-    <div class="order-items">${(o.items||[]).join(' · ')}</div>
-    <div class="order-footer">
-      <div class="order-price">${o.price}</div>
-      <div class="order-actions">
-        ${o.phone?`<a href="tel:${o.phone}"><button class="act-btn" style="background:var(--acs);color:var(--ac)">📞 Call</button></a>`:''}
-        ${o.status==='Pending'?`<button class="act-btn edit" onclick="updateOrderStatus('${o.id}','Preparing')">Start Preparing</button>`:''}
-        ${o.status==='Preparing'?`<button class="act-btn" style="background:#4CAF5018;color:var(--ok)" onclick="updateOrderStatus('${o.id}','Ready')">Mark Ready</button>`:''}
+        <div class="menu-item-price">${m.price || ''}</div>
       </div>
-    </div>
-  </div>`;
-}
-async function renderOrders(filter) {
-  const orders = await S.vendorOrders.list();
-  const shown  = filter === 'all' ? orders : orders.filter(o => o.status === filter);
-  const list   = el('orders-list'); if (!list) return;
-  list.innerHTML = shown.length ? shown.map(orderCardHTML).join('')
-    : `<div class="emst" style="padding:40px 20px;text-align:center"><div style="font-size:40px;margin-bottom:10px">📦</div><div style="color:var(--t1);font-weight:600;margin-bottom:6px">No orders yet</div><div style="color:var(--t3);font-size:13px">Orders will appear here once in-app ordering connects to a backend.</div></div>`;
-}
-function filterOrders(filter, btn) {
-  document.querySelectorAll('#pg-orders .btn-sm').forEach(b => b.className='btn-sm ghost');
-  if (btn) btn.className='btn-sm primary';
-  renderOrders(filter);
-}
-async function updateOrderStatus(orderId, newStatus) { await S.vendorOrders.updateStatus(orderId, newStatus); renderOrders('all'); vToast('Order updated: ' + newStatus); }
-
-// ── ANALYTICS  (honest empty states instead of fake trend lines) ──
-let analyticsChartsDone = false;
-async function renderAnalytics() {
-  analyticsChartsDone = true;
-  const { live, weekly, popularItems, growth } = await S.vendorAnalytics.trends();
-  const map = [['chart-weekly',weekly,'bar','#E8943A'],['chart-popular',popularItems,'doughnut',['#E8943A','#4CAF50','#2196F3','#F5A623','#9C27B0']],['chart-growth',growth,'line','#4CAF50']];
-  map.forEach(([id, data, type, color]) => {
-    const canvas = el(id); if (!canvas) return;
-    if (live && data) renderChart(id, type, data.labels, data.values, color);
-    else hideChartWithNotice(canvas, 'This chart needs order history — it will fill in once orders start coming through.');
-  });
+    `).join('')}
+  `).join('');
 }
 
-// ── REVIEWS  (real reviews from the published listing) ──
-async function renderReviews(sortFn) {
-  let reviews = await S.vendorReviews.list();
-  if (sortFn) reviews = [...reviews].sort(sortFn);
-  const list = el('reviews-list'); if (!list) return;
-  if (!reviews.length) { list.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--t3)"><div style="font-size:40px;margin-bottom:10px">⭐</div>No reviews yet.</div>`; return; }
-  list.innerHTML = reviews.map((r,i) => `
-    <div class="review-item">
-      <div class="ri-header">
-        <div><div class="ri-author">${r.author}</div><div class="ri-stars">${'⭐'.repeat(r.stars)}</div></div>
-        <div class="ri-date">${r.date}</div>
-      </div>
-      <div class="ri-text">${r.text}</div>
-      ${r.replied
-        ? `<div class="reply-box"><div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:4px">Your reply:</div><div style="font-size:13px;color:var(--t2)">${r.reply}</div></div>`
-        : `<div class="reply-box"><textarea class="reply-input" id="reply-${i}" rows="2" placeholder="Write a reply…"></textarea><button class="act-btn edit" style="margin-top:6px" onclick="submitReply(${i})">Send Reply</button></div>`}
-    </div>`).join('');
+function copyLink() {
+  const url = el('share-link').textContent;
+  navigator.clipboard?.writeText(url).then(() => toast('Link copied 🔗')).catch(() => toast('Could not copy — long-press the link instead'));
 }
-function sortReviews(type, btn) {
-  document.querySelectorAll('#pg-reviews .btn-sm').forEach(b => b.className='btn-sm ghost');
-  if (btn) btn.className='btn-sm primary';
-  const fns = {newest: () => 0, highest: (a,b) => b.stars-a.stars, lowest: (a,b) => a.stars-b.stars};
-  renderReviews(fns[type]);
-}
-async function submitReply(idx) {
-  const text = el('reply-'+idx)?.value.trim();
-  if (!text) { vToast('Write your reply first'); return; }
-  await S.vendorReviews.reply(idx, text);
-  renderReviews(); vToast('Reply sent ✅');
+function shareWhatsApp() {
+  const url = el('share-link').textContent;
+  window.open('https://wa.me/?text=' + encodeURIComponent(`Check out ${STORE?.name || 'this business'} on Noura: ${url}`), '_blank');
 }
 
-// ── PROMOTIONS ───────────────────────────────────────
-async function renderPromos() {
-  const promos = await S.vendorPromos.list();
-  const grid = el('promo-grid'); if (!grid) return;
-  if (!promos.length) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--t3)"><div style="font-size:48px;margin-bottom:12px">🎁</div><div style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:8px">No promotions yet</div><div style="font-size:14px;margin-bottom:20px">Create your first promotion to attract more customers</div><button class="btn-sm primary" onclick="openPromoModal()">➕ Create First Promo</button></div>`; return; }
-  grid.innerHTML = promos.map((p,i) => `
-    <div class="promo-card">
-      <div class="promo-type">${p.type}</div>
-      <div class="promo-val">${p.val}</div>
-      <div class="promo-desc">${p.desc}</div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div class="promo-exp">Expires: ${p.exp || 'No expiry'}</div>
-        <button class="act-btn del" onclick="deletePromo(${i})">🗑</button>
-      </div>
-    </div>`).join('');
-}
-function openPromoModal() { el('p-val').value=''; el('p-desc').value=''; el('p-exp').value=''; openVMod('mod-promo'); }
-async function savePromo() {
-  const val = el('p-val')?.value.trim(), desc = el('p-desc')?.value.trim();
-  if (!val)  { vToast('Enter a value'); return; }
-  if (!desc) { vToast('Enter a description'); return; }
-  await S.vendorPromos.create({ type: el('p-type')?.value, val, desc, exp: el('p-exp')?.value || '' });
-  closeVMod('mod-promo'); renderPromos(); vToast('Promotion created 🎁');
-}
-async function deletePromo(idx) { if (!confirm('Delete this promotion?')) return; await S.vendorPromos.remove(idx); renderPromos(); vToast('Promotion deleted'); }
-
-// ── SETTINGS ─────────────────────────────────────────
-function loadSettings() {
-  const v = S.vendor.getVendor() || {};
-  const ids = {'s-bname':'businessName','s-desc':'desc','s-phone':'phone','s-wa':'whatsapp','s-web':'website','s-addr':'address'};
-  Object.entries(ids).forEach(([id,key]) => { const e2=el(id); if(e2 && v[key]) e2.value=v[key]; });
-  buildHoursGrid('hours-grid');
-}
-async function saveVendorSettings() {
-  const patch = {
-    businessName: el('s-bname')?.value.trim(), desc: el('s-desc')?.value.trim() || '',
-    phone: el('s-phone')?.value.trim() || '', whatsapp: el('s-wa')?.value.trim() || '',
-    website: el('s-web')?.value.trim() || '', address: el('s-addr')?.value.trim() || '',
-  };
-  patch.initial = (patch.businessName || 'V').charAt(0).toUpperCase();
-  const res = await S.vendor.updateProfile(patch);
-  if (el('v-bname'))  el('v-bname').textContent  = res.vendor.businessName;
-  if (el('v-avatar')) el('v-avatar').textContent = res.vendor.initial;
-  vToast('Settings saved ✅ — live on your Noura listing');
-}
-
-// ── CHARTS ───────────────────────────────────────────
-const chartInstances = {};
-function renderChart(canvasId, type, labels, data, color) {
-  const canvas = el(canvasId); if (!canvas) return;
-  canvas.style.display = '';
-  const parent = canvas.parentElement, notice = parent.querySelector('.chart-empty-notice'); if (notice) notice.remove();
-  if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
-  const isDoughnut = type === 'doughnut';
-  chartInstances[canvasId] = new Chart(canvas, {
-    type, data: { labels, datasets: [{
-        data,
-        backgroundColor: isDoughnut ? data.map((_,i) => (Array.isArray(color)?color[i]:color)+'99') : (color+'33'),
-        borderColor:     isDoughnut ? data.map((_,i) => Array.isArray(color)?color[i]:color) : color,
-        borderWidth: 2, fill: !isDoughnut, tension: 0.4,
-        pointBackgroundColor: isDoughnut ? undefined : color, pointRadius: isDoughnut ? 0 : 3,
-      }] },
-    options: { responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: isDoughnut, labels:{color:'#8A7D6A',font:{size:11}} } },
-      scales: isDoughnut ? {} : { x:{grid:{color:'#2A2318'},ticks:{color:'#8A7D6A',font:{size:11}}}, y:{grid:{color:'#2A2318'},ticks:{color:'#8A7D6A',font:{size:11}}} } }
-  });
-}
-
-// ── MODALS ───────────────────────────────────────────
-function openVMod(id)  { el(id)?.classList.add('on'); }
-function closeVMod(id) { el(id)?.classList.remove('on'); }
-document.addEventListener('DOMContentLoaded', () => {
-  if (S.platform.isMaintenanceMode()) {
-    document.body.innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;background:var(--bg,#0A0805);color:var(--t1,#F2EDE4);font-family:'Inter',sans-serif">
-      <div style="font-size:56px;margin-bottom:16px">🛠️</div>
-      <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px">Vendor Portal under maintenance</div>
-      <div style="color:#8A7D6A;font-size:14px;line-height:1.6;max-width:320px">We're making some improvements behind the scenes. Please check back shortly.</div>
-    </div>`;
-    return;
-  }
-  document.querySelectorAll('.v-modal').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('on'); }));
-
-  const dotIds = ['vsd0','vsd1','vsd2']; let di = 0;
-  const dotTimer = setInterval(() => {
-    el(dotIds[di])?.classList.remove('a'); di = (di+1) % 3; el(dotIds[di])?.classList.add('a');
-  }, 300);
-
-  setTimeout(() => {
-    clearInterval(dotTimer);
-    const vendor = S.vendor.getVendor();
-    if (vendor?.setupDone) { initApp(vendor); return; }
-    if (location.hash === '#register') { vgt('vs-register'); return; }
-    vgt('vs-welcome');
-  }, 1600);
-});
-
-// ── TOAST ────────────────────────────────────────────
-let vtTimer;
-function vToast(msg) {
-  const t = el('v-toast'); if (!t) return;
+let toastTimer;
+function toast(msg) {
+  const t = el('toast'); if (!t) return;
   t.textContent = msg; t.classList.add('on');
-  clearTimeout(vtTimer); vtTimer = setTimeout(()=>t.classList.remove('on'), 2800);
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('on'), 2600);
 }
 
-// ── PWA INSTALL (separate from the consumer app's) ─────
-let deferredVendorInstallPrompt = null;
-const V_INSTALL_DISMISS_KEY = 'noura_vendor_install_dismissed_at';
-const V_INSTALL_DISMISS_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+document.addEventListener('DOMContentLoaded', loadStore);
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredVendorInstallPrompt = e;
-  const row = el('v-ssec-install'); if (row) row.style.display = 'block';
-
-  const dismissedAt = Number(localStorage.getItem(V_INSTALL_DISMISS_KEY) || 0);
-  const recentlyDismissed = dismissedAt && (Date.now() - dismissedAt) < V_INSTALL_DISMISS_COOLDOWN_MS;
-  if (!recentlyDismissed) {
-    setTimeout(() => { if (deferredVendorInstallPrompt) el('v-install-banner')?.classList.add('on'); }, 1800);
-  }
-});
-async function installVendorApp() {
-  if (!deferredVendorInstallPrompt) { vToast('Already installed, or your browser doesn\'t support installing yet'); return; }
-  deferredVendorInstallPrompt.prompt();
-  const { outcome } = await deferredVendorInstallPrompt.userChoice;
-  if (outcome === 'accepted') vToast('Installed! 🎉');
-  deferredVendorInstallPrompt = null;
-  el('v-install-banner')?.classList.remove('on');
-  const row = el('v-ssec-install'); if (row) row.style.display = 'none';
-}
-function dismissVendorInstallBanner() {
-  el('v-install-banner')?.classList.remove('on');
-  localStorage.setItem(V_INSTALL_DISMISS_KEY, String(Date.now()));
-}
-window.addEventListener('appinstalled', () => {
-  deferredVendorInstallPrompt = null;
-  el('v-install-banner')?.classList.remove('on');
-  vToast('Noura for Business installed! 🎉');
-});
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => { navigator.serviceWorker.register('sw-vendor.js').catch(() => {}); });
-}
-
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw-vendor.js').then(function () {
-      console.log('Vendor service worker registered: /sw-vendor.js');
-    }).catch(function (err) { console.warn('Vendor SW register failed:', err); });
-  });
-}
 </script>
 </body>
 </html>
