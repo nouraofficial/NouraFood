@@ -5,7 +5,7 @@
       "has": [
         { "type": "host", "value": "(?<slug>[^.]+)\\.noura\\.app" }
       ],
-      "destination": "/store.html?v=$slug"
+"destination": "/store/:slug"
     },
     { "source": "/vendor", "destination": "/vendor.html" },
     { "source": "/admin", "destination": "/admin.html" },
