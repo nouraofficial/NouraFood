@@ -5,7 +5,7 @@
 //  UI still loads if the network drops mid-session.
 // ══════════════════════════════════════════════════════
 const CACHE_NAME = 'noura-shell-v1';
-const APP_SHELL = ['index.html', 'store.html', 'vendor.html', 'manifest.json', 'favicon.png', 'icons/icon-192.png'];
+const APP_SHELL = ['/index.html', '/store.html', '/vendor.html', '/manifest.json', '/favicon.png', '/icons/icon-192.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
