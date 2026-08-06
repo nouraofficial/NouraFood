@@ -1,0 +1,9 @@
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .then(reg => console.log('Main SW registered', reg))
+      .catch(err => console.warn('Main SW register failed:', err));
+  });
+}
+</script>
