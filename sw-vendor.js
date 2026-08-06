@@ -4,7 +4,7 @@
 //  own app shell, so installing one doesn't affect the other.
 // ══════════════════════════════════════════════════════
 const CACHE_NAME = 'noura-vendor-shell-v1';
-const APP_SHELL = ['vendor.html', 'manifest-vendor.json', 'favicon.png', 'icons/icon-192.png'];
+const APP_SHELL = ['/vendor.html', '/manifest-vendor.json', '/favicon.png', '/icons/icon-192.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
