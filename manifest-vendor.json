@@ -3,7 +3,7 @@
   "short_name": "Noura Biz",
   "description": "Manage your restaurant's menu, orders, and Noura storefront.",
   "start_url": "/vendor.html",
-  "scope": "/vendor.html",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0A0805",
