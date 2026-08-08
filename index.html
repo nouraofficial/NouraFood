@@ -584,78 +584,9 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   </div>
 </div>
 
-<!-- Export Source Code Modal -->
-<div class="mov on" id="mod-export-code">
-  <div class="ms" style="max-height:85vh;overflow-y:auto">
-    <div class="mh"></div>
-    <div style="text-align:center;margin-bottom:16px">
-      <div style="width:58px;height:58px;border-radius:18px;background:var(--ac);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 10px;font-weight:800">📥</div>
-      <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--t1)">Export Full Source Code</div>
-      <div style="font-size:13px;color:var(--t2);margin-top:4px">Download all project code files directly to your phone or PC</div>
-    </div>
 
-    <!-- Single Tap Full ZIP Download -->
-    <div style="background:linear-gradient(135deg, var(--sf), var(--sfu));border:1.5px solid var(--ac);border-radius:var(--rmd);padding:14px;margin-bottom:16px;text-align:center;box-shadow:var(--sh)">
-      <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--t1);margin-bottom:4px">📦 Complete Project Bundle (.ZIP)</div>
-      <div style="font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.4">Download all 9 project files in a single zip archive instantly.</div>
-      <button class="btn bp" style="padding:12px;font-size:14px;font-weight:800" onclick="downloadAllFilesZip()">📦 Download Full Project ZIP</button>
-    </div>
 
-    <!-- Individual File Downloads -->
-    <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rmd);padding:14px;margin-bottom:16px">
-      <div style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:10px">📄 Download Individual Files</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('index.html')">
-          <span>📱 index.html <span style="color:var(--t3)">(Main App)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('landing.html')">
-          <span>🌐 landing.html <span style="color:var(--t3)">(Landing Page)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('store.html')">
-          <span>🏪 store.html <span style="color:var(--t3)">(Storefront)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('vendor.html')">
-          <span>💼 vendor.html <span style="color:var(--t3)">(Vendor Portal)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('admin.html')">
-          <span>⚙️ admin.html <span style="color:var(--t3)">(Admin Panel)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('sw.js')">
-          <span>⚡ sw.js <span style="color:var(--t3)">(PWA Service Worker)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('manifest.json')">
-          <span>📱 manifest.json <span style="color:var(--t3)">(PWA Config)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('package.json')">
-          <span>📦 package.json <span style="color:var(--t3)">(NPM Packages)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('server.ts')">
-          <span>🖥️ server.ts <span style="color:var(--t3)">(Backend Express)</span></span>
-          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Official Platform Export -->
-    <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rmd);padding:14px;margin-bottom:16px">
-      <div style="font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--t2);margin-bottom:4px">⚙️ AI Studio IDE Export</div>
-      <div style="font-size:11px;color:var(--t3);line-height:1.5">You can also click the <strong>Settings / Menu icon (⚙️)</strong> in the top-right corner of Google AI Studio to <strong>"Export to GitHub"</strong> or <strong>"Download ZIP"</strong>.</div>
-    </div>
-
-    <button class="btn bs" onclick="closeMod('mod-export-code')">Close</button>
-  </div>
-</div>
-
-<div id="toast" class="on">Bundling all project files into ZIP... 📦</div>
-
+    
 <script>
 window.NOURA_ENV = {
   ENVIRONMENT: 'production',
