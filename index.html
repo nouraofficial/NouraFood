@@ -1,4 +1,6 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <script type="module" src="/@vite/client"></script>
 
 <meta charset="UTF-8">
@@ -7,10 +9,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Noura">
-<title>Noura — Discover Local Food &amp; AI Companion</title>
-<meta name="description" content="Noura helps you discover great local food — search Nigerian, Ghanaian &amp; Kenyan recipes, find nearby vendors, chat with Noura AI, and save your favourites. Free for everyone.">
-<link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<title>Noura — Discover Local Food & AI Companion</title>
+<meta name="description" content="Noura helps you discover great local food — search Nigerian, Ghanaian & Kenyan recipes, find nearby vendors, chat with Noura AI, and save your favourites. Free for everyone.">
+<link rel="manifest" href="/manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
@@ -147,11 +149,18 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 .comm-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--rfl);background:var(--sfu);border:1px solid var(--bd);font-size:13px;font-weight:600;color:var(--t1);cursor:pointer;text-decoration:none}
 .comm-btn:hover{border-color:var(--ac);color:var(--ac)}
 </style>
-<script src="/_aistudio-iframe.js?v=2f1c016a"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style></head>
+<script src="/_aistudio-iframe.js?v=2f1c016a"></script></head>
 <body>
 
 <!-- SPLASH SCREEN -->
-
+<div id="splash-screen" style="position:fixed;inset:0;background:#0D0B09;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease">
+  <div style="width:84px;height:84px;border-radius:24px;background:linear-gradient(135deg,#E8943A,#C06B1B);display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 12px 30px rgba(232,148,58,0.35);margin-bottom:16px;animation:splashPulse 1.8s infinite ease-in-out">
+    🍽️
+  </div>
+  <div style="font-family:'Sora',sans-serif;font-size:30px;font-weight:800;color:#F0EDE6;letter-spacing:-0.5px">Noura</div>
+  <div style="font-size:13px;color:#8A7F72;margin-top:6px;font-weight:500">Food Discovery & Local Vendor Platform</div>
+  <div style="margin-top:28px;width:32px;height:32px;border:3px solid #E8943A25;border-top-color:#E8943A;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+</div>
 <style>
 @keyframes splashPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
 </style>
@@ -159,18 +168,18 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 <div id="app">
 
   <!-- HOME SCREEN -->
-  <div class="screen" id="scr-home">
+  <div class="screen active" id="scr-home">
     <div class="htb">
       <div>
-        <div class="hgr" id="hgr">Welcome back 👋</div>
-        <div class="hun" id="hun">Noura</div>
+        <div class="hgr" id="hgr">Good morning 👋</div>
+        <div class="hun" id="hun">Food Lover</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <button class="btn" style="background:var(--ac);color:var(--bg);border:none;border-radius:var(--rfl);padding:6px 12px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer;box-shadow:0 2px 8px rgba(232,148,58,0.25)" onclick="installPwa()">
           📲 <span>Install App</span>
         </button>
         <div class="nbt" onclick="openNotificationsModal()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <div class="ndt" id="ndot" style="display:none"></div>
         </div>
       </div>
@@ -179,24 +188,13 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <!-- Search Bar -->
     <div style="padding:0 20px 16px;flex-shrink:0">
       <div style="display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rfl);padding:12px 16px;cursor:pointer" onclick="gt('discover')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:1.8;color:var(--t3);flex-shrink:0"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:1.8;color:var(--t3);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <span style="font-size:15px;color:var(--t3)">Search meals, restaurants, recipes…</span>
         <div style="margin-left:auto;background:var(--ac);color:var(--bg);font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--rfl)">AI ✨</div>
       </div>
     </div>
 
     <div class="scroll">
-      <!-- Static Install App Banner -->
-      <div style="margin:0 20px 16px;background:linear-gradient(135deg, var(--sf), var(--sfu));border:1.5px solid var(--ac);border-radius:var(--rlg);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--sh)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div style="width:40px;height:40px;border-radius:12px;background:var(--acs);border:1px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ac);flex-shrink:0;font-weight:800">📲</div>
-          <div>
-            <div style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1)">Get Noura App</div>
-            <div style="font-size:12px;color:var(--t2)">Install for fast offline access</div>
-          </div>
-        </div>
-        <button class="btn bp" style="width:auto;padding:8px 16px;font-size:12px;flex-shrink:0" onclick="installPwa()">Install</button>
-      </div>
       <!-- AI Banner -->
       <div class="hbn" onclick="gt('ai-chat')">
         <div>
@@ -229,60 +227,16 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
       <div class="hsec">
         <div class="sech"><div class="sect">Today's Meal Plan</div><div class="sea" onclick="gt('mealplan')">See plan</div></div>
         <div class="mscr" id="home-meals">
-    <div class="mc" onclick="openRecipe('53085')">
-      <img class="mc-img" src="https://www.themealdb.com/images/media/meals/vdwloy1713225718.jpg/preview" alt="" loading="lazy" onerror="this.src='https://via.placeholder.com/160x100'">
-      <div class="mc-body">
-        <div class="mty">🌅 Breakfast</div>
-        <div class="mnm">15-minute chicken &amp; halloumi burgers</div>
-      </div>
-    </div>
-  
-    <div class="mc" onclick="openRecipe('53050')">
-      <img class="mc-img" src="https://www.themealdb.com/images/media/meals/020z181619788503.jpg/preview" alt="" loading="lazy" onerror="this.src='https://via.placeholder.com/160x100'">
-      <div class="mc-body">
-        <div class="mty">☀️ Lunch</div>
-        <div class="mnm">Ayam Percik</div>
-      </div>
-    </div>
-  
-    <div class="mc" onclick="openRecipe('53466')">
-      <img class="mc-img" src="https://www.themealdb.com/images/media/meals/nmxec11782498644.jpg/preview" alt="" loading="lazy" onerror="this.src='https://via.placeholder.com/160x100'">
-      <div class="mc-body">
-        <div class="mty">🌇 Dinner</div>
-        <div class="mnm">Belgian Waterzooi Chicken</div>
-      </div>
-    </div>
-  
-    <div class="mc" onclick="openRecipe('53453')">
-      <img class="mc-img" src="https://www.themealdb.com/images/media/meals/9ya6o71780262651.jpg/preview" alt="" loading="lazy" onerror="this.src='https://via.placeholder.com/160x100'">
-      <div class="mc-body">
-        <div class="mty">🥤 Snack</div>
-        <div class="mnm">Bengali Chicken Curry with Potatoes</div>
-      </div>
-    </div>
-  </div>
+          <div class="mc"><div class="mc-img skel"></div><div class="mc-body"><div class="mnm">Loading meal plan…</div></div></div>
+        </div>
       </div>
 
       <!-- Restaurants Near You -->
       <div class="hsec">
         <div class="sech"><div class="sect">📍 Local Vendor Storefronts</div><div class="sea" onclick="gt('restaurants')">See all</div></div>
         <div class="mscr" id="home-restaurants">
-    <div class="rest-card" onclick="openRestaurantProfile('noura')">
-      <div class="rest-cover-ph">🍽️</div>
-      <div class="rest-info">
-        <div class="rest-name">Noura Buka &amp; Grill</div>
-        <div style="font-size:12px;color:var(--t2)">Nigerian Restaurant · ⭐ 4.9</div>
-      </div>
-    </div>
-  
-    <div class="rest-card" onclick="openRestaurantProfile('mama-put')">
-      <div class="rest-cover-ph">🍲</div>
-      <div class="rest-info">
-        <div class="rest-name">Mama Put Kitchen</div>
-        <div style="font-size:12px;color:var(--t2)">Nigerian Restaurant · ⭐ 4.8</div>
-      </div>
-    </div>
-  </div>
+          <div class="rest-card"><div class="rest-cover-ph">🍽️</div><div class="rest-info"><div class="rest-name">Loading storefronts…</div></div></div>
+        </div>
       </div>
 
       <!-- Quick Actions -->
@@ -298,7 +252,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 
       <!-- Community Engagement Box -->
       <div class="comm-card">
-        <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--t1);margin-bottom:6px">👥 Foodie Community &amp; Official Channels</div>
+        <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:var(--t1);margin-bottom:6px">👥 Foodie Community & Official Channels</div>
         <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">Connect with fellow food lovers across Nigeria, share what you're cooking, and follow Noura before official launch!</div>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
           <a class="comm-btn" href="https://www.tiktok.com/@nouraofficial26" target="_blank">📱 TikTok</a>
@@ -311,31 +265,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
       <!-- Trending Meals -->
       <div class="hsec">
         <div class="sech"><div class="sect">🔥 Trending Meals</div><div class="sea" onclick="gt('discover')">Explore all</div></div>
-        <div id="home-feed">
-    <div class="fdc" onclick="openRecipe('53085')">
-      <div class="fdt"><img src="https://www.themealdb.com/images/media/meals/vdwloy1713225718.jpg/preview" style="width:90px;height:90px;object-fit:cover"></div>
-      <div class="fdi">
-        <div class="fdn">15-minute chicken &amp; halloumi burgers</div>
-        <div style="font-size:12px;color:var(--ac);font-weight:600">Tap to view recipe →</div>
-      </div>
-    </div>
-  
-    <div class="fdc" onclick="openRecipe('53050')">
-      <div class="fdt"><img src="https://www.themealdb.com/images/media/meals/020z181619788503.jpg/preview" style="width:90px;height:90px;object-fit:cover"></div>
-      <div class="fdi">
-        <div class="fdn">Ayam Percik</div>
-        <div style="font-size:12px;color:var(--ac);font-weight:600">Tap to view recipe →</div>
-      </div>
-    </div>
-  
-    <div class="fdc" onclick="openRecipe('53466')">
-      <div class="fdt"><img src="https://www.themealdb.com/images/media/meals/nmxec11782498644.jpg/preview" style="width:90px;height:90px;object-fit:cover"></div>
-      <div class="fdi">
-        <div class="fdn">Belgian Waterzooi Chicken</div>
-        <div style="font-size:12px;color:var(--ac);font-weight:600">Tap to view recipe →</div>
-      </div>
-    </div>
-  </div>
+        <div id="home-feed"></div>
       </div>
     </div>
   </div>
@@ -347,7 +277,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     </div>
     <div style="padding:0 20px 10px;flex-shrink:0">
       <div style="display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rfl);padding:10px 16px;margin-bottom:12px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:1.8;color:var(--t3);flex-shrink:0"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:1.8;color:var(--t3);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="srch-inp" placeholder="Search any meal, ingredient or cuisine…" oninput="doSearch(this.value)" style="flex:1;background:none;border:none;outline:none;color:var(--t1);font-size:15px">
       </div>
       <!-- Category Filter Pills -->
@@ -369,7 +299,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <!-- RESTAURANTS SCREEN -->
   <div class="screen" id="scr-restaurants">
     <div class="ph">
-      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"/></svg></div>
       <div class="pt">Vendor Storefronts</div>
     </div>
     <div class="scroll" style="padding:0 20px 88px">
@@ -380,7 +310,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <!-- RESTAURANT PROFILE SCREEN -->
   <div class="screen" id="scr-rest-profile">
     <div class="ph">
-      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"/></svg></div>
       <div class="pt" id="rp-title">Storefront</div>
     </div>
     <div class="scroll" style="padding:0 20px 88px" id="rp-body"></div>
@@ -389,7 +319,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <!-- COMMUNITY SCREEN -->
   <div class="screen" id="scr-community">
     <div class="ph">
-      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"/></svg></div>
       <div class="pt">Foodie Community</div>
     </div>
     <div class="scroll" style="padding:0 20px 88px">
@@ -409,7 +339,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <!-- NOURA AI CHAT SCREEN -->
   <div class="screen" id="scr-ai-chat">
     <div class="ph" style="padding-bottom:10px">
-      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"/></svg></div>
       <div style="flex:1"><div class="pt" style="font-size:18px">Noura AI Companion</div></div>
       <button style="background:var(--sfu);border:1px solid var(--bd);color:var(--t2);border-radius:var(--rfl);padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer" onclick="clearAiChatHistory()">🗑️ Clear</button>
     </div>
@@ -423,7 +353,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <div class="chat-bar">
       <input class="chat-input" id="chat-inp" placeholder="Ask Noura AI about food or recipes…" onkeydown="if(event.key==='Enter')sendAiChat()">
       <button class="chat-send" onclick="sendAiChat()">
-        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </div>
   </div>
@@ -431,7 +361,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <!-- RECIPE GENERATOR SCREEN -->
   <div class="screen" id="scr-ai-recipe">
     <div class="ph">
-      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"/></svg></div>
       <div class="pt">Recipe Generator</div>
     </div>
     <div class="scroll" style="padding:0 20px 88px">
@@ -445,49 +375,33 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <!-- CHALLENGES SCREEN -->
   <div class="screen" id="scr-challenges">
     <div class="ph">
-      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+      <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:2;color:var(--t1)"><polyline points="15 18 9 12 15 6"/></svg></div>
       <div class="pt">Food Challenges</div>
     </div>
     <div class="scroll" style="padding:0 20px 88px" id="ch-list"></div>
   </div>
 
   <!-- PROFILE SCREEN -->
-  <div class="screen active" id="scr-profile">
+  <div class="screen" id="scr-profile">
     <div class="ph">
       <div class="pt">My Profile</div>
     </div>
-    <div class="scroll" style="padding:0 20px 88px" id="profile-container">
-      <div style="text-align:center;padding:10px 0 20px">
-        <div style="width:80px;height:80px;border-radius:50%;background:var(--acs);border:2px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:var(--ac);margin:0 auto 12px">N</div>
-        <div style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--t1)">Noura</div>
-        <div style="font-size:13px;color:var(--ac);margin-top:2px">nouraofficial.app@gmail.com</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:6px;background:var(--sfu);display:inline-block;padding:4px 12px;border-radius:var(--rfl)">Member since Aug 2026</div>
-      </div>
-      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden">
-        <div style="padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between" onclick="promptEditProfileName()"><span>✏️ Edit Profile Name</span><span>→</span></div>
-        <div style="padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between" onclick="gt('community')"><span>👥 Community Hub</span><span>→</span></div>
-        <div style="padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between" onclick="gt('challenges')"><span>🏆 Active Challenges</span><span>→</span></div>
-        <div style="padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between" onclick="openVendorPortal()"><span>🏪 Vendor Portal</span><span>→</span></div>
-        <div style="padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between" onclick="installPwa()"><span>📱 Install App (PWA)</span><span>→</span></div>
-        <div style="padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between;color:var(--ac)" onclick="openExportCodeModal()"><span>📥 Export Source Code &amp; Instructions</span><span>→</span></div>
-        <div style="padding:16px;cursor:pointer;display:flex;justify-content:space-between;color:var(--er)" onclick="doLogout()"><span>🚪 Log Out</span><span>→</span></div>
-      </div>
-    </div>
+    <div class="scroll" style="padding:0 20px 88px" id="profile-container"></div>
   </div>
 
   <!-- BOTTOM NAV -->
   <nav id="bnav" class="on">
-    <button class="nb" data-tab="home" onclick="gt('home')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home
+    <button class="nb active" data-tab="home" onclick="gt('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
     </button>
     <button class="nb" data-tab="discover" onclick="gt('discover')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Discover
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Discover
     </button>
     <button class="nb" data-tab="mealplan" onclick="gt('mealplan')">
-      <div class="nbc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></div>Plan
+      <div class="nbc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>Plan
     </button>
-    <button class="nb active" data-tab="profile" onclick="gt('profile')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile
+    <button class="nb" data-tab="profile" onclick="gt('profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile
     </button>
   </nav>
 
@@ -506,11 +420,11 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <form id="form-login" onsubmit="handleLoginSubmit(event)">
       <div class="ig">
         <label class="il">Email Address</label>
-        <div class="iw ni"><input type="email" id="login-email" required="" placeholder="e.g. foodie@gmail.com"></div>
+        <div class="iw ni"><input type="email" id="login-email" required placeholder="e.g. foodie@gmail.com"></div>
       </div>
       <div class="ig">
         <label class="il">Password</label>
-        <div class="iw ni"><input type="password" id="login-pass" required="" placeholder="••••••••"></div>
+        <div class="iw ni"><input type="password" id="login-pass" required placeholder="••••••••"></div>
       </div>
       <button type="submit" class="btn bp" style="margin-top:10px">Sign In to Noura →</button>
     </form>
@@ -519,15 +433,15 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <form id="form-signup" style="display:none" onsubmit="handleSignUpSubmit(event)">
       <div class="ig">
         <label class="il">Full Name</label>
-        <div class="iw ni"><input type="text" id="signup-name" required="" placeholder="e.g. Amaka Bello"></div>
+        <div class="iw ni"><input type="text" id="signup-name" required placeholder="e.g. Amaka Bello"></div>
       </div>
       <div class="ig">
         <label class="il">Email Address</label>
-        <div class="iw ni"><input type="email" id="signup-email" required="" placeholder="e.g. amaka@gmail.com"></div>
+        <div class="iw ni"><input type="email" id="signup-email" required placeholder="e.g. amaka@gmail.com"></div>
       </div>
       <div class="ig">
         <label class="il">Password</label>
-        <div class="iw ni"><input type="password" id="signup-pass" required="" placeholder="At least 6 characters"></div>
+        <div class="iw ni"><input type="password" id="signup-pass" required placeholder="At least 6 characters"></div>
       </div>
       <button type="submit" class="btn bp" style="margin-top:10px">Create Free Account 🎉</button>
     </form>
@@ -561,7 +475,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <div style="text-align:center;margin-bottom:16px">
       <div style="width:58px;height:58px;border-radius:18px;background:var(--ac);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 10px;font-weight:800">📲</div>
       <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--t1)">Install Noura App</div>
-      <div style="font-size:13px;color:var(--t2);margin-top:4px">Access Noura instantly from your Home Screen with fast performance &amp; offline access</div>
+      <div style="font-size:13px;color:var(--t2);margin-top:4px">Access Noura instantly from your Home Screen with fast performance & offline access</div>
     </div>
 
     <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rmd);padding:12px 14px;margin-bottom:12px">
@@ -584,9 +498,78 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   </div>
 </div>
 
+<!-- Export Source Code Modal -->
+<div class="mov" id="mod-export-code">
+  <div class="ms" style="max-height:85vh;overflow-y:auto">
+    <div class="mh"></div>
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="width:58px;height:58px;border-radius:18px;background:var(--ac);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 10px;font-weight:800">📥</div>
+      <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--t1)">Export Full Source Code</div>
+      <div style="font-size:13px;color:var(--t2);margin-top:4px">Download all project code files directly to your phone or PC</div>
+    </div>
 
+    <!-- Single Tap Full ZIP Download -->
+    <div style="background:linear-gradient(135deg, var(--sf), var(--sfu));border:1.5px solid var(--ac);border-radius:var(--rmd);padding:14px;margin-bottom:16px;text-align:center;box-shadow:var(--sh)">
+      <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--t1);margin-bottom:4px">📦 Complete Project Bundle (.ZIP)</div>
+      <div style="font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.4">Download all 9 project files in a single zip archive instantly.</div>
+      <button class="btn bp" style="padding:12px;font-size:14px;font-weight:800" onclick="downloadAllFilesZip()">📦 Download Full Project ZIP</button>
+    </div>
 
-    
+    <!-- Individual File Downloads -->
+    <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rmd);padding:14px;margin-bottom:16px">
+      <div style="font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:10px">📄 Download Individual Files</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('index.html')">
+          <span>📱 index.html <span style="color:var(--t3)">(Main App)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('landing.html')">
+          <span>🌐 landing.html <span style="color:var(--t3)">(Landing Page)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('store.html')">
+          <span>🏪 store.html <span style="color:var(--t3)">(Storefront)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('vendor.html')">
+          <span>💼 vendor.html <span style="color:var(--t3)">(Vendor Portal)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('admin.html')">
+          <span>⚙️ admin.html <span style="color:var(--t3)">(Admin Panel)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('sw.js')">
+          <span>⚡ sw.js <span style="color:var(--t3)">(PWA Service Worker)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('manifest.json')">
+          <span>📱 manifest.json <span style="color:var(--t3)">(PWA Config)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('package.json')">
+          <span>📦 package.json <span style="color:var(--t3)">(NPM Packages)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+        <button class="btn bs" style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:8px 12px" onclick="downloadSingleFile('server.ts')">
+          <span>🖥️ server.ts <span style="color:var(--t3)">(Backend Express)</span></span>
+          <span style="color:var(--ac);font-weight:700">Download ⬇</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Official Platform Export -->
+    <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rmd);padding:14px;margin-bottom:16px">
+      <div style="font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--t2);margin-bottom:4px">⚙️ AI Studio IDE Export</div>
+      <div style="font-size:11px;color:var(--t3);line-height:1.5">You can also click the <strong>Settings / Menu icon (⚙️)</strong> in the top-right corner of Google AI Studio to <strong>"Export to GitHub"</strong> or <strong>"Download ZIP"</strong>.</div>
+    </div>
+
+    <button class="btn bs" onclick="closeMod('mod-export-code')">Close</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
 <script>
 window.NOURA_ENV = {
   ENVIRONMENT: 'production',
@@ -1769,16 +1752,11 @@ async function downloadAllFilesZip() {
   let count = 0;
   for (const filename of files) {
     try {
-      if (filename === 'index.html') {
-        zip.file('index.html', document.documentElement.outerHTML);
+      const res = await fetch('/' + filename);
+      if (res.ok) {
+        const content = await res.text();
+        zip.file(filename, content);
         count++;
-      } else {
-        const res = await fetch('/' + filename);
-        if (res.ok) {
-          const content = await res.text();
-          zip.file(filename, content);
-          count++;
-        }
       }
     } catch (err) {
       console.warn('Failed to add ' + filename, err);
@@ -1824,6 +1802,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1600);
 });
 </script>
-
-
-</body></html>
+</body>
+</html>
