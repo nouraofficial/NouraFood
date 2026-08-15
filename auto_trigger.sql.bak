@@ -22,7 +22,6 @@ alter table if exists public.profiles add column if not exists cuisines text[] d
 alter table if exists public.profiles add column if not exists diet text default '';
 alter table if exists public.profiles add column if not exists allergies text[] default '{}';
 alter table if exists public.profiles add column if not exists onboarding_complete boolean not null default false;
-alter table if exists public.profiles add column if not exists onboarding_complete boolean not null default false;
 
 create table if not exists public.user_preferences (
   user_id uuid primary key references auth.users(id) on delete cascade,
@@ -77,31 +76,6 @@ alter table if exists public.restaurants add column if not exists created_at tim
 alter table if exists public.restaurants add column if not exists updated_at timestamptz not null default now();
 
 create unique index if not exists vendors_auth_user_uidx on public.vendors(auth_user_id) where auth_user_id is not null;
-
--- A partial unique index cannot be inferred by ON CONFLICT(auth_user_id).
--- Keep the old index if present, but add a real table-level UNIQUE constraint
--- so Auth -> Vendor upserts work reliably.
-do $$
-begin
-  if exists (
-    select 1
-    from public.vendors
-    where auth_user_id is not null
-    group by auth_user_id
-    having count(*) > 1
-  ) then
-    raise exception 'Noura migration stopped: duplicate vendors.auth_user_id values exist. Resolve them before rerunning.';
-  end if;
-
-  if not exists (
-    select 1 from pg_constraint
-    where conrelid = 'public.vendors'::regclass
-      and conname = 'vendors_auth_user_id_key'
-  ) then
-    alter table public.vendors
-      add constraint vendors_auth_user_id_key unique (auth_user_id);
-  end if;
-end $$;
 create unique index if not exists vendors_slug_uidx on public.vendors(lower(slug)) where slug is not null;
 create unique index if not exists restaurants_slug_uidx on public.restaurants(lower(slug)) where slug is not null;
 create unique index if not exists restaurants_vendor_uidx on public.restaurants(vendor_id) where vendor_id is not null;
@@ -203,56 +177,27 @@ alter table if exists public.restaurants enable row level security;
 alter table if exists public.menu_items enable row level security;
 alter table if exists public.reviews enable row level security;
 
--- Avoid recursive RLS checks on profiles by using a SECURITY DEFINER helper.
-create or replace function public.noura_is_admin()
-returns boolean
-language sql
-security definer
-set search_path=public
-stable
-as $$
-  select exists (
-    select 1 from public.profiles
-    where id = auth.uid()
-      and role in ('admin','super_admin')
-  );
-$$;
-
-revoke all on function public.noura_is_admin() from public;
-grant execute on function public.noura_is_admin() to authenticated;
-
 drop policy if exists profiles_owner_select on public.profiles;
-create policy profiles_owner_select
-on public.profiles for select to authenticated
-using (auth.uid() = id or public.noura_is_admin());
-
-drop policy if exists profiles_owner_insert on public.profiles;
-create policy profiles_owner_insert
-on public.profiles for insert to authenticated
-with check (auth.uid() = id);
-
+create policy profiles_owner_select on public.profiles for select to authenticated using(auth.uid()=id or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin')));
 drop policy if exists profiles_owner_update on public.profiles;
-create policy profiles_owner_update
-on public.profiles for update to authenticated
-using (auth.uid() = id or public.noura_is_admin())
-with check (auth.uid() = id or public.noura_is_admin());
+create policy profiles_owner_update on public.profiles for update to authenticated using(auth.uid()=id) with check(auth.uid()=id);
 
 drop policy if exists vendors_public_select on public.vendors;
 create policy vendors_public_select on public.vendors for select to anon,authenticated using(status<>'deleted');
 drop policy if exists vendors_owner_insert on public.vendors;
-create policy vendors_owner_insert on public.vendors for insert to authenticated with check(auth.uid()=auth_user_id or public.noura_is_admin());
+create policy vendors_owner_insert on public.vendors for insert to authenticated with check(auth.uid()=auth_user_id);
 drop policy if exists vendors_owner_update on public.vendors;
-create policy vendors_owner_update on public.vendors for update to authenticated using(auth.uid()=auth_user_id or public.noura_is_admin()) with check(auth.uid()=auth_user_id or public.noura_is_admin());
+create policy vendors_owner_update on public.vendors for update to authenticated using(auth.uid()=auth_user_id or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin'))) with check(auth.uid()=auth_user_id or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin')));
 
 drop policy if exists restaurants_public_select on public.restaurants;
-create policy restaurants_public_select on public.restaurants for select to anon,authenticated using(coalesce(verified,false)=true or exists(select 1 from public.vendors v where v.id=vendor_id and v.auth_user_id=auth.uid()) or public.noura_is_admin());
+create policy restaurants_public_select on public.restaurants for select to anon,authenticated using(coalesce(verified,false)=true or exists(select 1 from public.vendors v where v.id=vendor_id and v.auth_user_id=auth.uid()) or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin')));
 drop policy if exists restaurants_owner_update on public.restaurants;
-create policy restaurants_owner_update on public.restaurants for update to authenticated using(exists(select 1 from public.vendors v where v.id=vendor_id and v.auth_user_id=auth.uid()) or public.noura_is_admin()) with check(true);
+create policy restaurants_owner_update on public.restaurants for update to authenticated using(exists(select 1 from public.vendors v where v.id=vendor_id and v.auth_user_id=auth.uid()) or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin'))) with check(true);
 
 drop policy if exists menu_public_select on public.menu_items;
-create policy menu_public_select on public.menu_items for select to anon,authenticated using(exists(select 1 from public.restaurants r where r.id=restaurant_id and (r.verified=true or exists(select 1 from public.vendors v where v.id=r.vendor_id and v.auth_user_id=auth.uid()) or public.noura_is_admin())));
+create policy menu_public_select on public.menu_items for select to anon,authenticated using(exists(select 1 from public.restaurants r where r.id=restaurant_id and (r.verified=true or exists(select 1 from public.vendors v where v.id=r.vendor_id and v.auth_user_id=auth.uid()) or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin')))));
 drop policy if exists menu_owner_write on public.menu_items;
-create policy menu_owner_write on public.menu_items for all to authenticated using(exists(select 1 from public.restaurants r join public.vendors v on v.id=r.vendor_id where r.id=restaurant_id and (v.auth_user_id=auth.uid() or public.noura_is_admin()))) with check(exists(select 1 from public.restaurants r join public.vendors v on v.id=r.vendor_id where r.id=restaurant_id and (v.auth_user_id=auth.uid() or public.noura_is_admin())));
+create policy menu_owner_write on public.menu_items for all to authenticated using(exists(select 1 from public.restaurants r join public.vendors v on v.id=r.vendor_id where r.id=restaurant_id and (v.auth_user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin'))))) with check(exists(select 1 from public.restaurants r join public.vendors v on v.id=r.vendor_id where r.id=restaurant_id and (v.auth_user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role in ('admin','super_admin')))));
 
 drop policy if exists reviews_public_select on public.reviews;
 create policy reviews_public_select on public.reviews for select to anon,authenticated using(true);

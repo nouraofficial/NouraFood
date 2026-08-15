@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0D0B09">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Noura">
-<title>Noura — Discover Nigerian & African Food Near You | AI Food Companion</title>
-<meta name="description" content="Noura helps you discover great local food — search Nigerian, Ghanaian & Kenyan recipes, find nearby vendors, chat with Noura AI, and save your favourites. Free for everyone.">
-<meta name="keywords" content="Noura, Nigerian food app, African recipes, find local restaurants Nigeria, jollof rice recipe, food discovery app, Noura AI, Nigerian vendors near me, Ghanaian recipes, Kenyan recipes">
-<meta name="author" content="Fluxiq Labs">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://nourafood.vercel.app/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nourafood.vercel.app/">
-<meta property="og:title" content="Noura — Discover Great Local Food Near You">
-<meta property="og:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Your African food companion — free to use.">
-<meta property="og:image" content="./og-image.jpg">
-<meta property="og:site_name" content="Noura">
-<meta property="og:locale" content="en_NG">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://nourafood.vercel.app/">
-<meta name="twitter:title" content="Noura — Discover Great Local Food Near You">
-<meta name="twitter:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Free for everyone.">
-<meta name="twitter:image" content="./og-image.jpg">
-<link rel="manifest" href="/manifest.json">
-<link rel="preload" as="image" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="application-name" content="Noura">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="format-detection" content="telephone=no">
-<script type="application/ld+json">
+
 {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
@@ -43,1520 +9,9 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "NGN" },
   "publisher": { "@type": "Organization", "name": "Fluxiq Labs", "url": "https://fluxiqlabs.com" }
 }
-</script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden;background:#0D0B09}
-body{font-family:'Inter',sans-serif;color:#F0EDE6;-webkit-font-smoothing:antialiased}
-button,textarea,select,input{font-family:'Inter',sans-serif}
-:root{
-  --bg:#0D0B09;--sf:#171411;--sfu:#201D19;--bd:#2A2620;
-  --ac:#E8943A;--acs:#E8943A18;
-  --t1:#F0EDE6;--t2:#8A7F72;--t3:#4A4339;
-  --ok:#4CAF50;--er:#E05252;
-  --rmd:14px;--rlg:20px;--rfl:999px;
-}
-body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t2:#6B6259;--t3:#B0A898}
-#app{position:fixed;inset:0;display:flex;flex-direction:column;max-width:430px;margin:0 auto;overflow:hidden;background:var(--bg)}
-.screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .26s ease,transform .26s ease;overflow:hidden;background:var(--bg)}
-.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:88px}
-.scroll::-webkit-scrollbar{display:none}
-.iscroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.iscroll::-webkit-scrollbar{display:none}
-/* NAV */
-#bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:68px;background:var(--sf);border-top:1px solid var(--bd);display:none;align-items:center;justify-content:space-around;padding:0 8px 8px;z-index:100}
-#bnav.on{display:flex}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 0;background:none;border:none;cursor:pointer;color:var(--t3);font-size:10px;font-weight:500;transition:color .2s}
-.nb.active{color:var(--ac)}
-.nb svg{width:22px;height:22px;stroke-width:1.8}
-.nbc{width:52px;height:52px;border-radius:50%;background:var(--sfu);border:3px solid var(--bg);display:flex;align-items:center;justify-content:center;margin-top:-24px;transition:background .2s}
-.nb.active .nbc{background:var(--ac)}
-.nb.active .nbc svg{stroke:var(--bg)}
-/* BUTTONS */
-.btn{width:100%;padding:15px 24px;border-radius:var(--rmd);border:none;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s,transform .1s;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn:active{transform:scale(.97);opacity:.9}
-.btn:disabled{opacity:.4;cursor:default}
-.bp{background:var(--ac);color:var(--bg)}
-.bs{background:var(--sfu);color:var(--t1);border:1px solid var(--bd)}
-/* INPUTS */
-.ig{margin-bottom:16px}
-.il{display:block;font-size:12px;font-weight:500;color:var(--t2);margin-bottom:6px;letter-spacing:.3px}
-.iw{position:relative;display:flex;align-items:center;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rmd);transition:border-color .2s}
-.iw:focus-within{border-color:var(--ac)}
-.iw.err{border-color:var(--er)}
-.ii{position:absolute;left:14px;color:var(--t3);display:flex;align-items:center;pointer-events:none}
-.ii svg{width:17px;height:17px;stroke-width:1.8}
-.iw input,.iw select{width:100%;height:50px;background:none;border:none;outline:none;padding:0 14px 0 42px;color:var(--t1);font-size:15px;-webkit-appearance:none}
-.iw.ni input,.iw.ni select{padding-left:14px}
-.iw input::placeholder{color:var(--t3)}
-.iw select option{background:var(--sf);color:var(--t1)}
-.itog{position:absolute;right:12px;background:none;border:none;cursor:pointer;color:var(--t3);padding:4px;display:flex;align-items:center}
-.itog svg{width:17px;height:17px;stroke-width:1.8}
-.ie{font-size:11px;color:var(--er);margin-top:4px;display:none}
-.ie.on{display:block}
-.taw{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rmd);transition:border-color .2s;padding:14px}
-.taw:focus-within{border-color:var(--ac)}
-.taw textarea{width:100%;background:none;border:none;outline:none;color:var(--t1);font-size:15px;line-height:1.6;min-height:72px;resize:none}
-.taw textarea::placeholder{color:var(--t3)}
-/* CHIPS */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.chip{padding:7px 14px;border-radius:var(--rfl);border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
-.chip.sel{background:var(--acs);border-color:var(--ac);color:var(--ac)}
-/* PAGE HEADER */
-.ph{display:flex;align-items:center;gap:14px;padding:56px 20px 20px;flex-shrink:0}
-.pbk{width:38px;height:38px;border-radius:var(--rmd);background:var(--sf);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
-.pbk svg{width:18px;height:18px;stroke-width:2;color:var(--t1)}
-.pt{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--t1);flex:1}
-.pa{background:none;border:none;cursor:pointer;color:var(--ac);font-size:14px;font-weight:600;padding:4px}
-.div{display:flex;align-items:center;gap:12px;margin:20px 0}
-.divl{flex:1;height:1px;background:var(--bd)}
-.div span{font-size:13px;color:var(--t3)}
-/* TOAST */
-#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sfu);border:1px solid var(--bd);color:var(--t1);font-size:14px;font-weight:500;padding:12px 20px;border-radius:var(--rfl);opacity:0;transition:all .3s ease;pointer-events:none;white-space:nowrap;z-index:500;max-width:92vw;text-align:center}
-#install-banner{position:fixed;left:12px;right:12px;bottom:-140px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:14px;display:flex;align-items:center;gap:12px;z-index:600;box-shadow:0 8px 28px rgba(0,0,0,.4);transition:bottom .4s cubic-bezier(.16,1,.3,1)}
-#install-banner.on{bottom:88px}
-#install-banner .ib-icon{width:44px;height:44px;border-radius:12px;background:var(--acs);border:1px solid #E8943A40;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden}
-#install-banner .ib-body{flex:1;min-width:0}
-#install-banner .ib-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--t1)}
-#install-banner .ib-sub{font-size:11px;color:var(--t2);margin-top:1px}
-#install-banner .ib-install{background:var(--ac);color:var(--bg);border:none;border-radius:var(--rfl);padding:9px 16px;font-size:12px;font-weight:700;flex-shrink:0}
-#install-banner .ib-close{background:none;border:none;color:var(--t3);font-size:18px;padding:4px;flex-shrink:0}
-#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
-/* MODAL */
-.mov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:none;align-items:flex-end;justify-content:center;touch-action:none}
-.mov.on{display:flex}
-.ms{background:var(--sf);border-radius:20px 20px 0 0;padding:0;width:100%;max-width:430px;animation:sup .3s ease both;max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.ms::-webkit-scrollbar{display:none}
-#mod-recipe .ms{padding:0}
-@keyframes sup{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.mh{width:36px;height:4px;border-radius:2px;background:var(--bd);margin:0 auto 20px}
-.mt{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--t1);margin-bottom:6px}
-.msub{font-size:14px;color:var(--t2);margin-bottom:20px}
-.ibt{width:40px;height:40px;border-radius:var(--rmd);background:var(--sf);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer}
-.ibt svg{width:20px;height:20px;stroke-width:1.8;color:var(--t1)}
-/* SPINNER */
-.spin{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:60px 20px}
-.spinner{width:40px;height:40px;border:3px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spin-txt{font-size:14px;color:var(--t2)}
-/* SKELETON */
-.skel{background:linear-gradient(90deg,var(--sf) 25%,var(--sfu) 50%,var(--sf) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
-@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}
 
-/* ── SPLASH ──────────────────────────────────── */
-#scr-splash{align-items:center;justify-content:center;overflow:hidden}
-#splash-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.splash-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-.slm{width:96px;height:96px;border-radius:28px;background:var(--acs);border:1.5px solid #E8943A50;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 0 0 0 #E8943A40}
-.slm img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}.brand-icon{width:44px;height:44px;border-radius:13px;object-fit:cover;display:block}.alo-brand{display:flex;align-items:center;justify-content:center;margin-bottom:22px}.alo-brand img{width:58px;height:58px;border-radius:17px;object-fit:cover;display:block}.alo-brand .wordmark{margin-left:10px;font-family:'Sora',sans-serif;font-size:38px;font-weight:800;letter-spacing:-1.4px;color:var(--t1);line-height:1}.alo-brand .wordmark span{color:var(--ac)}
-.slm.pulse{animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both,ringPulse 1.8s 1s ease-out infinite}
-.swm{font-family:'Sora',sans-serif;font-size:48px;font-weight:800;color:var(--t1);letter-spacing:-1.5px;animation:splashFade .6s .35s ease both;line-height:1}
-.swm span{color:var(--ac)}
-.stag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t2);margin-top:10px;animation:splashFade .5s .6s ease both}
-.sdots{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);display:flex;gap:8px;animation:splashFade .5s .8s ease both;z-index:2}
-.sdot{width:6px;height:6px;border-radius:50%;background:var(--bd);transition:all .4s cubic-bezier(.34,1.56,.64,1)}
-.sdot.a{background:var(--ac);transform:scale(1.5)}
-.splash-ring{position:absolute;width:200px;height:200px;border-radius:50%;border:1px solid #E8943A20;animation:ringExpand 3s ease-out infinite;z-index:1}
-.splash-ring:nth-child(2){animation-delay:.8s;width:320px;height:320px}
-.splash-ring:nth-child(3){animation-delay:1.6s;width:440px;height:440px}
-@keyframes splashPop{from{opacity:0;transform:scale(.3) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0)}}
-@keyframes splashFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes ringExpand{0%{opacity:.6;transform:scale(.5)}100%{opacity:0;transform:scale(1.4)}}
-@keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 #E8943A40}50%{box-shadow:0 0 0 18px #E8943A00}}
-@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
-@keyframes fup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-/* ── ONBOARDING ──────────────────────────────── */
-.osl{display:flex;width:300%;flex:1;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.osi{width:calc(100%/3);flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px 0;text-align:center}
-.oic{width:120px;height:120px;border-radius:36px;background:var(--acs);border:1px solid #E8943A25;display:flex;align-items:center;justify-content:center;font-size:56px;margin-bottom:32px}
-.ott{font-family:'Sora',sans-serif;font-size:30px;font-weight:800;color:var(--t1);line-height:1.15;letter-spacing:-.4px;margin-bottom:14px}
-.ost{font-size:15px;color:var(--t2);line-height:1.65}
-.ofoot{padding:24px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:16px}
-.odds{display:flex;gap:7px}
-.odd{height:6px;border-radius:3px;background:var(--bd);transition:width .3s,background .3s;width:6px}
-.odd.a{width:22px;background:var(--ac)}
-.skp{font-size:14px;color:var(--t2);background:none;border:none;cursor:pointer;padding:4px}
 
-/* ── AUTH ────────────────────────────────────── */
-.ascr{background:var(--bg)}
-.ascrl{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.ascrl::-webkit-scrollbar{display:none}
-.ain{min-height:100%;padding:64px 24px 40px;display:flex;flex-direction:column}
-.abk{background:none;border:none;cursor:pointer;color:var(--ac);font-size:15px;font-weight:500;padding:0;margin-bottom:24px;display:flex;align-items:center;gap:6px;width:fit-content}
-.abk svg{width:16px;height:16px;stroke-width:2}
-.alo{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);margin-bottom:28px}
-.alo span{color:var(--ac)}
-.ahe{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--t1);margin-bottom:6px}
-.asu{font-size:15px;color:var(--t2);margin-bottom:32px}
-.afl{text-align:right;margin-top:-8px;margin-bottom:20px}
-.afl a{font-size:13px;color:var(--ac);font-weight:500;text-decoration:none;cursor:pointer}
-.afoo{text-align:center;margin-top:32px;font-size:15px;color:var(--t2)}
-.afoo a{color:var(--ac);font-weight:600;text-decoration:none;cursor:pointer}
-.tnote{font-size:11px;color:var(--t3);line-height:1.6;margin-bottom:20px;margin-top:-4px}
-.tnote a{color:var(--ac);text-decoration:none}
-.pws{margin-top:6px;display:flex;gap:4px;align-items:center}
-.pwb{flex:1;height:3px;border-radius:2px;background:var(--bd);transition:background .3s}
-.pwlb{font-size:11px;color:var(--t2);min-width:50px;text-align:right}
 
-/* ── HOME ────────────────────────────────────── */
-.htb{display:flex;justify-content:space-between;align-items:center;padding:56px 20px 20px;flex-shrink:0}
-.hgr{font-size:13px;color:var(--t2);margin-bottom:2px}
-.hun{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--t1)}
-.nbt{width:40px;height:40px;border-radius:var(--rmd);background:var(--sf);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
-.nbt svg{width:20px;height:20px;stroke-width:1.8;color:var(--t1)}
-.ndt{position:absolute;top:8px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--ac);border:1.5px solid var(--bg)}
-.hbn{margin:0 20px 24px;background:var(--ac);border-radius:var(--rlg);padding:20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:opacity .15s}
-.hbn:active{opacity:.88}
-.bnl{font-size:11px;font-weight:600;color:var(--bg);letter-spacing:.6px;margin-bottom:6px}
-.bnt{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--bg);line-height:1.25;margin-bottom:12px}
-.bnc{display:inline-block;background:rgba(0,0,0,.2);color:var(--bg);font-size:11px;font-weight:700;padding:5px 12px;border-radius:var(--rfl)}
-.bne{font-size:50px;margin-left:12px;flex-shrink:0}
-.hsec{margin-bottom:28px}
-.sech{display:flex;justify-content:space-between;align-items:center;padding:0 20px;margin-bottom:14px}
-.sect{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--t1)}
-.sea{font-size:13px;color:var(--ac);font-weight:500;cursor:pointer}
-/* Meal cards horizontal */
-.mscr{display:flex;gap:14px;padding:0 20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.mscr::-webkit-scrollbar{display:none}
-.mc{min-width:160px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;flex-shrink:0;cursor:pointer;transition:transform .15s}
-.mc:active{transform:scale(.97)}
-.mc-img{width:100%;height:100px;object-fit:cover;background:var(--sfu)}
-.mc-img-ph{width:100%;height:100px;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:36px}
-.mc-body{padding:12px}
-.mty{font-size:10px;font-weight:600;color:var(--ac);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
-.mnm{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--t1);margin-bottom:6px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.mmt{display:flex;gap:6px;align-items:center}
-.mmtx{font-size:11px;color:var(--t2)}
-/* Quick actions */
-.arow{display:flex;gap:10px;padding:0 20px}
-.ai{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer}
-.aic{width:52px;height:52px;border-radius:var(--rmd);display:flex;align-items:center;justify-content:center;font-size:22px}
-.ail{font-size:11px;color:var(--t2);text-align:center;line-height:1.4}
-/* Feed */
-.fdc{display:flex;gap:14px;margin:0 20px 12px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;cursor:pointer;transition:transform .15s}
-.fdc:active{transform:scale(.98)}
-.fdt{width:90px;height:90px;flex-shrink:0;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:32px}
-.fdt img{width:90px;height:90px;object-fit:cover}
-.fdi{flex:1;min-width:0;padding:12px 12px 12px 0}
-.fdtp{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
-.fda{font-size:12px;color:var(--t2);font-weight:500}
-.ftag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:var(--rfl);background:var(--bd);color:var(--t2)}
-.ftag.hot{background:#E8943A25;color:var(--ac)}
-.ftag.new{background:#4CAF5025;color:#4CAF50}
-.fdn{font-family:'Sora',sans-serif;font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fdac{display:flex;align-items:center;gap:14px}
-.fda2{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--t3);cursor:pointer}
-.fda2 svg{width:15px;height:15px;stroke-width:1.8}
-.fda2.lkd{color:#E05252}
-.fda2.lkd svg{fill:#E05252;stroke:#E05252}
-
-/* ── DISCOVER / SEARCH ───────────────────────── */
-#scr-discover{background:var(--bg)}
-.srch-bar{padding:0 20px 16px;flex-shrink:0}
-.srch-wrap{display:flex;align-items:center;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rfl);padding:0 16px;gap:10px;transition:border-color .2s}
-.srch-wrap:focus-within{border-color:var(--ac)}
-.srch-wrap svg{width:18px;height:18px;stroke-width:1.8;color:var(--t3);flex-shrink:0}
-.srch-wrap input{flex:1;height:46px;background:none;border:none;outline:none;color:var(--t1);font-size:15px}
-.srch-wrap input::placeholder{color:var(--t3)}
-.srch-clr{background:none;border:none;cursor:pointer;color:var(--t3);font-size:18px;padding:2px;display:none}
-.cat-scroll{display:flex;gap:10px;padding:0 20px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-shrink:0}
-.cat-scroll::-webkit-scrollbar{display:none}
-.cat-chip{padding:8px 16px;border-radius:var(--rfl);border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
-.cat-chip.a{background:var(--acs);border-color:var(--ac);color:var(--ac)}
-/* Recipe grid */
-.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 20px}
-.rgc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;cursor:pointer;transition:transform .15s}
-.rgc:active{transform:scale(.97)}
-.rgc-img{width:100%;height:120px;object-fit:cover;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:40px}
-.rgc-img img{width:100%;height:120px;object-fit:cover}
-.rgc-body{padding:10px}
-.rgc-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3}
-.rgc-cat{font-size:11px;color:var(--t2)}
-.rgc-area{font-size:10px;color:var(--ac);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-
-/* ── RECIPE DETAIL MODAL ─────────────────────── */
-#mod-recipe .ms{padding:0;border-radius:20px 20px 0 0}
-.rec-hero{width:100%;height:220px;object-fit:cover;background:var(--sfu);display:block}
-.rec-hero-ph{width:100%;height:220px;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:72px}
-.rec-detail-body{padding:20px 20px 44px}
-.rec-detail-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.rec-detail-name{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);flex:1;line-height:1.2;margin-right:12px}
-.rec-save-btn{width:42px;height:42px;border-radius:50%;background:var(--sfu);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:20px;transition:background .2s}
-.rec-save-btn.saved{background:#E0525220;border-color:#E0525240}
-.rec-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.rec-badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--rfl)}
-.rec-badge.area{background:var(--acs);color:var(--ac)}
-.rec-badge.cat{background:var(--sfu);color:var(--t2);border:1px solid var(--bd)}
-.rec-badge.yt{background:#FF000015;color:#FF4444;cursor:pointer}
-.rec-section-title{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:12px;margin-top:20px}
-.ing-list{display:flex;flex-direction:column;gap:8px}
-.ing-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--sfu);border-radius:10px}
-.ing-emoji{font-size:20px;flex-shrink:0}
-.ing-name{flex:1;font-size:14px;color:var(--t1);font-weight:500}
-.ing-measure{font-size:13px;color:var(--ac);font-weight:600}
-.instr-steps{display:flex;flex-direction:column;gap:12px}
-.step-item{display:flex;gap:12px;align-items:flex-start}
-.step-num{width:28px;height:28px;border-radius:50%;background:var(--acs);border:1px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ac);flex-shrink:0;margin-top:2px}
-.step-txt{flex:1;font-size:14px;color:var(--t2);line-height:1.7}
-.rec-tags-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.rec-tag-item{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--rfl);background:var(--bd);color:var(--t2)}
-
-/* ── PROFILE ─────────────────────────────────── */
-.ptb{display:flex;justify-content:space-between;align-items:center;padding:56px 20px 20px;flex-shrink:0}
-.ppt{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--t1)}
-.pas{display:flex;flex-direction:column;align-items:center;padding:0 20px 24px}
-.avw{position:relative;margin-bottom:14px}
-.avc{width:88px;height:88px;border-radius:50%;background:var(--acs);border:2px solid var(--ac);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:var(--ac);overflow:hidden}
-.aeb{position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:var(--ac);border:2.5px solid var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px}
-.pnm{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--t1);margin-bottom:2px}
-.pun{font-size:13px;color:var(--ac);font-weight:500;margin-bottom:4px}
-.pbi{font-size:14px;color:var(--t2);text-align:center;line-height:1.5;margin-bottom:4px}
-.pem{font-size:13px;color:var(--t3)}
-.str{display:flex;gap:10px;margin:0 20px 24px}
-.stc{flex:1;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rmd);padding:14px;text-align:center}
-.stv{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);margin-bottom:3px}
-.stl{font-size:11px;color:var(--t2);line-height:1.4}
-.pmu{margin:0 20px 24px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden}
-.mi{display:flex;align-items:center;gap:14px;padding:15px 16px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s}
-.mi:last-child{border-bottom:none}
-.mi:active{background:var(--sfu)}
-.mic{width:36px;height:36px;border-radius:8px;background:var(--acs);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.mic.dg{background:#E0525218}
-.mil{flex:1;font-size:15px;font-weight:500;color:var(--t1)}
-.mil.dg{color:var(--er)}
-.mchv svg{width:16px;height:16px;stroke-width:2;color:var(--t3)}
-.pver{text-align:center;font-size:12px;color:var(--t3);padding:0 20px 20px}
-.noura-onboard{padding:28px 20px 40px;overflow-y:auto}
-.onb-logo{display:flex;flex-direction:column;align-items:center;margin:18px 0 26px}
-.onb-logo img{width:76px;height:76px;border-radius:20px;object-fit:cover;border:1px solid var(--bd);box-shadow:0 10px 35px #0006}
-.onb-title{font-family:'Sora',sans-serif;font-size:25px;font-weight:800;text-align:center;color:var(--t1);margin-bottom:8px}
-.onb-sub{font-size:14px;line-height:1.6;text-align:center;color:var(--t2);max-width:340px;margin:0 auto 24px}
-.onb-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px;margin-bottom:18px}
-.onb-avatar{width:92px;height:92px;border-radius:50%;background:var(--acs);border:2px solid var(--ac);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Sora',sans-serif;font-size:34px;font-weight:800;color:var(--ac);cursor:pointer}
-.onb-avatar img{width:100%;height:100%;object-fit:cover;display:none}
-.onb-avatar-note{text-align:center;font-size:12px;color:var(--t2);margin-bottom:20px}
-.onb-skip{text-align:center;color:var(--t3);font-size:12px;margin-top:14px;cursor:pointer}
-
-
-/* ── EDIT PROFILE ────────────────────────────── */
-.eas{display:flex;flex-direction:column;align-items:center;padding:20px;gap:12px}
-.eal{width:96px;height:96px;border-radius:50%;background:var(--acs);border:2px solid var(--ac);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:36px;font-weight:800;color:var(--ac);overflow:hidden;position:relative;cursor:pointer}
-.eao{position:absolute;inset:0;background:rgba(0,0,0,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:22px}
-.eal:active .eao{opacity:1}
-.eah{font-size:12px;color:var(--t2)}
-.efs{margin:0 20px 20px}
-.esl{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-
-/* ── PREFERENCES ─────────────────────────────── */
-.psec{margin:0 20px 24px}
-.psti{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:6px}
-.psub{font-size:13px;color:var(--t2);margin-bottom:12px;line-height:1.5}
-.brow{display:flex;gap:10px}
-.bchip{flex:1;padding:12px 8px;border-radius:var(--rmd);border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-align:center}
-.bchip.sel{background:var(--acs);border-color:var(--ac);color:var(--ac)}
-
-/* ── SAVED ───────────────────────────────────── */
-.cscr{display:flex;gap:10px;padding:0 20px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-shrink:0}
-.cscr::-webkit-scrollbar{display:none}
-.cch{padding:9px 18px;border-radius:var(--rfl);border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
-.cch.a{background:var(--acs);border-color:var(--ac);color:var(--ac)}
-.rgrid{display:flex;flex-direction:column;gap:12px;padding:0 20px}
-.rcd{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;cursor:pointer;transition:transform .15s;display:flex;gap:0}
-.rcd:active{transform:scale(.98)}
-.rth{width:80px;height:80px;flex-shrink:0;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:30px}
-.rth img{width:80px;height:80px;object-fit:cover}
-.ri{flex:1;padding:12px;min-width:0}
-.rnm{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
-.rmt{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
-.rmti{font-size:11px;color:var(--t2)}
-.rtgs{display:flex;gap:6px;flex-wrap:wrap}
-.rtg{font-size:10px;font-weight:600;padding:2px 8px;border-radius:var(--rfl);background:var(--bd);color:var(--t2)}
-.rhrt{background:none;border:none;cursor:pointer;padding:8px;color:var(--t3);transition:color .2s;flex-shrink:0;align-self:center}
-.rhrt.sv svg{fill:#E05252;stroke:#E05252}
-.rhrt svg{width:18px;height:18px;stroke-width:1.8}
-.emst{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 40px;text-align:center;gap:12px}
-.emic{font-size:52px}
-.emtt{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--t1)}
-.emsb{font-size:14px;color:var(--t2);line-height:1.6}
-
-/* ── NOTIFICATIONS ───────────────────────────── */
-.nfl{display:flex;gap:8px;padding:0 20px 14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-shrink:0}
-.nfl::-webkit-scrollbar{display:none}
-.nlit{display:flex;gap:14px;padding:16px 20px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;position:relative}
-.nlit:active{background:var(--sfu)}
-.nlit.unr{background:var(--acs)}
-.nlit.unr::before{content:'';position:absolute;left:8px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--ac)}
-.niw{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.nbdy{flex:1;min-width:0}
-.ntr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3px}
-.nti{font-size:14px;font-weight:600;color:var(--t1);line-height:1.3}
-.ntm{font-size:11px;color:var(--t3);white-space:nowrap;margin-left:8px;flex-shrink:0}
-.nmsg{font-size:13px;color:var(--t2);line-height:1.5}
-
-/* ── SETTINGS ────────────────────────────────── */
-.sscr{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:40px}
-.sscr::-webkit-scrollbar{display:none}
-.ssec{margin:0 20px 22px}
-.sstl{font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.scard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden}
-.srw{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s}
-.srw:last-child{border-bottom:none}
-.srw:active{background:var(--sfu)}
-.sic{width:34px;height:34px;flex-shrink:0;border-radius:8px;background:var(--acs);display:flex;align-items:center;justify-content:center;font-size:16px}
-.sic.dg{background:#E0525218}
-.slb{flex:1;font-size:15px;font-weight:500;color:var(--t1)}
-.slb.dg{color:var(--er)}
-.svl{font-size:13px;color:var(--t3);margin-right:4px}
-.tog{width:44px;height:26px;border-radius:13px;background:var(--bd);position:relative;cursor:pointer;transition:background .25s;flex-shrink:0;border:none;outline:none}
-.tog.on{background:var(--ac)}
-.tog::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:white;top:3px;left:3px;transition:transform .25s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.tog.on::after{transform:translateX(18px)}
-
-/* ── LEGAL SCREENS ────────────────────────────────── */
-.legal-section{margin-bottom:24px}
-.legal-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
-.legal-sub{font-size:13px;color:var(--t2);margin-bottom:12px;line-height:1.6}
-.legal-body{font-size:14px;color:var(--t2);line-height:1.75}
-.legal-group{margin:12px 0;padding:14px;background:var(--sfu);border-radius:var(--rmd)}
-.legal-group-title{font-size:12px;font-weight:600;color:var(--ac);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.legal-item{font-size:14px;color:var(--t2);line-height:1.6;padding:4px 0 4px 16px;position:relative}
-.legal-item::before{content:'•';position:absolute;left:4px;color:var(--ac)}
-/* Foundation */
-.value-card{display:flex;gap:14px;align-items:flex-start;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rmd);padding:14px}
-.value-num{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--acs);border:1px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ac)}
-.value-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px}
-.value-body{font-size:13px;color:var(--t2);line-height:1.6}
-.const-item{font-size:14px;color:var(--t2);line-height:1.65;padding:8px 0 8px 16px;position:relative;border-bottom:1px solid var(--bd)}
-.const-item:last-child{border-bottom:none}
-.const-item::before{content:'✦';position:absolute;left:0;color:var(--ac);font-size:10px;top:10px}
-
-
-/* ── HOME SEARCH ────────────────────────────────── */
-.home-search{display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rfl);padding:12px 16px;cursor:pointer;transition:border-color .2s}
-.home-search:active{border-color:var(--ac)}
-/* ── RESTAURANT CARDS ───────────────────────────── */
-.rest-card{min-width:200px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;flex-shrink:0;cursor:pointer;transition:transform .15s}
-.rest-card:active{transform:scale(.97)}
-.rest-cover{width:100%;height:100px;object-fit:cover;background:var(--sfu);display:block}
-.rest-cover-ph{width:100%;height:100px;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:32px}
-.rest-info{padding:12px}
-.rest-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rest-tag{font-size:11px;color:var(--t2)}
-.rest-rating{font-size:11px;font-weight:600;color:var(--ac)}
-.rest-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:var(--rfl);background:var(--acs);color:var(--ac)}
-/* ── RESTAURANT PROFILE ─────────────────────────── */
-.rest-hero{width:100%;height:200px;object-fit:cover;background:var(--sfu);display:block}
-.rest-hero-ph{width:100%;height:200px;background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:60px}
-.rest-profile-logo{width:72px;height:72px;border-radius:var(--rlg);background:var(--sfu);border:3px solid var(--bg);margin-top:-36px;margin-left:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative;z-index:1}
-.rest-profile-name{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);margin-bottom:4px}
-.rest-contact-row{display:flex;gap:10px;padding:16px 20px;border-bottom:1px solid var(--bd)}
-.cta-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 8px;border-radius:var(--rmd);border:1px solid var(--bd);background:var(--sfu);cursor:pointer;transition:all .2s;font-size:11px;font-weight:600;color:var(--t2);text-decoration:none}
-.cta-btn:active{background:var(--ac);color:var(--bg);border-color:var(--ac)}
-.menu-section{padding:20px}
-.menu-section-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:14px}
-.menu-item-card{display:flex;gap:12px;padding:14px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);margin-bottom:10px}
-.menu-item-img{width:72px;height:72px;border-radius:var(--rmd);background:var(--sfu);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden}
-.menu-item-img img{width:72px;height:72px;object-fit:cover}
-.menu-item-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px}
-.menu-item-desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.menu-item-price{font-size:15px;font-weight:700;color:var(--ac)}
-.menu-item-avail{font-size:11px;color:var(--ok);font-weight:500}
-/* ── REVIEWS ─────────────────────────────────────── */
-.review-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:16px;margin-bottom:10px}
-.review-author{font-size:13px;font-weight:600;color:var(--t1)}
-.review-stars{color:var(--ac);font-size:13px;letter-spacing:1px}
-.review-date{font-size:11px;color:var(--t3)}
-.review-text{font-size:14px;color:var(--t2);line-height:1.6;margin-top:6px}
-.star-input{display:flex;gap:8px;margin-bottom:16px}
-.star-btn{font-size:28px;cursor:pointer;opacity:.3;transition:opacity .15s,transform .15s;background:none;border:none;padding:0}
-.star-btn.on{opacity:1;transform:scale(1.15)}
-/* ── AI CHAT ─────────────────────────────────────── */
-.chat-msgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 20px;display:flex;flex-direction:column;gap:12px;scrollbar-width:none}
-.chat-msgs::-webkit-scrollbar{display:none}
-.chat-bubble{max-width:82%;padding:12px 16px;border-radius:18px;font-size:14px;line-height:1.65}
-.chat-bubble.ai{background:var(--sf);border:1px solid var(--bd);color:var(--t1);border-bottom-left-radius:4px;align-self:flex-start}
-.chat-bubble.user{background:var(--ac);color:var(--bg);border-bottom-right-radius:4px;align-self:flex-end;font-weight:500}
-.typing-dots{display:flex;gap:4px;align-items:center;padding:2px 4px}
-.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--t2);animation:typingBounce 1.2s infinite}
-.typing-dot:nth-child(2){animation-delay:.2s}
-.typing-dot:nth-child(3){animation-delay:.4s}
-@keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
-.chat-bar{display:flex;gap:10px;padding:12px 16px;border-top:1px solid var(--bd);background:var(--sf);flex-shrink:0}
-.chat-input{flex:1;background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rfl);padding:11px 16px;color:var(--t1);font-size:15px;outline:none;font-family:'Inter',sans-serif}
-.chat-input::placeholder{color:var(--t3)}
-.chat-input:focus{border-color:var(--ac)}
-.chat-send{width:44px;height:44px;border-radius:50%;background:var(--ac);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s}
-.chat-send:active{opacity:.8}
-.chat-send svg{width:18px;height:18px;stroke:var(--bg);stroke-width:2.5;fill:none}
-.chat-suggestions{display:flex;gap:8px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
-.chat-suggestions::-webkit-scrollbar{display:none}
-.chat-sug{padding:8px 14px;border-radius:var(--rfl);border:1px solid var(--bd);background:var(--sfu);color:var(--t2);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0}
-.chat-sug:active{background:var(--acs);border-color:var(--ac);color:var(--ac)}
-/* ── AI MARKDOWN ────────────────────────────────── */
-.chat-bubble.ai .md-h1,.chat-bubble.ai .md-h2,.chat-bubble.ai .md-h3{font-family:'Sora',sans-serif;color:var(--t1);line-height:1.3;margin:4px 0 10px}
-.chat-bubble.ai .md-h1{font-size:20px}.chat-bubble.ai .md-h2{font-size:17px}.chat-bubble.ai .md-h3{font-size:15px}
-.chat-bubble.ai .md-p{margin:0 0 10px}.chat-bubble.ai .md-p:last-child{margin-bottom:0}
-.chat-bubble.ai .md-list{margin:6px 0 12px;padding-left:22px}.chat-bubble.ai .md-list li{margin:5px 0;padding-left:2px}
-.chat-bubble.ai .md-quote{border-left:3px solid var(--ac);padding:6px 12px;margin:8px 0;color:var(--t2);background:var(--acs);border-radius:0 8px 8px 0}
-.chat-bubble.ai .md-code{display:block;background:#090806;border:1px solid var(--bd);border-radius:10px;padding:12px;overflow:auto;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;margin:8px 0}
-.chat-bubble.ai .md-inline-code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--sfu);border:1px solid var(--bd);border-radius:5px;padding:1px 5px}
-.chat-bubble.ai .md-link{color:var(--ac);text-decoration:underline}
-.chat-bubble.ai .md-hr{border:0;border-top:1px solid var(--bd);margin:12px 0}
-.ai-history-card{display:flex;align-items:center;gap:12px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:14px;margin-bottom:10px;cursor:pointer}
-.ai-history-card:active{background:var(--sfu)}
-.ai-history-main{flex:1;min-width:0}.ai-history-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ai-history-time{font-size:11px;color:var(--t3);margin-top:4px}.ai-history-delete{background:none;border:0;color:var(--t3);font-size:17px;padding:8px}
-.ai-history-empty{text-align:center;padding:70px 24px;color:var(--t2)}
-
-/* ── SMART SEARCH ───────────────────────────────── */
-#scr-smart-search{background:var(--bg)}
-.ss-item{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s}
-.ss-item:active{background:var(--sfu)}
-.ss-icon{width:44px;height:44px;border-radius:var(--rmd);background:var(--sfu);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-
-</style>
-
-</head>
-<body>
-<body>
-<div id="app">
-
-<!-- SPLASH -->
-<div class="screen active" id="scr-splash">
-  <canvas id="splash-canvas"></canvas>
-  <div class="splash-ring"></div>
-  <div class="splash-ring"></div>
-  <div class="splash-ring"></div>
-  <div class="splash-center">
-    <div class="slm pulse" id="splash-logo"><img src="./icon-192.png" alt="Noura"></div>
-    <div class="swm">noura<span>.</span></div>
-    <div class="stag">Eat smart &nbsp;·&nbsp; Live well</div>
-  </div>
-  <div class="sdots">
-    <div class="sdot a" id="sd0"></div>
-    <div class="sdot" id="sd1"></div>
-    <div class="sdot" id="sd2"></div>
-  </div>
-</div>
-
-<!-- ONBOARDING -->
-<div class="screen" id="scr-onboarding">
-  <div class="osl" id="osl">
-    <div class="osi"><div class="oic">🧠</div><div class="ott">AI That<br>Knows Food</div><div class="ost">Tell us your budget, diet, and goals. Get a full meal plan built around you.</div></div>
-    <div class="osi"><div class="oic">🍳</div><div class="ott">Cook With<br>What You Have</div><div class="ost">Type ingredients in your kitchen. Get a real recipe with instructions and nutrition.</div></div>
-    <div class="osi"><div class="oic">📱</div><div class="ott">Discover &<br>Share Meals</div><div class="ost">Explore thousands of real recipes. Save your favourites and cook with confidence.</div></div>
-  </div>
-  <div class="ofoot">
-    <div class="odds"><div class="odd a" id="od0"></div><div class="odd" id="od1"></div><div class="odd" id="od2"></div></div>
-    <button class="btn bp" id="btn-ob" style="width:100%">Next</button>
-    <button class="skp" id="btn-sk">Skip</button>
-  </div>
-</div>
-
-<!-- LOGIN -->
-<div class="screen ascr" id="scr-login">
-  <div class="ascrl"><div class="ain">
-    <div class="alo-brand"><img src="./icon-192.png" alt="Noura logo"><div class="wordmark">noura<span>.</span></div></div>
-    <div class="ahe">Welcome back</div>
-    <div class="asu">Log in to your account</div>
-    <div class="ig"><label class="il">Email</label>
-      <div class="iw" id="liEW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></span>
-      <input type="email" id="liE" placeholder="you@example.com"></div>
-      <div class="ie" id="liEE">Enter a valid email address</div></div>
-    <div class="ig"><label class="il">Password</label>
-      <div class="iw" id="liPW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-      <input type="password" id="liP" placeholder="••••••••">
-      <button class="itog" onclick="tpw('liP',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-      <div class="ie" id="liPE">Password must be at least 6 characters</div></div>
-    <div class="afl"><a onclick="gt('forgot')">Forgot password?</a></div>
-    <button class="btn bp" id="btn-li" onclick="doLogin()" style="margin-bottom:16px">Log In</button>
-    <div class="div"><div class="divl"></div><span>or</span><div class="divl"></div></div>
-    <button class="btn bs" onclick="doGoogleLogin()"><span style="font-size:17px;font-weight:700">G</span> Continue with Google</button>
-    <div class="afoo">Don't have an account? <a onclick="gt('register')">Sign up</a></div>
-  </div></div>
-</div>
-
-<!-- REGISTER -->
-<div class="screen ascr" id="scr-register">
-  <div class="ascrl"><div class="ain">
-    <button class="abk" onclick="gt('login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-    <div class="ahe">Create account</div>
-    <div class="asu">Join Noura and eat smarter</div>
-    <div style="display:flex;gap:8px;margin-bottom:20px">
-      <div class="reg-role-chip sel" id="role-consumer" onclick="selectRegRole('consumer')" style="flex:1;text-align:center;padding:12px 8px;border-radius:var(--rmd);border:1.5px solid var(--ac);background:var(--acs);cursor:pointer;transition:all .15s">
-        <div style="font-size:20px;margin-bottom:2px">🛒</div>
-        <div style="font-size:12px;font-weight:600;color:var(--t1)">I'm here to eat</div>
-      </div>
-      <div class="reg-role-chip" id="role-seller" onclick="selectRegRole('seller')" style="flex:1;text-align:center;padding:12px 8px;border-radius:var(--rmd);border:1.5px solid var(--bd);background:var(--sfu);cursor:pointer;transition:all .15s">
-        <div style="font-size:20px;margin-bottom:2px">🏪</div>
-        <div style="font-size:12px;font-weight:600;color:var(--t2)">I'm a food seller</div>
-      </div>
-    </div>
-    <div id="reg-consumer-fields">
-    <div class="ig"><label class="il">Full Name</label>
-      <div class="iw" id="rgNW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-      <input type="text" id="rgN" placeholder="Your full name" autocapitalize="words"></div>
-      <div class="ie" id="rgNE">Enter your full name</div></div>
-    <div class="ig"><label class="il">Username</label>
-      <div class="iw" id="rgUW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></span>
-      <input type="text" id="rgU" placeholder="@yourhandle" autocapitalize="none"></div>
-      <div class="ie" id="rgUE">Username must be at least 3 characters</div></div>
-    <div class="ig"><label class="il">Email</label>
-      <div class="iw" id="rgEW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></span>
-      <input type="email" id="rgE" placeholder="you@example.com"></div>
-      <div class="ie" id="rgEE">Enter a valid email</div></div>
-    <div class="ig"><label class="il">Password</label>
-      <div class="iw" id="rgPW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-      <input type="password" id="rgP" placeholder="Min. 6 characters" oninput="pwstr(this.value)">
-      <button class="itog" onclick="tpw('rgP',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-      <div class="pws"><div class="pwb" id="pb1"></div><div class="pwb" id="pb2"></div><div class="pwb" id="pb3"></div><div class="pwb" id="pb4"></div><span class="pwlb" id="pwlb"></span></div>
-      <div class="ie" id="rgPE">At least 6 characters required</div></div>
-    <div class="ig"><label class="il">Confirm Password</label>
-      <div class="iw" id="rgCW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-      <input type="password" id="rgC" placeholder="Repeat password">
-      <button class="itog" onclick="tpw('rgC',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-      <div class="ie" id="rgCE">Passwords don't match</div></div>
-    <div class="tnote">By creating an account you agree to our <a href="noura-legal.html#terms" target="_blank">Terms</a> and <a href="noura-legal.html#privacy" target="_blank">Privacy Policy</a>.</div>
-    <button class="btn bp" id="btn-rg" onclick="doRegister()">Create Account</button>
-    </div>
-    <div id="reg-seller-note" style="display:none;text-align:center;padding:24px 8px">
-      <div style="font-size:44px;margin-bottom:12px">🏪</div>
-      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:8px">Selling on Noura?</div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:20px">Vendor accounts are set up in the Vendor Portal — you'll get a digital menu, order management, and analytics built for your business.</div>
-      <button class="btn bp" onclick="window.open('vendor.html#register','_blank')">Continue to Vendor Signup →</button>
-    </div>
-    <div class="afoo">Already have an account? <a onclick="gt('login')">Log in</a></div>
-  </div></div>
-</div>
-
-<!-- FORGOT -->
-<div class="screen ascr" id="scr-forgot">
-  <div class="ascrl"><div class="ain">
-    <button class="abk" onclick="gt('login')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg>Back</button>
-    <div style="font-size:48px;margin-bottom:16px">🔐</div>
-    <div class="ahe">Forgot password?</div>
-    <div class="asu">Enter your email and we'll send a reset link.</div>
-    <div class="ig"><label class="il">Email</label>
-      <div class="iw" id="fpEW"><span class="ii"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></span>
-      <input type="email" id="fpE" placeholder="you@example.com"></div>
-      <div class="ie" id="fpEE">Enter a valid email</div></div>
-    <button class="btn bp" onclick="doForgot()" style="margin-bottom:20px">Send Reset Link</button>
-    <div class="afoo"><a onclick="gt('login')">← Back to login</a></div>
-  </div></div>
-</div>
-
-<!-- HOME -->
-<div class="screen" id="scr-home">
-  <!-- Top bar -->
-  <div class="htb">
-    <div>
-      <div class="hgr" id="hgr">Good morning 👋</div>
-      <div class="hun" id="hun">there</div>
-    </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <div class="nbt" onclick="gt('notifications')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        <div class="ndt" id="ndot"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Smart Search Bar -->
-  <div style="padding:0 20px 20px;flex-shrink:0">
-    <div class="home-search" onclick="gt('discover')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:18px;height:18px;stroke-width:1.8;color:var(--t3);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <span style="font-size:15px;color:var(--t3)">Search meals, restaurants, cuisines…</span>
-      <div style="margin-left:auto;background:var(--ac);color:var(--bg);font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--rfl)">AI ✨</div>
-    </div>
-  </div>
-
-  <div class="scroll">
-    <!-- AI Banner -->
-    <div class="hbn" onclick="gt('ai-chat')">
-      <div>
-        <div class="bnl">✨ NOURA AI</div>
-        <div class="bnt">"What should I<br>eat today?"</div>
-        <div class="bnc">Ask Noura →</div>
-      </div>
-      <div class="bne">🤖</div>
-    </div>
-
-    <!-- Sponsored ad slot — only shows if admin has a real active campaign -->
-    <div id="home-ad-banner"></div>
-
-    <!-- Today's Meals (live API) -->
-    <div class="hsec">
-      <div class="sech"><div class="sect">Today's Meals</div><div class="sea" onclick="gt('mealplan')">See plan</div></div>
-      <div class="mscr" id="home-meals">
-        <div class="mc"><div class="mc-img-ph skel" style="height:100px"></div><div class="mc-body"><div class="skel" style="height:10px;width:50%;border-radius:4px;margin-bottom:8px"></div><div class="skel" style="height:14px;border-radius:4px"></div></div></div>
-        <div class="mc"><div class="mc-img-ph skel" style="height:100px"></div><div class="mc-body"><div class="skel" style="height:10px;width:50%;border-radius:4px;margin-bottom:8px"></div><div class="skel" style="height:14px;border-radius:4px"></div></div></div>
-      </div>
-    </div>
-
-    <!-- Nearby Restaurants -->
-    <div class="hsec">
-      <div class="sech"><div class="sect">📍 Restaurants Near You</div><div class="sea" onclick="gt('restaurants')">See all</div></div>
-      <div class="mscr" id="home-restaurants">
-        <!-- Skeleton -->
-        <div style="min-width:200px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;flex-shrink:0">
-          <div class="skel" style="height:100px;width:200px"></div>
-          <div style="padding:12px"><div class="skel" style="height:14px;margin-bottom:8px;border-radius:4px"></div><div class="skel" style="height:10px;width:60%;border-radius:4px"></div></div>
-        </div>
-        <div style="min-width:200px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);overflow:hidden;flex-shrink:0">
-          <div class="skel" style="height:100px;width:200px"></div>
-          <div style="padding:12px"><div class="skel" style="height:14px;margin-bottom:8px;border-radius:4px"></div><div class="skel" style="height:10px;width:60%;border-radius:4px"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="hsec">
-      <div class="sech"><div class="sect">Quick Actions</div></div>
-      <div class="arow">
-        <div class="ai" onclick="gt('ai-chat')"><div class="aic" style="background:#E8943A18">🤖</div><div class="ail">Ask<br>Noura AI</div></div>
-        <div class="ai" onclick="gt('ai-recipe')"><div class="aic" style="background:#4CAF5018">🍳</div><div class="ail">Recipe<br>Generator</div></div>
-        <div class="ai" onclick="gt('restaurants')"><div class="aic" style="background:#2196F318">📍</div><div class="ail">Find<br>Restaurant</div></div>
-        <div class="ai" onclick="gt('saved')"><div class="aic" style="background:#E0525218">❤️</div><div class="ail">Saved<br>Recipes</div></div>
-      </div>
-    </div>
-
-    <!-- Trending Food Feed (live) -->
-    <div class="hsec">
-      <div class="sech"><div class="sect">🔥 Trending Meals</div><div class="sea" onclick="gt('discover')">See all</div></div>
-      <div id="home-feed"><div class="spin"><div class="spinner"></div></div></div>
-    </div>
-  </div>
-</div>
-<!-- DISCOVER -->
-<div class="screen" id="scr-discover">
-  <div style="padding:56px 20px 0;flex-shrink:0">
-    <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--t1);margin-bottom:14px">Discover Recipes</div>
-    <!-- Search bar -->
-    <div class="srch-wrap" style="margin-bottom:14px">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="srch-inp" placeholder="Search any recipe…" oninput="onSearch(this.value)" autocomplete="off">
-      <button class="srch-clr" id="srch-clr" onclick="clearSearch()">✕</button>
-    </div>
-    <!-- Global / Local tabs -->
-    <div style="display:flex;gap:0;background:var(--sfu);border-radius:var(--rmd);padding:4px;margin-bottom:14px">
-      <button id="tab-global" onclick="switchDiscoverTab('global')"
-        style="flex:1;padding:9px;border:none;border-radius:10px;font-size:14px;font-weight:600;
-               cursor:pointer;background:var(--ac);color:var(--bg);transition:all .2s">
-        🌍 Global
-      </button>
-      <button id="tab-local" onclick="switchDiscoverTab('local')"
-        style="flex:1;padding:9px;border:none;border-radius:10px;font-size:14px;font-weight:600;
-               cursor:pointer;background:transparent;color:var(--t2);transition:all .2s">
-        🌶️ Local
-      </button>
-    </div>
-  </div>
-  <!-- Category chips row — hidden on local tab -->
-  <div class="cat-scroll" id="cat-scroll"></div>
-  <!-- Local cuisine group chips — hidden on global tab -->
-  <div class="cat-scroll" id="local-cat-scroll" style="display:none"></div>
-  <!-- Recipe grid -->
-  <div class="iscroll" style="padding-bottom:88px">
-    <div class="rec-grid" id="rec-grid" style="padding-bottom:20px"></div>
-    <!-- Edamam not-configured notice -->
-    <div id="edamam-notice" style="display:none;padding:20px;margin:0 20px;
-         background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rlg);
-         text-align:center;grid-column:1/-1">
-      <div style="font-size:32px;margin-bottom:10px">🔑</div>
-      <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:6px">
-        Edamam API key needed
-      </div>
-      <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:12px">
-        Get a free key at <strong>developer.edamam.com</strong><br>
-        Then paste it into the app config at the top of the JS.
-      </div>
-      <a href="https://developer.edamam.com" target="_blank"
-         style="display:inline-block;background:var(--ac);color:var(--bg);
-                font-size:13px;font-weight:600;padding:8px 18px;
-                border-radius:var(--rfl);text-decoration:none">
-        Get Free Key →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- MEAL PLAN -->
-<div class="screen" id="scr-mealplan">
-  <div class="ph" style="padding-bottom:8px">
-    <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--t1)">Today's Plan</div>
-  </div>
-  <div class="scroll" id="mealplan-scroll"></div>
-</div>
-
-<!-- PROFILE -->
-<div class="screen" id="scr-profile">
-  <div class="ptb">
-    <div class="ppt">Profile</div>
-    <div style="display:flex;gap:8px">
-      <div class="ibt" onclick="gt('notifications')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-      <div class="ibt" onclick="gt('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-    </div>
-  </div>
-  <div class="scroll">
-    <!-- Avatar + core identity -->
-    <div class="pas">
-      <div class="avw">
-        <div class="avc" id="pavc">
-          <img id="pavatar-img" src="" alt="" style="display:none;width:88px;height:88px;object-fit:cover;border-radius:50%">
-          <span id="pinit">?</span>
-        </div>
-        <div class="aeb" onclick="gt('edit-profile')">✏️</div>
-      </div>
-      <div class="pnm" id="pnm">Your Name</div>
-      <div class="pun" id="pun" style="color:var(--ac);font-size:13px;font-weight:500;margin-bottom:4px">@username</div>
-      <div class="pbi" id="pbi" style="display:none;font-size:14px;color:var(--t2);text-align:center;line-height:1.5;margin-bottom:6px;padding:0 20px"></div>
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
-        <span id="p-country-flag" style="font-size:16px;display:none"></span>
-        <div class="pem" id="pem" style="font-size:13px;color:var(--t3)">you@example.com</div>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="str">
-      <div class="stc"><div class="stv" id="stat-meals">0</div><div class="stl">Meals<br>Opened</div></div>
-      <div class="stc"><div class="stv" id="svct">0</div><div class="stl">Recipes<br>Saved</div></div>
-      <div class="stc"><div class="stv" id="stat-streak">—</div><div class="stl">Day<br>Streak 🔥</div></div>
-    </div>
-
-    <!-- Day 9 fields: Diet, Cuisines, Allergies shown as read-only tags -->
-    <div id="profile-tags-section" style="padding:0 20px 20px;display:none">
-      <div id="profile-diet-row" style="display:none;margin-bottom:12px">
-        <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Diet</div>
-        <div id="profile-diet-val" style="display:inline-block;background:var(--acs);color:var(--ac);font-size:12px;font-weight:600;padding:4px 12px;border-radius:var(--rfl)"></div>
-      </div>
-      <div id="profile-cuisines-row" style="display:none;margin-bottom:12px">
-        <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Favourite Cuisines</div>
-        <div id="profile-cuisines-val" style="display:flex;flex-wrap:wrap;gap:6px"></div>
-      </div>
-      <div id="profile-allergies-row" style="display:none">
-        <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Allergies</div>
-        <div id="profile-allergies-val" style="display:flex;flex-wrap:wrap;gap:6px"></div>
-      </div>
-    </div>
-
-    <!-- Menu -->
-    <div class="pmu">
-      <div class="mi" onclick="gt('edit-profile')"><div class="mic">✏️</div><div class="mil">Edit Profile</div><div class="mchv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="mi" onclick="gt('prefs')"><div class="mic">🎯</div><div class="mil">Food Preferences</div><div class="mchv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="mi" onclick="gt('saved')"><div class="mic">🔖</div><div class="mil">Saved Recipes</div><div class="mchv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="mi" onclick="gt('challenges')"><div class="mic">🏆</div><div class="mil">Challenges</div><div class="mchv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="mi" onclick="gt('notifications')"><div class="mic">🔔</div><div class="mil">Notifications</div><div class="mchv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="mi" onclick="gt('settings')"><div class="mic">⚙️</div><div class="mil">Settings</div><div class="mchv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"/></svg></div></div>
-      <div class="mi" onclick="doLogout()"><div class="mic dg">🚪</div><div class="mil dg">Log Out</div></div>
-    </div>
-    
-  </div>
-</div>
-
-<!-- EDIT PROFILE -->
-<div class="screen" id="scr-edit-profile">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Edit Profile</div>
-    <button class="pa" onclick="saveProfile()">Save</button>
-  </div>
-  <div class="iscroll"><div style="padding-bottom:40px">
-    <div class="eas">
-      <label class="eal" id="eal" style="background-size:cover;background-position:center">
-        <span id="einit">?</span><div class="eao">📷</div>
-        <input type="file" accept="image/*" style="display:none" onchange="uploadProfilePhoto(this)">
-      </label>
-      <div class="eah">Tap to change photo</div>
-    </div>
-    <div class="efs">
-      <div class="esl">Personal Info</div>
-      <div class="ig"><label class="il">Full Name</label><div class="iw ni"><input type="text" id="epN" autocapitalize="words" placeholder="Your full name"></div></div>
-      <div class="ig"><label class="il">Username</label><div class="iw ni"><input type="text" id="epU" placeholder="@yourhandle" autocapitalize="none"></div></div>
-      <div class="ig"><label class="il">Bio</label><div class="taw"><textarea id="epB" placeholder="Tell people a little about yourself…" rows="3"></textarea></div></div>
-      <div class="ig"><label class="il">Country</label>
-        <div class="iw ni"><select id="epCo">
-          <option value="">Select country</option>
-          <option>🇳🇬 Nigeria</option><option>🇬🇭 Ghana</option><option>🇰🇪 Kenya</option>
-          <option>🇿🇦 South Africa</option><option>🇬🇧 United Kingdom</option>
-          <option>🇺🇸 United States</option><option>🇨🇦 Canada</option><option>🌍 Other</option>
-        </select></div>
-      </div>
-    </div>
-    <div class="efs">
-      <div class="esl">Favourite Cuisines</div>
-      <div class="chips" id="cui-chips">
-        <div class="chip" onclick="tchip(this,'multi')">🍛 Nigerian</div><div class="chip" onclick="tchip(this,'multi')">🌍 West African</div>
-        <div class="chip" onclick="tchip(this,'multi')">🍕 Italian</div><div class="chip" onclick="tchip(this,'multi')">🍜 Asian</div>
-        <div class="chip" onclick="tchip(this,'multi')">🥙 Middle Eastern</div><div class="chip" onclick="tchip(this,'multi')">🫕 Continental</div>
-        <div class="chip" onclick="tchip(this,'multi')">🌮 Mexican</div><div class="chip" onclick="tchip(this,'multi')">🐟 Seafood</div>
-      </div>
-    </div>
-    <div class="efs" style="margin-top:20px">
-      <div class="esl">Dietary Preference</div>
-      <div class="chips" id="diet-chips">
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🥩 No restriction</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🥗 Vegetarian</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🌱 Vegan</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🐟 Pescatarian</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🌾 Gluten-Free</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🧀 Dairy-Free</div>
-      </div>
-    </div>
-    <div class="efs" style="margin-top:20px">
-      <div class="esl">Allergies</div>
-      <div class="chips" id="allergy-chips">
-        <div class="chip" onclick="tchip(this,'multi')">🥜 Peanuts</div><div class="chip" onclick="tchip(this,'multi')">🌾 Gluten</div>
-        <div class="chip" onclick="tchip(this,'multi')">🥛 Dairy</div><div class="chip" onclick="tchip(this,'multi')">🦐 Shellfish</div>
-        <div class="chip" onclick="tchip(this,'multi')">🥚 Eggs</div><div class="chip" onclick="tchip(this,'multi')">🌰 Tree Nuts</div>
-        <div class="chip" onclick="tchip(this,'multi')">🐟 Fish</div><div class="chip" onclick="tchip(this,'multi')">🫘 Soy</div>
-      </div>
-    </div>
-    <div style="padding:24px 20px 0"><button class="btn bp" onclick="saveProfile()">Save Changes</button></div>
-  </div></div>
-</div>
-
-<!-- PREFERENCES -->
-<div class="screen" id="scr-prefs">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Food Preferences</div>
-    <button class="pa" onclick="savePrefs()">Save</button>
-  </div>
-  <div class="iscroll"><div style="padding-bottom:40px">
-    <div class="psec"><div class="psti">💰 Budget Range</div><div class="psub">Your typical daily meal budget</div>
-      <div class="brow"><div class="bchip" onclick="selBudget(this)">₦500–1k</div><div class="bchip" onclick="selBudget(this)">₦1k–3k</div><div class="bchip" onclick="selBudget(this)">₦3k–7k</div><div class="bchip" onclick="selBudget(this)">₦7k+</div></div>
-    </div>
-    <div class="psec"><div class="psti">🕐 Preferred Meal Times</div><div class="psub">When do you usually eat?</div>
-      <div class="chips" id="mt-chips">
-        <div class="chip" onclick="tchip(this,'multi')">🌅 Early (before 8am)</div><div class="chip" onclick="tchip(this,'multi')">☀️ Morning (8–10am)</div>
-        <div class="chip" onclick="tchip(this,'multi')">🌤 Midday (12–2pm)</div><div class="chip" onclick="tchip(this,'multi')">🌇 Evening (6–8pm)</div>
-        <div class="chip" onclick="tchip(this,'multi')">🌙 Late (after 9pm)</div>
-      </div>
-    </div>
-    <div class="psec"><div class="psti">🎯 Health Goal</div><div class="psub">What are you working towards?</div>
-      <div class="chips" id="goal-chips">
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">⚖️ Lose weight</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">💪 Build muscle</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🫀 Eat healthier</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">⚡ More energy</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">😌 Maintain weight</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🍽️ No specific goal</div>
-      </div>
-    </div>
-    <div class="psec"><div class="psti">❤️ Favourite Foods</div><div class="psub">What do you love eating?</div>
-      <div class="chips" id="fav-chips">
-        <div class="chip" onclick="tchip(this,'multi')">Jollof Rice</div><div class="chip" onclick="tchip(this,'multi')">Suya</div>
-        <div class="chip" onclick="tchip(this,'multi')">Pounded Yam</div><div class="chip" onclick="tchip(this,'multi')">Pepper Soup</div>
-        <div class="chip" onclick="tchip(this,'multi')">Fried Rice</div><div class="chip" onclick="tchip(this,'multi')">Moi Moi</div>
-        <div class="chip" onclick="tchip(this,'multi')">Shawarma</div><div class="chip" onclick="tchip(this,'multi')">Pasta</div>
-        <div class="chip" onclick="tchip(this,'multi')">Pizza</div><div class="chip" onclick="tchip(this,'multi')">Salads</div>
-        <div class="chip" onclick="tchip(this,'multi')">Smoothies</div><div class="chip" onclick="tchip(this,'multi')">Seafood</div>
-      </div>
-    </div>
-    <div class="psec"><div class="psti">🚫 Foods to Avoid</div><div class="psub">The AI won't suggest these.</div>
-      <div class="chips" id="avoid-chips">
-        <div class="chip" onclick="tchip(this,'multi')">Very spicy</div><div class="chip" onclick="tchip(this,'multi')">Fried foods</div>
-        <div class="chip" onclick="tchip(this,'multi')">Red meat</div><div class="chip" onclick="tchip(this,'multi')">Pork</div>
-        <div class="chip" onclick="tchip(this,'multi')">Alcohol</div><div class="chip" onclick="tchip(this,'multi')">Fast food</div>
-      </div>
-    </div>
-    <div class="psec"><div class="psti">🍳 Cooking Skill</div><div class="psub">How comfortable are you in the kitchen?</div>
-      <div class="chips" id="skill-chips">
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">👶 Beginner</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🙂 Getting there</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">👨‍🍳 Confident cook</div>
-        <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">⭐ Home chef</div>
-      </div>
-    </div>
-    <div style="padding:8px 20px 0"><button class="btn bp" onclick="savePrefs()">Save Preferences</button></div>
-  </div></div>
-</div>
-
-<!-- SAVED RECIPES -->
-<div class="screen" id="scr-saved">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Saved Recipes</div>
-    <button class="pa" onclick="openMod('mod-col')">+ New</button>
-  </div>
-  <div class="cscr" id="cscr">
-    <div class="cch a" onclick="fltCol(this,'all')">All</div>
-    <div class="cch" onclick="fltCol(this,'Chicken')">🍗 Chicken</div>
-    <div class="cch" onclick="fltCol(this,'Seafood')">🐟 Seafood</div>
-    <div class="cch" onclick="fltCol(this,'Vegetarian')">🥗 Veggie</div>
-    <div class="cch" onclick="fltCol(this,'Dessert')">🍰 Dessert</div>
-  </div>
-  <div class="iscroll"><div class="rgrid" id="rgrid" style="padding-bottom:40px"></div></div>
-</div>
-
-<!-- CHALLENGES -->
-<div class="screen" id="scr-challenges">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Challenges</div>
-  </div>
-  <div class="iscroll">
-    <div style="padding:0 20px 8px">
-      <div id="badges-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"></div>
-      <div style="background:var(--sfu);border:1px solid var(--bd);border-radius:var(--rmd);padding:12px 14px;font-size:12px;color:var(--t2);margin-bottom:16px">🏆 Progress is tracked on this device. A shared community leaderboard is coming once Noura has a backend to compare across everyone.</div>
-    </div>
-    <div id="challenges-list" style="padding:0 20px 40px;display:flex;flex-direction:column;gap:12px"></div>
-  </div>
-</div>
-
-<!-- NOTIFICATIONS -->
-<div class="screen" id="scr-notifications">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Notifications</div>
-    <button class="pa" onclick="markAllRead()">Mark all read</button>
-  </div>
-  <div class="nfl">
-    <div class="cch a" onclick="fltNotif(this,'all')">All</div>
-    <div class="cch" onclick="fltNotif(this,'ai')">🧠 AI</div>
-    <div class="cch" onclick="fltNotif(this,'food')">🍽️ Food</div>
-    <div class="cch" onclick="fltNotif(this,'promo')">🏷️ Offers</div>
-    <div class="cch" onclick="fltNotif(this,'social')">👥 Social</div>
-  </div>
-  <div class="iscroll"><div id="nlist"></div></div>
-</div>
-
-<!-- SETTINGS -->
-<div class="screen" id="scr-settings">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Settings</div>
-  </div>
-  <div class="sscr"><div style="padding:0 20px 40px">
-    <div class="ssec" id="ssec-install" style="display:none"><div class="sstl">App</div>
-      <div class="scard">
-        <div class="srw" onclick="installNouraApp()"><div class="sic">📲</div><div class="slb">Install Noura App</div><span style="font-size:11px;color:var(--ac);font-weight:600">Install</span></div>
-      </div>
-    </div>
-    <div class="ssec"><div class="sstl">Account</div>
-      <div class="scard">
-        <div class="srw" onclick="gt('edit-profile')"><div class="sic">👤</div><div class="slb">Edit Profile</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="openMod('mod-cpw')"><div class="sic">🔒</div><div class="slb">Change Password</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="openMod('mod-cem')"><div class="sic">📧</div><div class="slb">Change Email</div><div class="svl" id="sev"></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-      </div>
-    </div>
-    <div class="ssec"><div class="sstl">Notifications</div>
-      <div class="scard">
-        <div class="srw"><div class="sic">🔔</div><div class="slb">Push Notifications</div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-        <div class="srw"><div class="sic">⏰</div><div class="slb">Meal Reminders</div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-        <div class="srw"><div class="sic">🏷️</div><div class="slb">Promotions</div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
-      </div>
-    </div>
-    <div class="ssec"><div class="sstl">Appearance</div>
-      <div class="scard">
-        <div class="srw" onclick="toggleTheme(this)"><div class="sic">🌙</div><div class="slb">Dark Mode</div><button class="tog on" id="tog-dark" onclick="event.stopPropagation();toggleTheme(this.closest('.srw'))"></button></div>
-        <div class="srw"><div class="sic">📏</div><div class="slb">Imperial Units (lbs)</div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
-        <div class="srw"><div class="sic">🌐</div><div class="slb">Language</div><div class="svl">English</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-      </div>
-    </div>
-    <div class="ssec"><div class="sstl">Privacy</div>
-      <div class="scard">
-        <div class="srw"><div class="sic">👁️</div><div class="slb">Public Profile</div><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
-        <div class="srw"><div class="sic">📍</div><div class="slb">Share Location</div><button class="tog" onclick="this.classList.toggle('on')"></button></div>
-      </div>
-    </div>
-    <div class="ssec"><div class="sstl">About</div>
-      <div class="scard">
-        <div class="srw" onclick="gt('foundation')"><div class="sic">ℹ️</div><div class="slb">About Noura</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="gt('privacy')"><div class="sic">🔐</div><div class="slb">Privacy Policy</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="gt('terms')"><div class="sic">📄</div><div class="slb">Terms of Service</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="gt('foundation')"><div class="sic">🌍</div><div class="slb">The Noura Foundation</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="openVendorPortal()"><div class="sic">🏪</div><div class="slb">Vendor Portal</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-        <div class="srw" onclick="toast('Help centre coming soon 💬')"><div class="sic">💬</div><div class="slb">Help & Support</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
-      </div>
-    </div>
-    <div class="ssec"><div class="scard">
-      <div class="srw" onclick="doLogout()"><div class="sic dg">🚪</div><div class="slb dg">Log Out</div></div>
-      <div class="srw" onclick="delAcct()"><div class="sic dg">⚠️</div><div class="slb dg">Delete Account</div></div>
-    </div></div>
-  </div></div>
-</div>
-
-
-<!-- ══ PRIVACY POLICY ══════════════════════════════ -->
-<div class="screen" id="scr-privacy">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Privacy Policy</div>
-  </div>
-  <div class="iscroll"><div style="padding:0 20px 60px">
-
-    <div style="background:var(--acs);border:1px solid #E8943A30;border-radius:var(--rlg);padding:16px;margin-bottom:24px">
-      <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--ac);margin-bottom:6px">Our Promise</div>
-      <div style="font-size:14px;color:var(--t1);line-height:1.7">Your trust is more valuable than your data. We believe privacy is a fundamental right, not a premium feature.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Information We Collect</div>
-      <div class="legal-sub">Depending on how you use Noura, we may collect:</div>
-      <div class="legal-group">
-        <div class="legal-group-title">Account Information</div>
-        <div class="legal-item">Full name, username, email address</div>
-        <div class="legal-item">Phone number (optional)</div>
-        <div class="legal-item">Profile picture</div>
-      </div>
-      <div class="legal-group">
-        <div class="legal-group-title">Food Preferences</div>
-        <div class="legal-item">Favourite cuisines, dietary preferences, allergies</div>
-        <div class="legal-item">Nutrition goals and meal preferences</div>
-        <div class="legal-item">Saved recipes</div>
-      </div>
-      <div class="legal-group">
-        <div class="legal-group-title">Activity</div>
-        <div class="legal-item">Restaurants viewed, recipes created</div>
-        <div class="legal-item">Search history, favourite vendors</div>
-      </div>
-      <div class="legal-group">
-        <div class="legal-group-title">Location</div>
-        <div class="legal-item">Only when permission has been granted. Used to find nearby restaurants, improve recommendations, and estimate distances. You may disable this at any time.</div>
-      </div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Why We Collect Information</div>
-      <div class="legal-item">Personalise meal recommendations</div>
-      <div class="legal-item">Improve AI suggestions</div>
-      <div class="legal-item">Save your preferences</div>
-      <div class="legal-item">Connect you with local food businesses</div>
-      <div class="legal-item">Improve app performance</div>
-      <div class="legal-item">Prevent fraud and abuse</div>
-      <div class="legal-item">Respond to customer support requests</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Data Protection</div>
-      <div class="legal-body">Your information is protected using modern security practices. We continuously work to encrypt sensitive information, protect user accounts, detect suspicious activity, and prevent unauthorised access. Although no online system is completely immune to risk, protecting user data remains one of our highest priorities.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Sharing Information</div>
-      <div class="legal-body">We never sell your personal information. Information may only be shared when necessary — to help restaurants fulfil your requests, work with trusted service providers, comply with applicable laws, or protect users from abuse.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">AI Transparency</div>
-      <div class="legal-body">AI powers many experiences inside Noura — meal suggestions, recipe generation, restaurant recommendations. These suggestions are informational only. They are not medical, dietary, or professional advice. For medical conditions or specialised nutrition needs, please consult qualified professionals.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Your Rights</div>
-      <div class="legal-item">Access your personal information</div>
-      <div class="legal-item">Correct inaccurate information</div>
-      <div class="legal-item">Delete your account</div>
-      <div class="legal-item">Request deletion of personal data</div>
-      <div class="legal-item">Control notification preferences</div>
-      <div class="legal-item">Withdraw location permission at any time</div>
-    </div>
-
-    <div style="padding:16px;background:var(--sfu);border-radius:var(--rmd);border:1px solid var(--bd);text-align:center;margin-top:8px">
-      <div style="font-size:13px;color:var(--t2);line-height:1.6">Questions about your privacy?<br>Contact us at <span style="color:var(--ac);font-weight:600">privacy@noura.app</span></div>
-    </div>
-  </div></div>
-</div>
-
-<!-- ══ TERMS OF SERVICE ════════════════════════════ -->
-<div class="screen" id="scr-terms">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Terms of Service</div>
-  </div>
-  <div class="iscroll"><div style="padding:0 20px 60px">
-
-    <div style="font-size:13px;color:var(--t3);margin-bottom:24px">By using Noura, you agree to these terms. Please read them carefully.</div>
-
-    <div class="legal-section">
-      <div class="legal-title">Using Noura</div>
-      <div class="legal-body">Noura is a food discovery and meal planning platform. You must be at least 13 years old to create an account. You are responsible for keeping your account credentials secure.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Community Code of Conduct</div>
-      <div class="legal-body">Noura is built around respect. By joining, you agree to help create a welcoming environment for everyone.</div>
-      <div class="legal-group">
-        <div class="legal-group-title">You must not:</div>
-        <div class="legal-item">Harass, intimidate, or discriminate against others</div>
-        <div class="legal-item">Post fake reviews, false claims, or misleading information</div>
-        <div class="legal-item">Share hate speech, violent, or abusive content</div>
-        <div class="legal-item">Send spam, scams, or phishing content</div>
-        <div class="legal-item">Publish another person's private information without consent</div>
-      </div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Vendor Standards</div>
-      <div class="legal-body">Food businesses on Noura agree to maintain food safety standards, display accurate menus with clear pricing, identify allergens where possible, and communicate professionally with customers. Misleading images, false claims, or impersonation of other businesses is strictly prohibited.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">AI-Generated Content</div>
-      <div class="legal-body">Noura clearly identifies AI-generated content. AI meal plans, recipes, and suggestions are informational only — not medical or dietary advice. We will never manipulate users into spending money through AI.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Intellectual Property</div>
-      <div class="legal-body">Content you create on Noura belongs to you. By posting, you grant Noura a licence to display it within the platform. You may not use Noura's brand, logo, or technology without permission.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Enforcement</div>
-      <div class="legal-body">Violations of these terms may result in content removal, warnings, temporary suspension, or permanent account removal. Serious violations may be reported to relevant authorities.</div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-title">Changes to These Terms</div>
-      <div class="legal-body">We may update these terms as Noura grows. We will notify you of significant changes. Continued use of Noura after changes means you accept the updated terms.</div>
-    </div>
-
-    <div style="padding:16px;background:var(--sfu);border-radius:var(--rmd);border:1px solid var(--bd);text-align:center;margin-top:8px">
-      <div style="font-size:13px;color:var(--t2);line-height:1.6">Questions about these terms?<br>Contact us at <span style="color:var(--ac);font-weight:600">legal@noura.app</span></div>
-    </div>
-  </div></div>
-</div>
-
-<!-- ══ NOURA FOUNDATION ════════════════════════════ -->
-<div class="screen" id="scr-foundation">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">The Noura Foundation</div>
-  </div>
-  <div class="iscroll"><div style="padding:0 20px 60px">
-
-    <!-- Charter hero -->
-    <div style="background:var(--ac);border-radius:var(--rlg);padding:24px;margin-bottom:28px;text-align:center">
-      <div style="font-size:36px;margin-bottom:12px">🍽️</div>
-      <div style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--bg);line-height:1.3;margin-bottom:10px">Building More Than an App</div>
-      <div style="font-size:14px;color:var(--bg);opacity:.85;line-height:1.7">Noura is a commitment to making food discovery, meal planning, and local food businesses more accessible, trustworthy, and intelligent through technology.</div>
-    </div>
-
-    <!-- Question -->
-    <div style="text-align:center;margin-bottom:28px;padding:0 8px">
-      <div style="font-size:13px;color:var(--t2);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:8px">Every decision begins with one question</div>
-      <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--t1);line-height:1.3">"Does this genuinely help people?"</div>
-    </div>
-
-    <!-- Core Values -->
-    <div style="font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--t1);margin-bottom:16px">🌍 Core Values</div>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px">
-      <div class="value-card"><div class="value-num">1</div><div><div class="value-title">Trust First</div><div class="value-body">Trust is earned through honesty, transparency, and consistency. We never take it for granted.</div></div></div>
-      <div class="value-card"><div class="value-num">2</div><div><div class="value-title">People Before Profit</div><div class="value-body">Long-term success comes from improving lives. Revenue follows value. Never the other way around.</div></div></div>
-      <div class="value-card"><div class="value-num">3</div><div><div class="value-title">Food For Everyone</div><div class="value-body">Every culture. Every cuisine. Every tradition. Every table. Everyone belongs.</div></div></div>
-      <div class="value-card"><div class="value-num">4</div><div><div class="value-title">Innovation With Purpose</div><div class="value-body">Technology should simplify life, not complicate it. Every feature must have a meaningful purpose.</div></div></div>
-      <div class="value-card"><div class="value-num">5</div><div><div class="value-title">Privacy By Design</div><div class="value-body">Privacy is not an afterthought. It is part of the product itself.</div></div></div>
-      <div class="value-card"><div class="value-num">6</div><div><div class="value-title">Quality Over Quantity</div><div class="value-body">One outstanding experience is worth more than a hundred forgettable ones.</div></div></div>
-      <div class="value-card"><div class="value-num">7</div><div><div class="value-title">Grow Together</div><div class="value-body">When customers succeed, restaurants grow, creators thrive, and communities flourish.</div></div></div>
-    </div>
-
-    <!-- Constitution -->
-    <div style="font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--t1);margin-bottom:16px">📖 The Noura Constitution</div>
-    <div style="background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:20px;margin-bottom:28px">
-      <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">We believe:</div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div class="const-item">We will never intentionally manipulate users into spending more money.</div>
-        <div class="const-item">We will clearly identify AI-generated content.</div>
-        <div class="const-item">We will never sell users' personal information.</div>
-        <div class="const-item">We will prioritise accessibility so that as many people as possible can use our platform.</div>
-        <div class="const-item">We will design with empathy before efficiency.</div>
-        <div class="const-item">We will support local businesses alongside larger brands.</div>
-        <div class="const-item">We will build responsibly, even when it is harder.</div>
-        <div class="const-item">We will admit mistakes, learn from them, and improve continuously.</div>
-        <div class="const-item">We will measure success not only by revenue, but by the value we create for people.</div>
-        <div class="const-item">We will protect the trust placed in us every single day.</div>
-      </div>
-    </div>
-
-    <!-- Vision -->
-    <div style="text-align:center;padding:24px;background:var(--sfu);border-radius:var(--rlg);border:1px solid var(--bd)">
-      <div style="font-size:28px;margin-bottom:12px">🚀</div>
-      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:10px">Our Vision</div>
-      <div style="font-size:14px;color:var(--t2);line-height:1.8">Noura is not built simply to help people eat.<br>It is built to help people <strong style="color:var(--t1)">connect through food.</strong></div>
-      <div style="margin-top:16px;font-size:13px;color:var(--t3);line-height:1.7">Every meal matters.<br>Every business matters.<br>Every person matters.</div>
-      <div style="margin-top:16px;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--ac)">Welcome to Noura. 🍽️</div>
-    </div>
-
-  </div></div>
-</div>
-
-
-<!-- ══ NOURA AI CHAT ══════════════════════════════ -->
-<div class="screen" id="scr-ai-chat">
-  <div class="ph" style="padding-bottom:0">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div style="flex:1">
-      <div class="pt" style="font-size:18px">Noura AI</div>
-      <div style="font-size:11px;color:var(--ok);font-weight:500">● Online</div>
-    </div>
-    <button class="pa" onclick="openAIHistory()" style="font-size:12px">History</button>
-    <div style="font-size:28px">🤖</div>
-  </div>
-  <!-- What Should I Eat? — flagship feature -->
-  <div style="padding:12px 16px 0;flex-shrink:0">
-    <div onclick="openMod('mod-wsie');startWSIE()" style="background:linear-gradient(135deg,var(--acs),var(--sf));border:1.5px solid #E8943A50;border-radius:var(--rlg);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer">
-      <div style="font-size:28px">🍛</div>
-      <div style="flex:1"><div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--t1)">What Should I Eat?</div><div style="font-size:12px;color:var(--t2)">Answer 4 quick questions for a personalized pick</div></div>
-      <div style="color:var(--ac);font-size:18px">→</div>
-    </div>
-  </div>
-  <!-- Suggestion chips -->
-  <div class="chat-suggestions" id="chat-suggestions">
-    <div class="chat-sug" onclick="sendSuggestion(this)">What should I eat today?</div>
-    <div class="chat-sug" onclick="sendSuggestion(this)">I only have rice and eggs</div>
-    <div class="chat-sug" onclick="sendSuggestion(this)">Healthy meal under ₦2,000</div>
-    <div class="chat-sug" onclick="sendSuggestion(this)">Something quick and easy</div>
-    <div class="chat-sug" onclick="sendSuggestion(this)">High protein meal</div>
-    <div class="chat-sug" onclick="sendSuggestion(this)">Nigerian dinner ideas</div>
-  </div>
-  <!-- Messages -->
-  <div class="chat-msgs" id="chat-msgs">
-    <div class="chat-bubble ai">
-      👋 Hi! I'm Noura AI, your personal food assistant.<br><br>
-      Ask me anything — what to cook, where to eat, recipes from your ingredients, or meal plans. I'm here to help! 🍽️
-    </div>
-  </div>
-  <!-- Input bar -->
-  <div class="chat-bar">
-    <input class="chat-input" id="chat-inp" placeholder="Ask me anything about food…"
-           onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="chat-send" onclick="sendChat()">
-      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-  </div>
-</div>
-
-<!-- ══ AI CHAT HISTORY ═════════════════════════════ -->
-<div class="screen" id="scr-ai-history">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Chat History</div>
-    <button class="pa" onclick="newAIChat()">+ New Chat</button>
-  </div>
-  <div class="iscroll"><div id="ai-history-list" style="padding:0 20px 40px"></div></div>
-</div>
-
-<!-- ══ AI RECIPE GENERATOR ════════════════════════ -->
-<div class="screen" id="scr-ai-recipe">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Recipe Generator</div>
-  </div>
-  <div class="iscroll"><div style="padding:0 20px 60px">
-    <div style="background:var(--acs);border:1px solid #E8943A30;border-radius:var(--rlg);padding:16px;margin-bottom:24px;display:flex;gap:12px;align-items:flex-start">
-      <div style="font-size:24px">🍳</div>
-      <div style="font-size:13px;color:var(--t1);line-height:1.7">Tell me what ingredients you have, your cuisine preference, and how long you want to cook — I'll generate a full recipe instantly.</div>
-    </div>
-    <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Ingredients you have</div>
-    <div class="taw" style="margin-bottom:20px">
-      <textarea id="rg-ingredients" placeholder="e.g. rice, eggs, tomatoes, onions, palm oil…" rows="3"></textarea>
-    </div>
-    <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Cuisine (optional)</div>
-    <div class="iw ni" style="margin-bottom:20px">
-      <select id="rg-cuisine">
-        <option value="">Any cuisine</option>
-        <option>Nigerian</option><option>Ghanaian</option><option>Kenyan</option>
-        <option>West African</option><option>Italian</option><option>Asian</option>
-        <option>Continental</option><option>Middle Eastern</option>
-      </select>
-    </div>
-    <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Max cooking time</div>
-    <div class="chips" style="margin-bottom:20px;margin-top:0" id="rg-time-chips">
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">⚡ Under 15 min</div>
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🕐 Under 30 min</div>
-      <div class="chip sel" onclick="tchip(this,'single',this.closest('.chips'))">⏱ Under 1 hour</div>
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">🍖 Any time</div>
-    </div>
-    <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Budget (optional)</div>
-    <div class="chips" style="margin-bottom:24px;margin-top:0" id="rg-budget-chips">
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">₦500–1k</div>
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">₦1k–3k</div>
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">₦3k–7k</div>
-      <div class="chip" onclick="tchip(this,'single',this.closest('.chips'))">Any budget</div>
-    </div>
-    <button class="btn bp" id="rg-btn" onclick="generateRecipe()">✨ Generate Recipe</button>
-    <!-- Result -->
-    <div id="rg-result" style="display:none;margin-top:24px"></div>
-  </div></div>
-</div>
-
-<!-- ══ RESTAURANTS LIST ════════════════════════════ -->
-<div class="screen" id="scr-restaurants">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Restaurants</div>
-  </div>
-  <!-- Search -->
-  <div style="padding:0 20px 14px;flex-shrink:0">
-    <div class="srch-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="rest-search" placeholder="Search restaurants or cuisines…" oninput="filterRestaurants(this.value)" autocomplete="off">
-    </div>
-  </div>
-  <!-- Filter chips -->
-  <div class="cat-scroll" id="rest-filter-chips">
-    <div class="cat-chip a" onclick="filterRestCat(this,'all')">All</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Nigerian')">🇳🇬 Nigerian</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Fast Food')">🍔 Fast Food</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Continental')">🍝 Continental</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Shawarma')">🌯 Shawarma</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Seafood')">🐟 Seafood</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Bakery')">🥐 Bakery</div>
-    <div class="cat-chip" onclick="filterRestCat(this,'Healthy')">🥗 Healthy</div>
-  </div>
-  <div class="iscroll" style="padding-bottom:88px">
-    <div id="rest-list" style="padding:0 20px;display:flex;flex-direction:column;gap:14px;padding-bottom:20px"></div>
-  </div>
-</div>
-
-<!-- ══ RESTAURANT PROFILE ══════════════════════════ -->
-<div class="screen" id="scr-rest-profile">
-  <div style="position:relative;flex-shrink:0">
-    <button onclick="gb()" style="position:absolute;top:52px;left:16px;z-index:5;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.5);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button id="rp-fav-btn" onclick="toggleRestFav()" style="position:absolute;top:52px;right:16px;z-index:5;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.5);border:none;cursor:pointer;font-size:18px;backdrop-filter:blur(8px)">🤍</button>
-    <div id="rp-hero"></div>
-  </div>
-  <div class="iscroll" style="padding-bottom:88px">
-    <div id="rp-logo-row" style="display:flex;align-items:flex-end;gap:14px;padding-right:20px;background:var(--bg)"></div>
-    <div id="rp-info" style="padding:16px 20px"></div>
-    <div class="rest-contact-row" id="rp-contact"></div>
-    <div id="rp-menu"></div>
-    <div id="rp-reviews"></div>
-  </div>
-</div>
-
-<!-- ══ SMART SEARCH ════════════════════════════════ -->
-<div class="screen" id="scr-smart-search">
-  <div class="ph" style="padding-bottom:14px">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div style="flex:1">
-      <div class="srch-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="ss-inp" placeholder="Search meals, restaurants, recipes…" oninput="onSmartSearch(this.value)" autocomplete="off" autofocus>
-        <button class="srch-clr" id="ss-clr" onclick="clearSmartSearch()">✕</button>
-      </div>
-    </div>
-  </div>
-  <!-- Trending searches -->
-  <div style="padding:0 20px 14px;flex-shrink:0" id="ss-trending">
-    <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Trending Searches</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <div class="chip" onclick="setSmartSearch('Jollof Rice')">Jollof Rice</div>
-      <div class="chip" onclick="setSmartSearch('Suya')">Suya</div>
-      <div class="chip" onclick="setSmartSearch('Pizza')">Pizza</div>
-      <div class="chip" onclick="setSmartSearch('Healthy lunch')">Healthy lunch</div>
-      <div class="chip" onclick="setSmartSearch('Shawarma')">Shawarma</div>
-      <div class="chip" onclick="setSmartSearch('Vegan meals')">Vegan meals</div>
-      <div class="chip" onclick="setSmartSearch('Pepper Soup')">Pepper Soup</div>
-      <div class="chip" onclick="setSmartSearch('Pasta')">Pasta</div>
-    </div>
-  </div>
-  <div class="iscroll" style="padding-bottom:88px">
-    <div id="ss-results" style="display:flex;flex-direction:column"></div>
-  </div>
-</div>
-
-<!-- ══ FAVORITES ═══════════════════════════════════ -->
-<div class="screen" id="scr-favorites">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Favourites</div>
-  </div>
-  <!-- Tabs -->
-  <div style="display:flex;gap:0;padding:0 20px 14px;flex-shrink:0">
-    <button id="fav-tab-recipes" onclick="switchFavTab('recipes')"
-      style="flex:1;padding:10px;border:none;border-bottom:2px solid var(--ac);background:none;font-size:14px;font-weight:600;color:var(--ac);cursor:pointer">
-      Recipes
-    </button>
-    <button id="fav-tab-restaurants" onclick="switchFavTab('restaurants')"
-      style="flex:1;padding:10px;border:none;border-bottom:2px solid var(--bd);background:none;font-size:14px;font-weight:500;color:var(--t2);cursor:pointer">
-      Restaurants
-    </button>
-  </div>
-  <div class="iscroll" style="padding-bottom:88px">
-    <div id="fav-content" style="padding:0 20px"></div>
-  </div>
-</div>
-
-<!-- ══ WRITE REVIEW MODAL ══════════════════════════ -->
-<div class="mov" id="mod-review">
-  <div class="ms">
-    <div class="mh"></div>
-    <div class="mt">Write a Review</div>
-    <div class="msub" id="rev-restaurant-name">Share your experience</div>
-    <div style="font-size:13px;color:var(--t2);margin-bottom:8px">Your rating</div>
-    <div class="star-input" id="star-input">
-      <button class="star-btn" onclick="setStars(1)">⭐</button>
-      <button class="star-btn" onclick="setStars(2)">⭐</button>
-      <button class="star-btn" onclick="setStars(3)">⭐</button>
-      <button class="star-btn" onclick="setStars(4)">⭐</button>
-      <button class="star-btn" onclick="setStars(5)">⭐</button>
-    </div>
-    <div class="ig">
-      <label class="il">Your review</label>
-      <div class="taw"><textarea id="rev-text" placeholder="What did you love? What could be better?" rows="4"></textarea></div>
-    </div>
-    <button class="btn bp" style="margin-bottom:12px" onclick="submitReview()">Submit Review</button>
-    <button class="btn bs" onclick="closeMod('mod-review')">Cancel</button>
-  </div>
-</div>
-
-<!-- BOTTOM NAV -->
-<nav id="bnav">
-  <button class="nb active" data-tab="home" onclick="gt('home')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
-  </button>
-  <button class="nb" data-tab="discover" onclick="gt('discover')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Discover
-  </button>
-  <button class="nb" data-tab="mealplan" onclick="gt('mealplan')">
-    <div class="nbc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>Plan
-  </button>
-  <button class="nb" data-tab="profile" onclick="gt('profile')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile
-  </button>
-</nav>
-
-<!-- MODALS -->
-<div class="mov" id="mod-wsie">
-  <div class="ms" id="mod-wsie-body"><div class="spin"><div class="spinner"></div></div></div>
-</div>
-<div class="mov" id="mod-recipe">
-  <div class="ms" id="mod-recipe-body"><div class="spin"><div class="spinner"></div></div></div>
-</div>
-<div class="mov" id="mod-cpw">
-  <div class="ms"><div class="mh"></div><div class="mt">Change Password</div><div class="msub">You'll be logged out after updating.</div>
-    <div class="ig"><label class="il">Current Password</label><div class="iw ni"><input type="password" id="cpwC" placeholder="••••••••"></div></div>
-    <div class="ig"><label class="il">New Password</label><div class="iw ni"><input type="password" id="cpwN" placeholder="Min. 6 characters"></div></div>
-    <div class="ig"><label class="il">Confirm New Password</label><div class="iw ni"><input type="password" id="cpwF" placeholder="Repeat new password"></div></div>
-    <button class="btn bp" style="margin-bottom:12px" onclick="doCpw()">Update Password</button>
-    <button class="btn bs" onclick="closeMod('mod-cpw')">Cancel</button>
-  </div>
-</div>
-<div class="mov" id="mod-cem">
-  <div class="ms"><div class="mh"></div><div class="mt">Change Email</div><div class="msub">A verification link will be sent.</div>
-    <div class="ig"><label class="il">New Email</label><div class="iw ni"><input type="email" id="cemE" placeholder="newemail@example.com"></div></div>
-    <div class="ig"><label class="il">Password</label><div class="iw ni"><input type="password" id="cemP" placeholder="Confirm your password"></div></div>
-    <button class="btn bp" style="margin-bottom:12px" onclick="doCem()">Send Verification</button>
-    <button class="btn bs" onclick="closeMod('mod-cem')">Cancel</button>
-  </div>
-</div>
-<div class="mov" id="mod-col">
-  <div class="ms"><div class="mh"></div><div class="mt">New Collection</div><div class="msub">Give your collection a name.</div>
-    <div class="ig"><div class="iw ni"><input type="text" id="colN" placeholder="e.g. Nigerian Dishes" autocapitalize="words"></div></div>
-    <button class="btn bp" style="margin-bottom:12px" onclick="makeCol()">Create Collection</button>
-    <button class="btn bs" onclick="closeMod('mod-col')">Cancel</button>
-  </div>
-</div>
-
-<div id="toast"></div>
-
-<script>
 /* ===== config ===== */
 /**
  * ══════════════════════════════════════════════════════════════
@@ -1653,8 +108,8 @@ window.NOURA_ENV = {
 };
 
 
-</script>
-<script>
+
+
 /* ===== services ===== */
 /**
  * ══════════════════════════════════════════════════════════════
@@ -1827,11 +282,37 @@ window.NOURA_ENV = {
     async login(email, password) {
       const sb = getSupabase();
       if (sb) {
-        const { data, error } = await sb.auth.signInWithPassword({ email, password });
-        if (error) return { ok: false, user: null, reason: error.message || 'auth_error' };
-        AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
-        const { user } = await userProfileService.loadProfile();
-        return { ok: true, user };
+        try {
+          const { data, error } = await sb.auth.signInWithPassword({ email, password });
+          if (error) return { ok: false, user: null, reason: error.message || 'auth_error' };
+          if (!data?.session || !data?.user) return { ok: false, user: null, reason: 'no_session' };
+          AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+
+          // Authentication must never be blocked by a profile-sync/RLS hiccup.
+          // The user is already authenticated; profile hydration can be repaired
+          // immediately after routing/onboarding.
+          const authUser = data.user;
+          const meta = authUser.user_metadata || {};
+          const fallbackUser = {
+            id: authUser.id,
+            name: meta.name || authUser.email?.split('@')[0] || '',
+            username: meta.username ? ('@' + String(meta.username).replace(/^@/,'')) : '',
+            email: authUser.email || email,
+            bio: '', country: '', cuisines: [], diet: '', allergies: [], avatarUrl: meta.avatar_url || meta.picture || '',
+            onboardingComplete: false,
+          };
+          try {
+            const loaded = await userProfileService.loadProfile();
+            return { ok: true, user: loaded.user || fallbackUser };
+          } catch (profileError) {
+            console.warn('[Noura] Profile hydration failed after successful login:', profileError);
+            userProfileService._cacheUser(fallbackUser);
+            return { ok: true, user: fallbackUser, reason: 'profile_sync' };
+          }
+        } catch (err) {
+          console.error('[Noura] Login error:', err);
+          return { ok: false, user: null, reason: 'network' };
+        }
       }
       const res = await apiRequest('/auth/login', { method: 'POST', body: { email, password } });
       if (res.ok) {
@@ -1900,11 +381,18 @@ window.NOURA_ENV = {
      *  on return via Supabase's own auth state, not a direct return value. */
     async loginWithGoogle() {
       const sb = getSupabase();
-      if (sb) {
-        const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin } });
+      if (!sb) return { ok: false, reason: 'supabase_unavailable' };
+      try {
+        const redirectTo = window.location.origin + window.location.pathname;
+        const { error } = await sb.auth.signInWithOAuth({
+          provider: 'google',
+          options: { redirectTo, skipBrowserRedirect: false }
+        });
         return { ok: !error, reason: error?.message };
+      } catch (err) {
+        console.error('[Noura] Google OAuth error:', err);
+        return { ok: false, reason: 'oauth_start_failed' };
       }
-      return { ok: false, reason: 'not_configured' };
     },
 
     async refreshToken() {
@@ -1938,9 +426,17 @@ window.NOURA_ENV = {
      *  into our own AuthStore so isLoggedIn() reflects it correctly. */
     async syncSession() {
       const sb = getSupabase();
-      if (!sb) return;
-      const { data } = await sb.auth.getSession();
-      if (data?.session) AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+      if (!sb) return { ok: false, reason: 'supabase_unavailable' };
+      const { data, error } = await sb.auth.getSession();
+      if (error) {
+        console.warn('[Noura] Session restore failed:', error.message);
+        return { ok: false, reason: error.message };
+      }
+      if (data?.session) {
+        AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+        return { ok: true, session: data.session };
+      }
+      return { ok: true, session: null };
     },
   };
 
@@ -1994,8 +490,12 @@ window.NOURA_ENV = {
         const { data: sess } = await sb.auth.getSession();
         const uid = sess?.session?.user?.id;
         if (!uid) return { ok: false };
-        const { error } = await sb.from('profiles').update(patch).eq('id', uid);
+        const { data: updatedRows, error } = await sb.from('profiles').upsert(
+          { id: uid, ...patch },
+          { onConflict: 'id' }
+        ).select().limit(1);
         if (error) return { ok: false, reason: error.message };
+        const persisted = updatedRows?.[0];
         const merged = { ...(this._getCachedUser() || this._blankUser()), ...patch };
         this._cacheUser(merged);
         return { ok: true, user: merged };
@@ -3499,8 +1999,8 @@ REAL NOURA RESTAURANTS are authoritative. Never invent a restaurant, price, rati
   };
 })();
 
-</script>
-<script>
+
+
 /* ===== app ===== */
 // ══════════════════════════════════════════════════════
 //  NOURA — MAIN APP
@@ -3580,9 +2080,31 @@ function openMod(id){ q(id)?.classList.add('on'); activeModal = id; history.push
 function closeMod(id){ q(id)?.classList.remove('on'); activeModal = null; }
 
 // ══════════════════════════════════════════════════
+//  AUTH SESSION LISTENER
+//  Keeps Supabase OAuth/password sessions and the Noura
+//  routing state in sync across redirects and refreshes.
+// ══════════════════════════════════════════════════
+let nouraAuthListenerReady = false;
+function installAuthSessionListener(){
+  if (nouraAuthListenerReady) return;
+  const sb = (typeof getSupabase === 'function') ? getSupabase() : null;
+  if (!sb) return;
+  nouraAuthListenerReady = true;
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (session) {
+      AuthStore.setTokens(session.access_token, session.refresh_token);
+    } else if (event === 'SIGNED_OUT') {
+      AuthStore.clearTokens();
+    }
+  });
+}
+
+// ══════════════════════════════════════════════════
 //  INIT — runs after all JS parsed
 // ══════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
+
+  installAuthSessionListener();
 
   if (S.platform.isMaintenanceMode()) {
     document.body.innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;background:#0D0B09;color:#F0EDE6;font-family:'Inter',sans-serif">
@@ -3606,11 +2128,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (Math.abs(dx)>50){ if(dx<0&&oIdx<2){oIdx++;updOb();} if(dx>0&&oIdx>0){oIdx--;updOb();} }
   });
 
-  await S.auth.syncSession();
-  if (S.auth.isLoggedIn()) {
-    await new Promise(r => setTimeout(r, 900));
+  const sessionState = await S.auth.syncSession();
+  if (sessionState?.session) {
+    await new Promise(r => setTimeout(r, 500));
     q('scr-splash')?.classList.remove('active');
-    await routeAfterAuth();
+    try {
+      await routeAfterAuth(sessionState.session.user);
+    } catch (err) {
+      console.error('[Noura] Session routing failed:', err);
+      gt('login');
+      toast('Your session was restored, but Noura could not load your profile.');
+    }
     return;
   }
 
@@ -3675,10 +2203,19 @@ function pwstr(pw){
 }
 
 async function doGoogleLogin(){
-  const res = await S.auth.loginWithGoogle();
-  if(!res.ok) toast(res.reason==='not_configured' ? 'Google login needs a backend connected first' : 'Could not start Google login');
-  // On success the browser redirects to Google, then back here —
-  // syncSession() on the next load picks up the resulting session.
+  const btn=document.querySelector('.btn.bs');
+  if(btn) btn.disabled=true;
+  try {
+    const res = await S.auth.loginWithGoogle();
+    if(!res.ok){
+      const reason=res.reason||'';
+      toast(reason==='supabase_unavailable' ? 'Noura could not connect to Supabase. Check your connection.' :
+            /provider.*not.*enabled|unsupported/i.test(reason) ? 'Google sign-in is not enabled in Noura yet. Enable Google under Supabase → Authentication → Providers.' :
+            'Could not start Google sign-in. Please try again.');
+    }
+  } finally {
+    if(btn) btn.disabled=false;
+  }
 }
 
 function profileNeedsOnboarding(user){
@@ -3741,11 +2278,25 @@ async function doLogin(){
   serr('liPW','liPE',pw.length<6);          if(pw.length<6)          ok=false;
   if(!ok) return;
   const btn=q('btn-li'); btn.textContent='Logging in…'; btn.disabled=true;
-  const res = await S.auth.login(email, pw);
-  btn.textContent='Log In'; btn.disabled=false;
-  if(!res.ok){ toast(res.reason==='network'?'📡 No connection — try again':'Login failed. Check your details.'); return; }
-  recordLogin(); await routeAfterAuth(res.user);
-  toast('Welcome back, '+(res.user.name||'there').split(' ')[0]+'! 👋');
+  try {
+    const res = await S.auth.login(email, pw);
+    if(!res.ok){
+      const msg = res.reason==='network' ? '📡 No connection — try again' :
+                  res.reason==='no_session' ? 'Could not create a session. Please try again.' :
+                  /invalid login credentials/i.test(res.reason||'') ? 'Incorrect email or password.' :
+                  'Login failed. Please check your details.';
+      toast(msg);
+      return;
+    }
+    recordLogin();
+    await routeAfterAuth(res.user);
+    toast('Welcome back, '+(res.user?.name||'there').split(' ')[0]+'! 👋');
+  } catch (err) {
+    console.error('[Noura] Login handler failed:', err);
+    toast('Could not complete login. Please try again.');
+  } finally {
+    btn.textContent='Log In'; btn.disabled=false;
+  }
 }
 
 function selectRegRole(role) {
@@ -4573,13 +3124,3 @@ function openVendorPortal(){ window.open('noura-vendor.html','_blank'); }
 function openAdminPanel(){   window.open('noura-admin.html','_blank');  }
 function openLanding(){      window.open('noura-landing.html','_blank');}
 
-</script>
-
-<div id="install-banner" aria-live="polite">
-  <div class="ib-icon"><img class="brand-icon" src="./icon-192.png" alt="Noura"></div>
-  <div class="ib-body"><div class="ib-title">Install Noura</div><div class="ib-sub">Get the full Noura experience on your phone.</div></div>
-  <button class="ib-install" onclick="installNouraApp()">Install</button>
-  <button class="ib-close" onclick="dismissInstallBanner()" aria-label="Not now">×</button>
-</div>
-</body>
-</html>
