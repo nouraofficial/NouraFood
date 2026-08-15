@@ -1,16 +1,23 @@
 {
   "rewrites": [
     {
-      "source": "/vendor",
-      "destination": "/vendor.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
       "source": "/store/:slug",
       "destination": "/store.html?v=:slug"
+    },
+    {
+      "source": "/store/:slug/",
+      "destination": "/store.html?v=:slug"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
     }
   ]
 }
