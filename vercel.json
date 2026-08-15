@@ -7,6 +7,14 @@
     {
       "source": "/store/:slug/",
       "destination": "/store.html?v=:slug"
+    },
+    {
+      "source": "/vendor",
+      "destination": "/vendor.html"
+    },
+    {
+      "source": "/vendor/",
+      "destination": "/vendor.html"
     }
   ],
   "headers": [
@@ -15,7 +23,16 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache"
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/sw-vendor.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
         }
       ]
     }

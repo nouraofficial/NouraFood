@@ -12,20 +12,20 @@
 <meta name="keywords" content="Noura, Nigerian food app, African recipes, find local restaurants Nigeria, jollof rice recipe, food discovery app, Noura AI, Nigerian vendors near me, Ghanaian recipes, Kenyan recipes">
 <meta name="author" content="Fluxiq Labs">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://noura.fluxiqlabs.com/">
+<link rel="canonical" href="https://nourafood.vercel.app/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://noura.fluxiqlabs.com/">
+<meta property="og:url" content="https://nourafood.vercel.app/">
 <meta property="og:title" content="Noura — Discover Great Local Food Near You">
 <meta property="og:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Your African food companion — free to use.">
 <meta property="og:image" content="./og-image.jpg">
 <meta property="og:site_name" content="Noura">
 <meta property="og:locale" content="en_NG">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://noura.fluxiqlabs.com/">
+<meta name="twitter:url" content="https://nourafood.vercel.app/">
 <meta name="twitter:title" content="Noura — Discover Great Local Food Near You">
 <meta name="twitter:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Free for everyone.">
 <meta name="twitter:image" content="./og-image.jpg">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/manifest.json">
 <link rel="preload" as="image" href="./icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -45,7 +45,7 @@
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:#0D0B09}
@@ -1827,11 +1827,37 @@ window.NOURA_ENV = {
     async login(email, password) {
       const sb = getSupabase();
       if (sb) {
-        const { data, error } = await sb.auth.signInWithPassword({ email, password });
-        if (error) return { ok: false, user: null, reason: error.message || 'auth_error' };
-        AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
-        const { user } = await userProfileService.loadProfile();
-        return { ok: true, user };
+        try {
+          const { data, error } = await sb.auth.signInWithPassword({ email, password });
+          if (error) return { ok: false, user: null, reason: error.message || 'auth_error' };
+          if (!data?.session || !data?.user) return { ok: false, user: null, reason: 'no_session' };
+          AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+
+          // Authentication must never be blocked by a profile-sync/RLS hiccup.
+          // The user is already authenticated; profile hydration can be repaired
+          // immediately after routing/onboarding.
+          const authUser = data.user;
+          const meta = authUser.user_metadata || {};
+          const fallbackUser = {
+            id: authUser.id,
+            name: meta.name || authUser.email?.split('@')[0] || '',
+            username: meta.username ? ('@' + String(meta.username).replace(/^@/,'')) : '',
+            email: authUser.email || email,
+            bio: '', country: '', cuisines: [], diet: '', allergies: [], avatarUrl: meta.avatar_url || meta.picture || '',
+            onboardingComplete: false,
+          };
+          try {
+            const loaded = await userProfileService.loadProfile();
+            return { ok: true, user: loaded.user || fallbackUser };
+          } catch (profileError) {
+            console.warn('[Noura] Profile hydration failed after successful login:', profileError);
+            userProfileService._cacheUser(fallbackUser);
+            return { ok: true, user: fallbackUser, reason: 'profile_sync' };
+          }
+        } catch (err) {
+          console.error('[Noura] Login error:', err);
+          return { ok: false, user: null, reason: 'network' };
+        }
       }
       const res = await apiRequest('/auth/login', { method: 'POST', body: { email, password } });
       if (res.ok) {
@@ -1900,11 +1926,18 @@ window.NOURA_ENV = {
      *  on return via Supabase's own auth state, not a direct return value. */
     async loginWithGoogle() {
       const sb = getSupabase();
-      if (sb) {
-        const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin } });
+      if (!sb) return { ok: false, reason: 'supabase_unavailable' };
+      try {
+        const redirectTo = window.location.origin + window.location.pathname;
+        const { error } = await sb.auth.signInWithOAuth({
+          provider: 'google',
+          options: { redirectTo, skipBrowserRedirect: false }
+        });
         return { ok: !error, reason: error?.message };
+      } catch (err) {
+        console.error('[Noura] Google OAuth error:', err);
+        return { ok: false, reason: 'oauth_start_failed' };
       }
-      return { ok: false, reason: 'not_configured' };
     },
 
     async refreshToken() {
@@ -1938,9 +1971,17 @@ window.NOURA_ENV = {
      *  into our own AuthStore so isLoggedIn() reflects it correctly. */
     async syncSession() {
       const sb = getSupabase();
-      if (!sb) return;
-      const { data } = await sb.auth.getSession();
-      if (data?.session) AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+      if (!sb) return { ok: false, reason: 'supabase_unavailable' };
+      const { data, error } = await sb.auth.getSession();
+      if (error) {
+        console.warn('[Noura] Session restore failed:', error.message);
+        return { ok: false, reason: error.message };
+      }
+      if (data?.session) {
+        AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+        return { ok: true, session: data.session };
+      }
+      return { ok: true, session: null };
     },
   };
 
@@ -1994,8 +2035,12 @@ window.NOURA_ENV = {
         const { data: sess } = await sb.auth.getSession();
         const uid = sess?.session?.user?.id;
         if (!uid) return { ok: false };
-        const { error } = await sb.from('profiles').update(patch).eq('id', uid);
+        const { data: updatedRows, error } = await sb.from('profiles').upsert(
+          { id: uid, ...patch },
+          { onConflict: 'id' }
+        ).select().limit(1);
         if (error) return { ok: false, reason: error.message };
+        const persisted = updatedRows?.[0];
         const merged = { ...(this._getCachedUser() || this._blankUser()), ...patch };
         this._cacheUser(merged);
         return { ok: true, user: merged };
@@ -3580,9 +3625,31 @@ function openMod(id){ q(id)?.classList.add('on'); activeModal = id; history.push
 function closeMod(id){ q(id)?.classList.remove('on'); activeModal = null; }
 
 // ══════════════════════════════════════════════════
+//  AUTH SESSION LISTENER
+//  Keeps Supabase OAuth/password sessions and the Noura
+//  routing state in sync across redirects and refreshes.
+// ══════════════════════════════════════════════════
+let nouraAuthListenerReady = false;
+function installAuthSessionListener(){
+  if (nouraAuthListenerReady) return;
+  const sb = (typeof getSupabase === 'function') ? getSupabase() : null;
+  if (!sb) return;
+  nouraAuthListenerReady = true;
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (session) {
+      AuthStore.setTokens(session.access_token, session.refresh_token);
+    } else if (event === 'SIGNED_OUT') {
+      AuthStore.clearTokens();
+    }
+  });
+}
+
+// ══════════════════════════════════════════════════
 //  INIT — runs after all JS parsed
 // ══════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
+
+  installAuthSessionListener();
 
   if (S.platform.isMaintenanceMode()) {
     document.body.innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;background:#0D0B09;color:#F0EDE6;font-family:'Inter',sans-serif">
@@ -3606,11 +3673,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (Math.abs(dx)>50){ if(dx<0&&oIdx<2){oIdx++;updOb();} if(dx>0&&oIdx>0){oIdx--;updOb();} }
   });
 
-  await S.auth.syncSession();
-  if (S.auth.isLoggedIn()) {
-    await new Promise(r => setTimeout(r, 900));
+  const sessionState = await S.auth.syncSession();
+  if (sessionState?.session) {
+    await new Promise(r => setTimeout(r, 500));
     q('scr-splash')?.classList.remove('active');
-    await routeAfterAuth();
+    try {
+      await routeAfterAuth(sessionState.session.user);
+    } catch (err) {
+      console.error('[Noura] Session routing failed:', err);
+      gt('login');
+      toast('Your session was restored, but Noura could not load your profile.');
+    }
     return;
   }
 
@@ -3675,10 +3748,19 @@ function pwstr(pw){
 }
 
 async function doGoogleLogin(){
-  const res = await S.auth.loginWithGoogle();
-  if(!res.ok) toast(res.reason==='not_configured' ? 'Google login needs a backend connected first' : 'Could not start Google login');
-  // On success the browser redirects to Google, then back here —
-  // syncSession() on the next load picks up the resulting session.
+  const btn=document.querySelector('.btn.bs');
+  if(btn) btn.disabled=true;
+  try {
+    const res = await S.auth.loginWithGoogle();
+    if(!res.ok){
+      const reason=res.reason||'';
+      toast(reason==='supabase_unavailable' ? 'Noura could not connect to Supabase. Check your connection.' :
+            /provider.*not.*enabled|unsupported/i.test(reason) ? 'Google sign-in is not enabled in Noura yet. Enable Google under Supabase → Authentication → Providers.' :
+            'Could not start Google sign-in. Please try again.');
+    }
+  } finally {
+    if(btn) btn.disabled=false;
+  }
 }
 
 function profileNeedsOnboarding(user){
@@ -3741,11 +3823,25 @@ async function doLogin(){
   serr('liPW','liPE',pw.length<6);          if(pw.length<6)          ok=false;
   if(!ok) return;
   const btn=q('btn-li'); btn.textContent='Logging in…'; btn.disabled=true;
-  const res = await S.auth.login(email, pw);
-  btn.textContent='Log In'; btn.disabled=false;
-  if(!res.ok){ toast(res.reason==='network'?'📡 No connection — try again':'Login failed. Check your details.'); return; }
-  recordLogin(); await routeAfterAuth(res.user);
-  toast('Welcome back, '+(res.user.name||'there').split(' ')[0]+'! 👋');
+  try {
+    const res = await S.auth.login(email, pw);
+    if(!res.ok){
+      const msg = res.reason==='network' ? '📡 No connection — try again' :
+                  res.reason==='no_session' ? 'Could not create a session. Please try again.' :
+                  /invalid login credentials/i.test(res.reason||'') ? 'Incorrect email or password.' :
+                  'Login failed. Please check your details.';
+      toast(msg);
+      return;
+    }
+    recordLogin();
+    await routeAfterAuth(res.user);
+    toast('Welcome back, '+(res.user?.name||'there').split(' ')[0]+'! 👋');
+  } catch (err) {
+    console.error('[Noura] Login handler failed:', err);
+    toast('Could not complete login. Please try again.');
+  } finally {
+    btn.textContent='Log In'; btn.disabled=false;
+  }
 }
 
 function selectRegRole(role) {
@@ -4564,7 +4660,7 @@ window.addEventListener('appinstalled', () => {
   toast('Noura installed! 🎉');
 });
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => { try { const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'}); reg.update().catch(()=>{}); } catch(e) { console.warn('Noura service worker unavailable',e); } });
+  window.addEventListener('load', async () => { try { const reg=await navigator.serviceWorker.register('/sw.js',{scope:'/'} ); reg.update().catch(()=>{}); } catch(e) { console.warn('Noura service worker unavailable',e); } });
 }
 if (S.auth.isLoggedIn()) recordLogin();
 

@@ -9,9 +9,9 @@
 <meta name="keywords" content="Noura vendor, list restaurant Nigeria, food business online, digital menu Nigeria, restaurant management app, sell food online Nigeria">
 <meta name="author" content="Fluxiq Labs">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://noura.fluxiqlabs.com/vendor">
+<link rel="canonical" href="https://nourafood.vercel.app/vendor">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://noura.fluxiqlabs.com/vendor">
+<meta property="og:url" content="https://nourafood.vercel.app/vendor">
 <meta property="og:title" content="Noura Vendor Portal — Grow Your Food Business Online">
 <meta property="og:description" content="Free digital storefront for local food vendors — menu, orders, reviews, and analytics in one place.">
 <meta property="og:image" content="https://noura.fluxiqlabs.com/og-vendor.jpg">
@@ -21,7 +21,7 @@
 <meta name="twitter:title" content="Noura Vendor Portal — Grow Your Food Business Online">
 <meta name="twitter:description" content="List your restaurant for free and get discovered by local food lovers.">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="manifest" href="manifest-vendor.json">
+<link rel="manifest" href="/manifest-vendor.json">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -395,7 +395,7 @@ button{cursor:pointer;font-family:inherit}
         <div class="nav-item" onclick="showPage('pg-promotions',this,'Promotions')"><span class="ni">🎁</span>Promotions</div>
         <div class="nav-section-title">Account</div>
         <div class="nav-item" onclick="showPage('pg-settings',this,'Settings')"><span class="ni">⚙️</span>Settings</div>
-        <div class="nav-item" onclick="window.open('noura.html','_blank')"><span class="ni">📱</span>Open App</div>
+        <div class="nav-item" onclick="window.open('/','_blank')"><span class="ni">📱</span>Open App</div>
       <div class="nav-item" onclick="doVendorLogout()"><span class="ni">🚪</span>Log Out</div>
       </nav>
       <div class="sidebar-footer">
@@ -698,6 +698,7 @@ button{cursor:pointer;font-family:inherit}
  * ══════════════════════════════════════════════════════════════
  */
 window.NOURA_ENV = {
+  PUBLIC_APP_URL: 'https://nourafood.vercel.app',
   // ── Environment ────────────────────────────────────────────
   ENVIRONMENT: 'development', // 'development' | 'staging' | 'production'
   APP_VERSION: '1.0.0-month1',
@@ -2528,7 +2529,7 @@ Be concise (max 4-6 lines unless a full recipe is requested), warm, and practica
    *  PUBLIC EXPORT
    * ════════════════════════════════════════════════════════════ */
   const publicStoreService={
-    url(v=vendorService.getVendor()){return v?.slug?`${location.origin}/store/${encodeURIComponent(v.slug)}`:`${location.origin}/store`;},
+    url(v=vendorService.getVendor()){const base=(window.NOURA_ENV?.PUBLIC_APP_URL||location.origin).replace(/\/$/,''); return v?.slug?`${base}/store/${encodeURIComponent(v.slug)}`:`${base}/store`;},
     async refresh(){const v=vendorService.getVendor();if(!v)return null;try{await vendorMenuService._ensureRestaurant();}catch(_){}return vendorService.getVendor();}
   };
 
@@ -2702,7 +2703,7 @@ async function checkBroadcasts() {
 function viewMyPage() {
   const v = S.vendor.getVendor();
   if (!v?.slug) { vToast('Finish onboarding first to get your page'); return; }
-  window.open('store.html?v=' + v.slug, '_blank');
+  window.open(S.vendor.url(v), '_blank');
 }
 function copyMyPageLink() {
   const link = el('my-page-link')?.textContent;
@@ -3147,7 +3148,7 @@ window.addEventListener('appinstalled', () => {
   vToast('Noura for Business installed! 🎉');
 });
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw-vendor.js').catch(() => {}); });
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw-vendor.js',{scope:'/'} ).catch(() => {}); });
 }
 
 </script>

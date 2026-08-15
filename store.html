@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0A0805">
 <title>Loading… | Noura</title>
 <meta name="robots" content="index, follow">
-<link rel="canonical" id="store-canonical" href="/store">
+<link rel="canonical" id="store-canonical" href="https://nourafood.vercel.app/store">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -2163,7 +2163,7 @@ async function loadStore() {
 
   STORE = res.restaurant;
   document.title = STORE.name + ' | Noura';
-  const canonical=el('store-canonical'); if(canonical) canonical.href=location.origin+'/store/'+encodeURIComponent(STORE.slug||key);
+  const canonical=el('store-canonical'); if(canonical) canonical.href='https://nourafood.vercel.app/store/'+encodeURIComponent(STORE.slug||key);
   renderStore(STORE);
   el('store-loading').style.display = 'none';
   const app = el('store-app'); app.style.display = 'flex';
@@ -2256,7 +2256,7 @@ function renderStore(r) {
   el('contact-content').innerHTML = contactRows.length ? contactRows.join('') : `<div class="empty">No contact details added yet.</div>`;
 
   // Share
-  const shareUrl = location.origin + '/store/' + (r.slug || r.id);
+  const shareUrl = 'https://nourafood.vercel.app/store/' + (r.slug || r.id);
   el('share-link').textContent = shareUrl;
   el('qr-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=' + encodeURIComponent(shareUrl);
 }
