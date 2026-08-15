@@ -2,29 +2,16 @@
   "name": "Noura for Business",
   "short_name": "Noura Business",
   "start_url": "/vendor",
-  "scope": "/",
+  "scope": "/vendor",
   "display": "standalone",
+  "orientation": "portrait",
   "theme_color": "#0A0805",
   "background_color": "#0A0805",
+  "description": "Manage your Noura restaurant storefront, menu, orders and reviews.",
   "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-192-maskable.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
   "id": "/vendor"
 }

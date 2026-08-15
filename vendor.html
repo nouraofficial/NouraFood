@@ -3148,7 +3148,7 @@ window.addEventListener('appinstalled', () => {
   vToast('Noura for Business installed! 🎉');
 });
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw-vendor.js',{scope:'/'} ).catch(() => {}); });
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw-vendor.js',{scope:'/vendor'} ).catch(() => {}); });
 }
 
 </script>

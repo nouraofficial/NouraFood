@@ -625,7 +625,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
       <div style="font-size:44px;margin-bottom:12px">🏪</div>
       <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:8px">Selling on Noura?</div>
       <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:20px">Vendor accounts are set up in the Vendor Portal — you'll get a digital menu, order management, and analytics built for your business.</div>
-      <button class="btn bp" onclick="window.open('vendor.html#register','_blank')">Continue to Vendor Signup →</button>
+      <button class="btn bp" onclick="window.open('/vendor#register','_blank')">Continue to Vendor Signup →</button>
     </div>
     <div class="afoo">Already have an account? <a onclick="gt('login')">Log in</a></div>
   </div></div>
@@ -4678,9 +4678,9 @@ if ('serviceWorker' in navigator) {
 if (S.auth.isLoggedIn()) recordLogin();
 
 // ── Cross-file navigation ────────────────────────────
-function openVendorPortal(){ window.open('noura-vendor.html','_blank'); }
-function openAdminPanel(){   window.open('noura-admin.html','_blank');  }
-function openLanding(){      window.open('noura-landing.html','_blank');}
+function openVendorPortal(){ window.open('/vendor','_blank'); }
+function openAdminPanel(){   window.open('/admin','_blank'); }
+function openLanding(){      window.open('/landing','_blank'); }
 
 </script>
 
