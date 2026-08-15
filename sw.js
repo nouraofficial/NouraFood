@@ -1,5 +1,5 @@
 const CACHE = 'noura-consumer-v1';
-const APP_SHELL = ['./','./index.html','./manifest.json','./icons/icon-192.png','./icons/icon-192-maskable.png','./icons/icon-512.png','./apple-touch-icon.png','./favicon.png','./og-image.jpg'];
+const APP_SHELL = ['./','./index.html','./manifest.json','./icon-192.png','./icon-192-maskable.png','./icon-512.png','./apple-touch-icon.png','./favicon.png','./og-image.jpg'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));

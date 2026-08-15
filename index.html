@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Free for everyone.">
 <meta name="twitter:image" content="./og-image.jpg">
 <link rel="manifest" href="manifest.json">
-<link rel="preload" as="image" href="./icons/icon-192.png">
+<link rel="preload" as="image" href="./icon-192.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="application-name" content="Noura">
@@ -329,6 +329,17 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 .mil.dg{color:var(--er)}
 .mchv svg{width:16px;height:16px;stroke-width:2;color:var(--t3)}
 .pver{text-align:center;font-size:12px;color:var(--t3);padding:0 20px 20px}
+.noura-onboard{padding:28px 20px 40px;overflow-y:auto}
+.onb-logo{display:flex;flex-direction:column;align-items:center;margin:18px 0 26px}
+.onb-logo img{width:76px;height:76px;border-radius:20px;object-fit:cover;border:1px solid var(--bd);box-shadow:0 10px 35px #0006}
+.onb-title{font-family:'Sora',sans-serif;font-size:25px;font-weight:800;text-align:center;color:var(--t1);margin-bottom:8px}
+.onb-sub{font-size:14px;line-height:1.6;text-align:center;color:var(--t2);max-width:340px;margin:0 auto 24px}
+.onb-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px;margin-bottom:18px}
+.onb-avatar{width:92px;height:92px;border-radius:50%;background:var(--acs);border:2px solid var(--ac);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Sora',sans-serif;font-size:34px;font-weight:800;color:var(--ac);cursor:pointer}
+.onb-avatar img{width:100%;height:100%;object-fit:cover;display:none}
+.onb-avatar-note{text-align:center;font-size:12px;color:var(--t2);margin-bottom:20px}
+.onb-skip{text-align:center;color:var(--t3);font-size:12px;margin-top:14px;cursor:pointer}
+
 
 /* ── EDIT PROFILE ────────────────────────────── */
 .eas{display:flex;flex-direction:column;align-items:center;padding:20px;gap:12px}
@@ -519,7 +530,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <div class="splash-ring"></div>
   <div class="splash-ring"></div>
   <div class="splash-center">
-    <div class="slm pulse" id="splash-logo"><img src="./icons/icon-192.png" alt="Noura"></div>
+    <div class="slm pulse" id="splash-logo"><img src="./icon-192.png" alt="Noura"></div>
     <div class="swm">noura<span>.</span></div>
     <div class="stag">Eat smart &nbsp;·&nbsp; Live well</div>
   </div>
@@ -547,7 +558,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 <!-- LOGIN -->
 <div class="screen ascr" id="scr-login">
   <div class="ascrl"><div class="ain">
-    <div class="alo-brand"><img src="./icons/icon-192.png" alt="Noura logo"><div class="wordmark">noura<span>.</span></div></div>
+    <div class="alo-brand"><img src="./icon-192.png" alt="Noura logo"><div class="wordmark">noura<span>.</span></div></div>
     <div class="ahe">Welcome back</div>
     <div class="asu">Log in to your account</div>
     <div class="ig"><label class="il">Email</label>
@@ -1937,7 +1948,7 @@ window.NOURA_ENV = {
    *  USER PROFILE SERVICE
    * ════════════════════════════════════════════════════════════ */
   const userProfileService = {
-    _blankUser: () => ({ id: '', name: '', username: '', email: '', bio: '', country: '', cuisines: [], diet: '', allergies: [] }),
+    _blankUser: () => ({ id: '', name: '', username: '', email: '', bio: '', country: '', cuisines: [], diet: '', allergies: [], avatarUrl: '', onboardingComplete: false }),
     _getCachedUser: () => lsGet('noura_user', null),
     _cacheUser: (u) => lsSet('noura_user', u),
 
@@ -1946,17 +1957,29 @@ window.NOURA_ENV = {
       const sb = getSupabase();
       if (sb) {
         const { data: sess } = await sb.auth.getSession();
-        const uid = sess?.session?.user?.id;
+        const authUser = sess?.session?.user;
+        const uid = authUser?.id;
         if (!uid) return { ok: false, user: null };
-        const { data, error } = await sb.from('profiles').select('*').eq('id', uid).single();
-        if (error) return { ok: false, user: this._getCachedUser() };
-        const user = {
-          id: data.id, name: data.name || '', username: data.username || '', email: data.email || '',
-          bio: data.bio || '', country: data.country || '', cuisines: data.cuisines || [],
-          diet: data.diet || '', allergies: data.allergies || [], avatarUrl: data.avatar_url || '',
+        const meta = authUser.user_metadata || {};
+        const { data, error } = await sb.from('profiles').select('*').eq('id', uid).maybeSingle();
+        const base = data || {};
+        const hydrated = {
+          id: uid,
+          name: base.name || meta.name || authUser.email?.split('@')[0] || '',
+          username: base.username || (meta.username ? ('@'+String(meta.username).replace(/^@/,'')) : ''),
+          email: base.email || authUser.email || '',
+          bio: base.bio || '', country: base.country || '',
+          cuisines: base.cuisines || [], diet: base.diet || '', allergies: base.allergies || [],
+          avatarUrl: base.avatar_url || meta.avatar_url || meta.picture || '',
+          onboardingComplete: base.onboarding_complete === true,
         };
-        this._cacheUser(user);
-        return { ok: true, user };
+        // Keep the database row and Auth metadata aligned so refreshes never fall back to placeholders.
+        const patch = { id: uid, email: hydrated.email, name: hydrated.name, username: hydrated.username, avatar_url: hydrated.avatarUrl || null };
+        if (error || !data || !base.name || !base.username || !base.email) {
+          await sb.from('profiles').upsert(patch, { onConflict:'id' });
+        }
+        this._cacheUser(hydrated);
+        return { ok: true, user: hydrated };
       }
       const res = await apiRequest('/user/profile', { method: 'GET' });
       if (res.ok) { this._cacheUser(res.data); return { ok: true, user: res.data }; }
@@ -2897,6 +2920,8 @@ window.NOURA_ENV = {
       const { data: pub } = sb.storage.from('vendor-photos').getPublicUrl(path);
       const { error: updErr } = await sb.from('profiles').update({ avatar_url: pub.publicUrl }).eq('id', uid);
       if (updErr) return { ok: false, reason: updErr.message };
+      const cached=lsGet('noura_user',null);
+      if(cached){ cached.avatarUrl=pub.publicUrl; lsSet('noura_user',cached); }
       return { ok: true, url: pub.publicUrl };
     },
   };
@@ -3585,7 +3610,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (S.auth.isLoggedIn()) {
     await new Promise(r => setTimeout(r, 900));
     q('scr-splash')?.classList.remove('active');
-    gt('home', true);
+    await routeAfterAuth();
     return;
   }
 
@@ -3656,6 +3681,60 @@ async function doGoogleLogin(){
   // syncSession() on the next load picks up the resulting session.
 }
 
+function profileNeedsOnboarding(user){
+  const u=user||{};
+  return !u.onboardingComplete || !String(u.name||'').trim() || !String(u.username||'').trim();
+}
+async function routeAfterAuth(user){
+  const {user: fresh}=await S.profile.loadProfile();
+  const u=fresh||user||{};
+  if(profileNeedsOnboarding(u)){
+    populateOnboarding(u);
+    gt('onboarding');
+  }else{
+    gt('home');
+  }
+}
+function populateOnboarding(u){
+  const name=u?.name||''; const username=u?.username||'';
+  if(q('onb-name')) q('onb-name').value=name;
+  if(q('onb-username')) q('onb-username').value=username;
+  if(q('onb-bio')) q('onb-bio').value=u?.bio||'';
+  const init=(name||'?').charAt(0).toUpperCase();
+  if(q('onb-init')) q('onb-init').textContent=init;
+  if(q('onb-avatar-img')){
+    q('onb-avatar-img').src=u?.avatarUrl||'';
+    q('onb-avatar-img').style.display=u?.avatarUrl?'block':'none';
+  }
+  if(q('onb-init')) q('onb-init').style.display=u?.avatarUrl?'none':'';
+}
+async function uploadOnboardingPhoto(input){
+  const file=input.files?.[0]; if(!file) return;
+  if(file.size>5*1024*1024){toast('Please choose an image under 5 MB');return;}
+  const img=q('onb-avatar-img'), init=q('onb-init');
+  const local=URL.createObjectURL(file);
+  if(img){img.src=local;img.style.display='block';} if(init)init.style.display='none';
+  toast('Uploading photo… 📤');
+  const res=await S.media.uploadProfilePhoto(file);
+  if(!res.ok){toast(res.reason==='not_logged_in'?'Please log in again':'Photo upload failed — try again');return;}
+  if(img) img.src=res.url;
+  toast('Photo saved ✅');
+}
+async function completeOnboarding(){
+  const name=q('onb-name')?.value.trim()||'', username=(q('onb-username')?.value.trim()||'').replace(/^@/,'');
+  if(name.length<2){toast('Please enter your name');return;}
+  if(username.length<3){toast('Username must be at least 3 characters');return;}
+  const btn=q('btn-onb'); if(btn){btn.disabled=true;btn.textContent='Saving…';}
+  const res=await S.profile.updateProfile({name,username:'@'+username,bio:q('onb-bio')?.value.trim()||'',onboarding_complete:true});
+  if(btn){btn.disabled=false;btn.textContent='Continue to Noura →';}
+  if(!res.ok){toast('Could not save your profile — try again');return;}
+  await renderUser(); gt('home'); toast('Welcome to Noura, '+name.split(' ')[0]+'! 🎉');
+}
+async function skipOnboarding(){
+  await S.profile.updateProfile({onboarding_complete:true});
+  await renderUser(); gt('home');
+}
+
 async function doLogin(){
   const email=q('liE').value.trim(), pw=q('liP').value; let ok=true;
   serr('liEW','liEE',!email.includes('@')); if(!email.includes('@')) ok=false;
@@ -3665,7 +3744,7 @@ async function doLogin(){
   const res = await S.auth.login(email, pw);
   btn.textContent='Log In'; btn.disabled=false;
   if(!res.ok){ toast(res.reason==='network'?'📡 No connection — try again':'Login failed. Check your details.'); return; }
-  recordLogin(); gt('home');
+  recordLogin(); await routeAfterAuth(res.user);
   toast('Welcome back, '+(res.user.name||'there').split(' ')[0]+'! 👋');
 }
 
@@ -3698,7 +3777,7 @@ async function doRegister(){
   btn.textContent='Create Account'; btn.disabled=false;
   if(!res.ok){ toast(res.reason==='network'?'📡 No connection — try again':'Could not create account.'); return; }
   if(res.reason==='confirm_email'){ toast('Check your email to confirm your account, then log in 📧'); gt('login'); return; }
-  recordLogin(); gt('home');
+  recordLogin(); await routeAfterAuth(res.user);
   toast('Welcome to Noura, '+n.split(' ')[0]+'! 🎉');
 }
 
@@ -3731,7 +3810,17 @@ async function renderUser(){
   if(q('hun')) q('hun').textContent=first;
   if(q('pinit')) q('pinit').textContent=init;
   const pav=q('pinit')?.parentElement;
-  if(pav){ if(u.avatarUrl){ pav.style.backgroundImage=`url('${u.avatarUrl}')`; pav.style.backgroundSize='cover'; pav.style.backgroundPosition='center'; q('pinit').style.display='none'; } else { pav.style.backgroundImage=''; q('pinit').style.display=''; } }
+  const pimg=q('pavatar-img');
+  if(pav){
+    pav.style.backgroundImage='';
+    if(u.avatarUrl){
+      if(pimg){pimg.src=u.avatarUrl;pimg.style.display='block';}
+      if(q('pinit')) q('pinit').style.display='none';
+    }else{
+      if(pimg){pimg.removeAttribute('src');pimg.style.display='none';}
+      if(q('pinit')) q('pinit').style.display='';
+    }
+  }
   if(q('pnm'))   q('pnm').textContent=u.name||'Your Name';
   if(q('pun'))   q('pun').textContent=u.username||'@username';
   if(q('pem'))   q('pem').textContent=u.email||'—';
@@ -4487,7 +4576,7 @@ function openLanding(){      window.open('noura-landing.html','_blank');}
 </script>
 
 <div id="install-banner" aria-live="polite">
-  <div class="ib-icon"><img class="brand-icon" src="./icons/icon-192.png" alt="Noura"></div>
+  <div class="ib-icon"><img class="brand-icon" src="./icon-192.png" alt="Noura"></div>
   <div class="ib-body"><div class="ib-title">Install Noura</div><div class="ib-sub">Get the full Noura experience on your phone.</div></div>
   <button class="ib-install" onclick="installNouraApp()">Install</button>
   <button class="ib-close" onclick="dismissInstallBanner()" aria-label="Not now">×</button>

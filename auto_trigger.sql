@@ -16,6 +16,28 @@ alter table if exists public.profiles add column if not exists avatar_url text;
 alter table if exists public.profiles add column if not exists status text not null default 'active';
 alter table if exists public.profiles add column if not exists created_at timestamptz not null default now();
 alter table if exists public.profiles add column if not exists updated_at timestamptz not null default now();
+alter table if exists public.profiles add column if not exists bio text default '';
+alter table if exists public.profiles add column if not exists country text default '';
+alter table if exists public.profiles add column if not exists cuisines text[] default '{}';
+alter table if exists public.profiles add column if not exists diet text default '';
+alter table if exists public.profiles add column if not exists allergies text[] default '{}';
+alter table if exists public.profiles add column if not exists onboarding_complete boolean not null default false;
+
+create table if not exists public.user_preferences (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  budget text default '',
+  mealtimes text[] default '{}',
+  goal text default '',
+  fav_foods text[] default '{}',
+  avoid text[] default '{}',
+  skill text default '',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+alter table if exists public.user_preferences enable row level security;
+drop policy if exists user_preferences_owner_all on public.user_preferences;
+create policy user_preferences_owner_all on public.user_preferences for all to authenticated using(auth.uid()=user_id) with check(auth.uid()=user_id);
+
 
 alter table if exists public.vendors add column if not exists auth_user_id uuid;
 alter table if exists public.vendors add column if not exists slug text;
