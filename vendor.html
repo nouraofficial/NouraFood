@@ -1572,18 +1572,9 @@ window.NOURA_ENV = {
 
     isLoggedIn() { return !!this._get(); },
     getVendor() { return this._get(); },
-
-    async refreshCurrent() {
-      const sb = getSupabase();
-      if (!sb) return this.getVendor();
-      const { data: sess } = await sb.auth.getSession();
-      const uid = sess?.session?.user?.id;
-      if (!uid) return this.getVendor();
-      const { data: row, error } = await sb.from('vendors').select('*').eq('auth_user_id', uid).maybeSingle();
-      if (error || !row) return this.getVendor();
-      const vendor = mapVendorRow(row);
-      this._set(vendor);
-      return vendor;
+    url(v = this.getVendor()) {
+      const base = (window.NOURA_ENV?.PUBLIC_APP_URL || location.origin).replace(/\/$/, '');
+      return v?.slug ? `${base}/store/${encodeURIComponent(v.slug)}` : `${base}/store`;
     },
 
     async login(email, password) {
@@ -2713,36 +2704,20 @@ async function checkBroadcasts() {
   renderVendorNotifBadge();
 }
 
-async function getCurrentVendorForStoreLink() {
-  let v = S.vendor.getVendor() || {};
-  // The local vendor cache can lag behind the Supabase row after onboarding.
-  // Refresh from Supabase before deciding that onboarding is incomplete.
-  try {
-    const fresh = await S.vendor.refreshCurrent();
-    if (fresh) v = fresh;
-  } catch (_) {}
-  return v;
-}
-
-async function viewMyPage() {
-  const v = await getCurrentVendorForStoreLink();
+function viewMyPage() {
+  const v = S.vendor.getVendor();
   if (!v?.slug) { vToast('Finish onboarding first to get your page'); return; }
-  window.open(S.publicStore.url(v), '_blank');
+  window.open(S.vendor.url(v), '_blank');
 }
-async function copyMyPageLink() {
-  const v = await getCurrentVendorForStoreLink();
-  if (!v?.slug) { vToast('Finish onboarding first to get your page'); return; }
-  const link = S.publicStore.url(v);
-  const linkEl = el('my-page-link');
-  if (linkEl) linkEl.textContent = link;
+function copyMyPageLink() {
+  const link = el('my-page-link')?.textContent;
+  if (!link || link === '—') { vToast('Finish onboarding first to get your page'); return; }
   navigator.clipboard?.writeText(link).then(() => vToast('Link copied 🔗')).catch(() => vToast('Could not copy'));
 }
-async function shareMyPageWhatsApp() {
-  const v = await getCurrentVendorForStoreLink();
-  if (!v?.slug) { vToast('Finish onboarding first to get your page'); return; }
-  const link = S.publicStore.url(v);
-  const linkEl = el('my-page-link');
-  if (linkEl) linkEl.textContent = link;
+function shareMyPageWhatsApp() {
+  const link = el('my-page-link')?.textContent;
+  if (!link || link === '—') { vToast('Finish onboarding first to get your page'); return; }
+  const v = S.vendor.getVendor();
   window.open('https://wa.me/?text=' + encodeURIComponent(`Check out ${v?.businessName || 'my business'} on Noura: ${link}`), '_blank');
 }
 
@@ -2826,10 +2801,6 @@ async function obNext() {
     whatsapp: el('ob-wa')?.value || '', instagram: el('ob-ig')?.value || '', facebook: el('ob-fb')?.value || '', website: el('ob-web')?.value || '',
   };
   const res = await S.vendor.updateProfile(patch);
-  if (!res?.ok || !res.vendor) {
-    vToast('Could not finish onboarding: ' + (res?.reason || 'please try again'));
-    return;
-  }
   initApp(res.vendor);
 }
 function obBack(){ if(obStep>0){obStep--;renderObStep();} }
