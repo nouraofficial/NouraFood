@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0A0805">
-
+<link rel="manifest" href="/manifest.json">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="application-name" content="Noura">
@@ -227,6 +227,7 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 
 <div id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* config */
 /**
@@ -763,24 +764,40 @@ window.NOURA_ENV = {
     async get(id) {
       const sb = getSupabase();
       if (sb) {
-        const { data, error } = await sb.from('restaurants').select('*, menu_items(*), reviews(*)').eq('id', id).maybeSingle();
-        if (!error && data) return { ok: true, restaurant: mapRestaurantRow(data) };
+        const { data, error } = await sb.from('restaurants')
+          .select('*, menu_items(*), reviews(*)')
+          .eq('id', id)
+          .maybeSingle();
+
+        if (error) return { ok: false, restaurant: null, reason: error.message || 'supabase_error' };
+        if (data) return { ok: true, restaurant: mapRestaurantRow(data) };
+        return { ok: false, restaurant: null, reason: 'not_found' };
       }
+
       const res = await apiRequest('/restaurants/' + id, { method: 'GET' });
       if (res.ok) return { ok: true, restaurant: res.data };
-      const local = lsGet('noura_restaurants', []).find((r) => r.id === id) || null;
-      return { ok: !!local, restaurant: local };
+      return { ok: false, restaurant: null, reason: res.reason || 'backend_unavailable' };
     },
+
     async getBySlug(slug) {
+      const cleanSlug = String(slug || '').trim().toLowerCase();
+      if (!cleanSlug) return { ok: false, restaurant: null, reason: 'missing_slug' };
+
       const sb = getSupabase();
       if (sb) {
-        const { data, error } = await sb.from('restaurants').select('*, menu_items(*), reviews(*)').eq('slug', slug).maybeSingle();
-        if (!error && data) return { ok: true, restaurant: mapRestaurantRow(data) };
+        const { data, error } = await sb.from('restaurants')
+          .select('*, menu_items(*), reviews(*)')
+          .eq('slug', cleanSlug)
+          .maybeSingle();
+
+        if (error) return { ok: false, restaurant: null, reason: error.message || 'supabase_error' };
+        if (data) return { ok: true, restaurant: mapRestaurantRow(data) };
+        return { ok: false, restaurant: null, reason: 'not_found' };
       }
-      const res = await apiRequest('/restaurants/slug/' + slug, { method: 'GET' });
+
+      const res = await apiRequest('/restaurants/slug/' + encodeURIComponent(cleanSlug), { method: 'GET' });
       if (res.ok) return { ok: true, restaurant: res.data };
-      const local = lsGet('noura_restaurants', []).find((r) => r.slug === slug) || null;
-      return { ok: !!local, restaurant: local };
+      return { ok: false, restaurant: null, reason: res.reason || 'backend_unavailable' };
     },
     async search(query) {
       const { restaurants } = await this.list();
@@ -2161,10 +2178,15 @@ async function loadStore() {
   const key = resolveVendorSlug();
   if (!key) { showNotFound(); return; }
 
+  // The public storefront is database-backed. Never revive an expired
+  // localStorage copy after Supabase says the record is unavailable.
   let res = await S.restaurants.getBySlug(key);
-  if (!res.ok) { try { await S.restaurants.list(); } catch (_) {} res = await S.restaurants.getBySlug(key); }
-  if (!res.ok) res = await S.restaurants.get(key); // fallback: allow raw id too
-  if (!res.ok || !res.restaurant) { showNotFound(); return; }
+  if (!res.ok) res = await S.restaurants.get(key);
+
+  if (!res.ok || !res.restaurant) {
+    showNotFound(res.reason);
+    return;
+  }
 
   STORE = res.restaurant;
   document.title = STORE.name + ' | Noura';
@@ -2174,8 +2196,14 @@ async function loadStore() {
   const app = el('store-app'); app.style.display = 'flex';
 }
 
-function showNotFound() {
+function showNotFound(reason) {
   el('store-loading').style.display = 'none';
+  const title = el('store-notfound')?.querySelector('div:nth-child(2)');
+  const text = el('store-notfound')?.querySelector('div:nth-child(3)');
+  if (reason && reason !== 'not_found' && reason !== 'missing_slug') {
+    if (title) title.textContent = 'Store temporarily unavailable';
+    if (text) text.textContent = 'Noura could not reach this vendor record right now. Please try again.';
+  }
   el('store-notfound').style.display = 'flex';
 }
 
