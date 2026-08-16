@@ -12,6 +12,7 @@
 <meta name="author" content="Fluxiq Labs">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 @keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .page-enter{animation:pageIn .28s cubic-bezier(.16,1,.3,1)}
@@ -176,8 +177,8 @@ tr:hover td{background:var(--sfu)}
       <div class="auth-logo">noura<span>.</span></div>
       <div class="auth-badge"><span>👑 Admin Access</span></div>
       <div class="auth-title">Admin Login</div>
-      <div class="field"><label>Email</label><input type="email" id="al-email" placeholder="admin email"></div>
-      <div class="field"><label>Password</label><input type="password" id="al-pass" placeholder="Your Supabase password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+      <div class="field"><label>Email</label><input type="email" id="al-email" placeholder="admin@noura.app" autocomplete="username"></div>
+      <div class="field"><label>Password</label><input type="password" id="al-pass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
       <button class="btn-primary" onclick="doAdminLogin()">Log In to Admin Panel</button>
       <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--t3)">Secured area — authorised personnel only</div>
     </div>
@@ -618,7 +619,7 @@ tr:hover td{background:var(--sfu)}
         <div class="card">
           <div class="card-header"><div class="card-title">Role-Based Access Control</div></div>
           <div style="padding:4px 16px 16px;font-size:13px;color:var(--t2);line-height:1.7">
-            Roles are enforced by Supabase Auth and the profile role stored in the database. The dashboard only opens for authenticated users whose profile role is admin or super_admin; database/RPC policies must enforce the same rule server-side.
+            These are the roles Noura's admin system is designed around. Actual enforcement (limiting which admin can do what) requires backend authentication with per-account roles — this panel is single-login for now, so every admin currently has full access. Treat this as the spec to build against once accounts move to a real backend.
           </div>
         </div>
         <div id="roles-grid" style="display:flex;flex-direction:column;gap:12px"></div>
@@ -701,8 +702,22 @@ window.NOURA_ENV = {
   SUPABASE_URL: 'https://qkuznrnxclppvorpomcr.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrdXpucm54Y2xwcHZvcnBvbWNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1NzU3NDcsImV4cCI6MjEwMDE1MTc0N30.FFtuXBaH1NhJQeockvXsCDfCsZcP2AT6B51O9yXJS_0',
 
-  // Admin access is enforced by Supabase Auth + public.profiles.role + RLS.
-  // NEVER put an admin password or service/admin API key in this file.
+  // ── Admin-only actions (challenge creation, etc.) ────────────
+  // ⚠️ Must exactly match the ADMIN_API_KEY secret you set in
+  // Supabase → Edge Functions → Secrets. This is a stopgap for a
+  // single-admin MVP, not real per-account admin permissions —
+  // anyone with this value (visible in admin.html's source) can
+  // call admin actions, so treat admin.html itself as something
+  // you don't publicly link/index, not just this key as protection.
+  ADMIN_API_KEY: '',
+
+  // ⚠️ Gates the admin.html login screen itself. Same caveat as
+  // above — this is a client-side string check, not real auth.
+  // It stops someone from casually stumbling into the dashboard,
+  // it does not stop someone who inspects the page source. Real
+  // protection is a) not linking admin.html publicly, and b)
+  // eventually moving to real per-account Supabase admin roles.
+  ADMIN_PASSWORD: '',
 
   // ── Google OAuth ─────────────────────────────────────────────
   // PUBLIC — OAuth client IDs are meant to be public.
@@ -2081,16 +2096,9 @@ window.NOURA_ENV = {
    * ════════════════════════════════════════════════════════════ */
   const challengesAdminService = {
     async _call(action, payload) {
-      const sb = getSupabase();
-      if (!sb) return { ok: false, error: 'no_auth_backend' };
-      const { data: { session } } = await sb.auth.getSession();
-      if (!session?.access_token) return { ok: false, error: 'not_authenticated' };
       const res = await fetch(`${ENV.SUPABASE_URL}/functions/v1/admin-challenges`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
-        },
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': ENV.ADMIN_API_KEY },
         body: JSON.stringify({ action, payload }),
       }).catch(() => null);
       if (!res) return { ok: false, error: 'network' };
@@ -2189,21 +2197,22 @@ window.NOURA_ENV = {
 
   const adminActionsService = {
     async _call(action, payload) {
-      if (!ENV.SUPABASE_URL) return { ok: false, error: 'no_backend' };
       const sb = getSupabase();
-      if (!sb) return { ok: false, error: 'no_auth_backend' };
-      const { data: { session } } = await sb.auth.getSession();
-      if (!session?.access_token) return { ok: false, error: 'not_authenticated' };
+      if (!sb) return { ok: false, error: 'supabase_unavailable' };
+      const { data: sessionData } = await sb.auth.getSession();
+      const accessToken = sessionData?.session?.access_token;
+      if (!accessToken) return { ok: false, error: 'not_authenticated' };
       const res = await fetch(`${ENV.SUPABASE_URL}/functions/v1/admin-actions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
+          'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify({ action, payload }),
       }).catch(() => null);
       if (!res) return { ok: false, error: 'network' };
-      return res.json();
+      const data = await res.json().catch(() => null);
+      return res.ok ? (data || { ok: true }) : { ok: false, error: data?.error || data?.message || `http_${res.status}` };
     },
   };
 
@@ -2216,23 +2225,30 @@ window.NOURA_ENV = {
    * ════════════════════════════════════════════════════════════ */
   const adminService = {
     async login(email,password){
-      const sb = getSupabase();
-      if (!sb) return { ok:false, reason:'auth_backend_unavailable' };
-      const { data, error } = await sb.auth.signInWithPassword({ email, password });
-      if (error || !data?.session || !data?.user) {
-        return { ok:false, reason:error?.message || 'admin_login_failed' };
+      const sb=getSupabase();
+      if(!sb) return {ok:false,reason:'Supabase client failed to load'};
+      const cleanEmail=(email||'').trim().toLowerCase();
+      if(!cleanEmail || !password) return {ok:false,reason:'Enter your email and password'};
+      const {data,error}=await sb.auth.signInWithPassword({email:cleanEmail,password});
+      if(error || !data?.session || !data?.user){
+        return {ok:false,reason:error?.message||'Invalid email or password'};
       }
-      const { data: profile, error: profileError } = await sb
-        .from('profiles')
+      const {data:profile,error:profileError}=await sb.from('profiles')
         .select('id,email,name,role,status')
-        .eq('id', data.user.id)
+        .eq('id',data.user.id)
         .maybeSingle();
-      if (profileError || !profile || !['admin','super_admin'].includes(profile.role) || profile.status === 'banned') {
+      if(profileError){
         await sb.auth.signOut();
-        return { ok:false, reason:'not_admin' };
+        return {ok:false,reason:'Could not verify your admin profile: '+profileError.message};
       }
-      AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
-      return { ok:true, demo:false, user:profile };
+      const isAdmin=profile?.role==='admin'||profile?.role==='super_admin';
+      const active=profile?.status!=='banned';
+      if(!profile || !isAdmin || !active){
+        await sb.auth.signOut();
+        return {ok:false,reason:!profile?'Admin profile not found':(!isAdmin?'This account is not an admin':'This admin account is not active')};
+      }
+      AuthStore.setTokens(data.session.access_token,data.session.refresh_token);
+      return {ok:true,demo:false,user:profile};
     },
 
     async listUsers() {
@@ -2573,57 +2589,43 @@ let adminLoggedIn = false;
 
 // ── Auth ─────────────────────────────────────────────
 async function doAdminLogin() {
-  const email = el('al-email')?.value;
-  const pass  = el('al-pass')?.value;
-  if (!email || !pass) { aToast('Enter email and password'); return; }
-  const res=await S.admin.login(email,pass);
-  if(!res.ok){
-    aToast(res.reason==='not_admin'?'This account is not an admin':'Admin login failed');
-    return;
+  const btn=document.querySelector('#as-login .btn-primary');
+  const email=(el('al-email')?.value||'').trim();
+  const pass=el('al-pass')?.value||'';
+  if(!email||!pass){aToast('Enter your Supabase email and password');return;}
+  if(btn){btn.disabled=true;btn.textContent='Signing in…';}
+  try{
+    const res=await S.admin.login(email,pass);
+    if(!res.ok){aToast(res.reason||'Admin login failed');return;}
+    el('al-pass').value='';
+    el('as-login').style.display='none';
+    el('as-2fa').style.display='none';
+    el('as-app').classList.add('active');
+    adminLoggedIn=true;
+    history.replaceState({adminPage:'pg-dashboard'},'', '#dashboard');
+    await initAdmin();
+    aToast('Admin access granted');
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Log In to Admin Panel';}
   }
-  el('as-login').style.display='none';
-  el('as-2fa').style.display='none';
-  el('as-app').classList.add('active');
-  adminLoggedIn = true;
-  history.replaceState({ adminPage: 'pg-dashboard' }, '', '#dashboard');
-  initAdmin();
-
 }
 function tfaNext(input, idx) {
   if (input.value && idx < 5) { document.querySelectorAll('.tfa-input')[idx+1]?.focus(); }
 }
-async function verify2FA() {
-  // Legacy UI hook only. Never treat a typed code or a local flag as proof of identity.
-  await restoreAdminSession();
-}
-async function doAdminLogout() {
-  const sb = getSupabase();
-  if (sb) await sb.auth.signOut();
-  AuthStore.clearTokens();
-  el('as-app').classList.remove('active');
+function verify2FA() {
   el('as-2fa').style.display = 'none';
-  el('as-login').style.display = 'flex';
-  adminLoggedIn = false;
-}
-
-// Restore an existing Supabase session, but never trust local flags alone.
-async function restoreAdminSession() {
-  const sb = getSupabase();
-  if (!sb) return;
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session?.user) return;
-  const { data: profile } = await sb.from('profiles').select('id,email,name,role,status').eq('id', session.user.id).maybeSingle();
-  if (!profile || !['admin','super_admin'].includes(profile.role) || profile.status === 'banned') {
-    await sb.auth.signOut();
-    return;
-  }
-  el('as-login').style.display='none';
-  el('as-2fa').style.display='none';
   el('as-app').classList.add('active');
   adminLoggedIn = true;
+  history.replaceState({ adminPage: 'pg-dashboard' }, '', '#dashboard');
   initAdmin();
 }
-restoreAdminSession();
+async function doAdminLogout() {
+  try { await S.auth.logout(); } catch (_) {}
+  el('as-app').classList.remove('active');
+  el('as-2fa').style.display='none';
+  el('as-login').style.display='flex';
+  adminLoggedIn = false;
+}
 
 // ── Page routing ─────────────────────────────────────
 function aShowPage(pageId, navEl, title, fromPop) {
