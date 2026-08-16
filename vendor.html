@@ -249,33 +249,39 @@ button{cursor:pointer;font-family:inherit}
 </style>
 
 <script>
-/* TEMP AUTH DIAGNOSTIC — remove after the vendor signup issue is fixed */
-function showAuthDebugError(context, error) {
-  console.error('[NOURA AUTH DEBUG]', context, error);
-
-  const details = [
-    `Context: ${context}`,
-    `Message: ${error?.message || 'No message returned'}`,
-    `Code: ${error?.code || error?.status || 'N/A'}`,
-    `Name: ${error?.name || 'N/A'}`,
-    `Status: ${error?.status || 'N/A'}`,
-    error?.details ? `Details: ${error.details}` : '',
-    error?.hint ? `Hint: ${error.hint}` : ''
-  ].filter(Boolean).join('\n');
-
-  // Put the complete error directly on screen so it can be copied/screenshot.
-  let box = document.getElementById('noura-auth-debug');
+/* TEMP VENDOR AUTH DIAGNOSTIC */
+window.addEventListener('error', function (event) {
+  console.error('[NOURA GLOBAL ERROR]', event.error || event.message);
+  if (typeof showNouraGlobalDebug === 'function') {
+    showNouraGlobalDebug('JavaScript error', event.error || new Error(event.message));
+  }
+});
+window.addEventListener('unhandledrejection', function (event) {
+  console.error('[NOURA UNHANDLED REJECTION]', event.reason);
+  if (typeof showNouraGlobalDebug === 'function') {
+    showNouraGlobalDebug('Unhandled promise rejection', event.reason);
+  }
+});
+function showNouraGlobalDebug(title, err) {
+  let box = document.getElementById('noura-global-debug');
   if (!box) {
     box = document.createElement('pre');
-    box.id = 'noura-auth-debug';
+    box.id = 'noura-global-debug';
     box.style.cssText =
       'position:fixed;z-index:2147483647;left:10px;right:10px;bottom:10px;' +
-      'max-height:55vh;overflow:auto;padding:14px;border-radius:12px;' +
-      'background:#180b0b;color:#ffb4b4;border:1px solid #ff5555;' +
-      'font:12px/1.5 monospace;white-space:pre-wrap;box-shadow:0 8px 30px #000;';
+      'max-height:60vh;overflow:auto;padding:16px;border-radius:12px;' +
+      'background:#180b0b;color:#ffd0d0;border:1px solid #ff5555;' +
+      'font:12px/1.55 monospace;white-space:pre-wrap;box-shadow:0 8px 30px #000;';
     document.body.appendChild(box);
   }
-  box.textContent = details;
+  box.textContent =
+    'NOURA VENDOR DIAGNOSTIC\n------------------------\n' +
+    'Step: ' + title + '\n' +
+    'Message: ' + (err?.message || err || 'Unknown') + '\n' +
+    'Code: ' + (err?.code || 'N/A') + '\n' +
+    'Status: ' + (err?.status || 'N/A') + '\n' +
+    'Details: ' + (err?.details || 'N/A') + '\n' +
+    'Hint: ' + (err?.hint || 'N/A');
 }
 </script>
 
@@ -2747,21 +2753,94 @@ async function doVendorLogin() {
 }
 
 async function doVendorRegister() {
-  const businessName = el('vr-bname')?.value.trim();
-  const ownerName     = el('vr-name')?.value.trim();
-  const email         = el('vr-email')?.value.trim();
-  const password      = el('vr-pass')?.value;
-  const category      = el('vr-cat')?.value;
-  if (!businessName) { vToast('Enter your business name'); return; }
-  if (!ownerName)     { vToast('Enter your full name'); return; }
-  if (!email.includes('@')) { vToast('Enter a valid email'); return; }
-  if (password.length < 6)  { vToast('Password must be 6+ characters'); return; }
-  if (!category)      { vToast('Select a category'); return; }
-  const res = await S.vendor.register({ businessName, ownerName, email, password, category });
-  if (!res.ok) { showAuthDebugError('SIGNUP / LOGIN FAILED', error); return; }
-  if (res.reason === 'confirm_email') { vToast('Check your email to confirm your account, then log in 📧'); vgt('vs-login'); return; }
-  vgt('vs-onboarding');
-  startOnboarding();
+  const button = document.querySelector('#vs-register .btn-primary');
+  const debug = (title, err) => {
+    console.error('[NOURA VENDOR DEBUG]', title, err);
+    let box = document.getElementById('noura-auth-debug');
+    if (!box) {
+      box = document.createElement('pre');
+      box.id = 'noura-auth-debug';
+      box.style.cssText =
+        'position:fixed;z-index:2147483647;left:10px;right:10px;bottom:10px;' +
+        'max-height:60vh;overflow:auto;padding:16px;border-radius:12px;' +
+        'background:#180b0b;color:#ffd0d0;border:1px solid #ff5555;' +
+        'font:12px/1.55 monospace;white-space:pre-wrap;box-shadow:0 8px 30px #000;';
+      document.body.appendChild(box);
+    }
+    const e = err || {};
+    box.textContent = [
+      `NOURA VENDOR DIAGNOSTIC`,
+      `------------------------`,
+      `Step: ${title}`,
+      `Message: ${e.message || e.reason || 'No error message returned'}`,
+      `Code: ${e.code || 'N/A'}`,
+      `Status: ${e.status || 'N/A'}`,
+      `Details: ${e.details || 'N/A'}`,
+      `Hint: ${e.hint || 'N/A'}`,
+      ``,
+      `Supabase loaded: ${typeof window.supabase !== 'undefined'}`,
+      `Supabase URL configured: ${!!window.NOURA_ENV?.SUPABASE_URL}`,
+      `Supabase key configured: ${!!window.NOURA_ENV?.SUPABASE_ANON_KEY}`
+    ].join('\n');
+  };
+
+  try {
+    if (button) {
+      button.disabled = true;
+      button.dataset.originalText = button.textContent;
+      button.textContent = 'Creating account…';
+    }
+
+    const businessName = el('vr-bname')?.value.trim();
+    const ownerName = el('vr-name')?.value.trim();
+    const email = el('vr-email')?.value.trim();
+    const password = el('vr-pass')?.value || '';
+    const category = el('vr-cat')?.value;
+
+    if (!businessName) { vToast('Enter your business name'); return; }
+    if (!ownerName) { vToast('Enter your full name'); return; }
+    if (!email.includes('@')) { vToast('Enter a valid email'); return; }
+    if (password.length < 6) { vToast('Password must be 6+ characters'); return; }
+    if (!category) { vToast('Select a category'); return; }
+
+    const sb = getSupabase();
+    if (!sb) {
+      debug('Supabase client could not be created', new Error(
+        'Supabase SDK/config is unavailable on this page.'
+      ));
+      return;
+    }
+
+    debug('Starting Supabase signUp()', new Error(
+      `Attempting signup for ${email}`
+    ));
+
+    const res = await S.vendor.register({
+      businessName, ownerName, email, password, category
+    });
+
+    if (!res?.ok) {
+      debug('Supabase/vendor registration returned an error', res);
+      return;
+    }
+
+    if (res.reason === 'confirm_email') {
+      vToast('Check your email to confirm your account, then log in 📧');
+      vgt('vs-login');
+      return;
+    }
+
+    vgt('vs-onboarding');
+    startOnboarding();
+
+  } catch (err) {
+    debug('Unexpected JavaScript exception during registration', err);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = button.dataset.originalText || 'Create Account';
+    }
+  }
 }
 
 async function doVendorForgot() {
