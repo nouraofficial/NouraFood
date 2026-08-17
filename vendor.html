@@ -247,6 +247,38 @@ button{cursor:pointer;font-family:inherit}
   .page-body{padding:20px}
 }
 </style>
+
+<script>
+/* TEMP AUTH DIAGNOSTIC — remove after the vendor signup issue is fixed */
+function showAuthDebugError(context, error) {
+  console.error('[NOURA AUTH DEBUG]', context, error);
+
+  const details = [
+    `Context: ${context}`,
+    `Message: ${error?.message || 'No message returned'}`,
+    `Code: ${error?.code || error?.status || 'N/A'}`,
+    `Name: ${error?.name || 'N/A'}`,
+    `Status: ${error?.status || 'N/A'}`,
+    error?.details ? `Details: ${error.details}` : '',
+    error?.hint ? `Hint: ${error.hint}` : ''
+  ].filter(Boolean).join('\n');
+
+  // Put the complete error directly on screen so it can be copied/screenshot.
+  let box = document.getElementById('noura-auth-debug');
+  if (!box) {
+    box = document.createElement('pre');
+    box.id = 'noura-auth-debug';
+    box.style.cssText =
+      'position:fixed;z-index:2147483647;left:10px;right:10px;bottom:10px;' +
+      'max-height:55vh;overflow:auto;padding:14px;border-radius:12px;' +
+      'background:#180b0b;color:#ffb4b4;border:1px solid #ff5555;' +
+      'font:12px/1.5 monospace;white-space:pre-wrap;box-shadow:0 8px 30px #000;';
+    document.body.appendChild(box);
+  }
+  box.textContent = details;
+}
+</script>
+
 </head>
 <body>
 
@@ -2726,7 +2758,7 @@ async function doVendorRegister() {
   if (password.length < 6)  { vToast('Password must be 6+ characters'); return; }
   if (!category)      { vToast('Select a category'); return; }
   const res = await S.vendor.register({ businessName, ownerName, email, password, category });
-  if (!res.ok) { vToast('Could not create account — try again.'); return; }
+  if (!res.ok) { showAuthDebugError('SIGNUP / LOGIN FAILED', error); return; }
   if (res.reason === 'confirm_email') { vToast('Check your email to confirm your account, then log in 📧'); vgt('vs-login'); return; }
   vgt('vs-onboarding');
   startOnboarding();
@@ -2770,7 +2802,7 @@ async function openVendorNotifs() {
 
 async function checkBroadcasts() {
   const before = (await S.notifications.list()).notifications.length;
-  await (typeof S.notifications?.pullBroadcastsForVendor === 'function' ? S.notifications.pullBroadcastsForVendor() : Promise.resolve([]));
+  await S.notifications.pullBroadcastsForVendor();
   const { notifications: after } = await S.notifications.list();
   if (after.length > before) vToast('📢 ' + after[0].title);
   renderVendorNotifBadge();
