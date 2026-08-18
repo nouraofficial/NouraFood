@@ -148,12 +148,12 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 /* ── SPLASH ──────────────────────────────────── */
 #scr-splash{align-items:center;justify-content:center;overflow:hidden}
 #splash-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.splash-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-.slm{width:96px;height:96px;border-radius:28px;background:var(--acs);border:1.5px solid #E8943A50;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 0 0 0 #E8943A40}
+.splash-center{position:absolute;top:62px;left:0;right:0;z-index:8;display:flex;flex-direction:column;align-items:center;text-align:center}
+.slm{width:68px;height:68px;border-radius:28px;background:var(--acs);border:1.5px solid #E8943A50;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:13px;animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 0 0 0 #E8943A40}
 .slm.pulse{animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both,ringPulse 1.8s 1s ease-out infinite}
-.swm{font-family:'Sora',sans-serif;font-size:48px;font-weight:800;color:var(--t1);letter-spacing:-1.5px;animation:splashFade .6s .35s ease both;line-height:1}
+.swm{font-family:'Sora',sans-serif;font-size:38px;font-weight:800;color:var(--t1);letter-spacing:-1.5px;animation:splashFade .6s .35s ease both;line-height:1}
 .swm span{color:var(--ac)}
-.stag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t2);margin-top:10px;animation:splashFade .5s .6s ease both}
+.stag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--t2);margin-top:10px;animation:splashFade .5s .6s ease both}
 .sdots{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);display:flex;gap:8px;animation:splashFade .5s .8s ease both;z-index:2}
 .sdot{width:6px;height:6px;border-radius:50%;background:var(--bd);transition:all .4s cubic-bezier(.34,1.56,.64,1)}
 .sdot.a{background:var(--ac);transform:scale(1.5)}
@@ -166,20 +166,37 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 @keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 #E8943A40}50%{box-shadow:0 0 0 18px #E8943A00}}
 @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
 @keyframes fup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-/* ── NOURA MASCOT — isolated enhancement only ─────────────── */
-.noura-mascot{position:absolute;z-index:3;pointer-events:none;user-select:none;will-change:transform,opacity;filter:drop-shadow(0 18px 32px rgba(0,0,0,.45));}
-.noura-mascot img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;mix-blend-mode:normal;}
-.splash-mascot{width:245px;height:635px;right:-20px;bottom:-115px;opacity:0;transform:translate3d(34px,30px,0) scale(.96);animation:mascotEnter .75s .35s cubic-bezier(.22,1,.36,1) forwards,mascotFloat 4.8s 1.15s ease-in-out infinite;}
-.onboarding-mascot{width:150px;height:250px;right:-18px;bottom:92px;opacity:.94;transform:translateY(18px);animation:mascotSoftEnter .55s .15s ease-out both,mascotFloatSmall 4.6s .7s ease-in-out infinite;}
-.mascot-glow{position:absolute;z-index:2;pointer-events:none;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.22),rgba(245,158,11,0) 68%);filter:blur(8px);}
-.splash-mascot-glow{right:42px;bottom:80px;animation:mascotGlow 4.8s ease-in-out infinite;}
-@keyframes mascotEnter{0%{opacity:0;transform:translate3d(34px,30px,0) scale(.96)}70%{opacity:1;transform:translate3d(-3px,-4px,0) scale(1.01)}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
-@keyframes mascotSoftEnter{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:.94;transform:translateY(0) scale(1)}}
-@keyframes mascotFloat{0%,100%{margin-bottom:0;transform:translate3d(0,0,0) rotate(0deg)}50%{margin-bottom:7px;transform:translate3d(-2px,-7px,0) rotate(-.6deg)}}
-@keyframes mascotFloatSmall{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(.5deg)}}
-@keyframes mascotGlow{0%,100%{opacity:.45;transform:scale(.96)}50%{opacity:.72;transform:scale(1.04)}}
-@media(max-width:380px){.splash-mascot{width:205px;height:540px;right:-28px;bottom:-105px}.splash-mascot-glow{right:18px;bottom:70px;width:190px;height:190px}.onboarding-mascot{width:125px;height:215px;right:-22px;bottom:96px}}
-@media(prefers-reduced-motion:reduce){.noura-mascot,.mascot-glow{animation:none!important;transition:none!important}}
+/* ── NOURA MASCOT — integrated character layer ───────────── */
+.noura-mascot{position:absolute;z-index:6;pointer-events:none;user-select:none;will-change:transform,opacity;filter:drop-shadow(0 22px 38px rgba(0,0,0,.55));}
+.noura-mascot img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;}
+.splash-mascot{width:270px;height:500px;left:50%;bottom:72px;opacity:0;transform:translate3d(-50%,42px,0) scale(.92);animation:mascotHeroEnter .85s .18s cubic-bezier(.22,1,.36,1) forwards;}
+.splash-mascot img{animation:mascotIdle 4.2s 1.05s ease-in-out infinite;transform-origin:50% 92%;}
+.onboarding-mascot{width:118px;height:205px;right:8px;bottom:104px;opacity:0;transform:translate3d(14px,16px,0) scale(.96);animation:mascotSideEnter .55s .12s cubic-bezier(.22,1,.36,1) forwards;}
+.onboarding-mascot img{animation:mascotSideIdle 4s .8s ease-in-out infinite;transform-origin:50% 90%;}
+.mascot-glow{position:absolute;z-index:5;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.22),rgba(245,158,11,0) 68%);filter:blur(10px);}
+.splash-mascot-glow{width:300px;height:300px;left:50%;bottom:120px;transform:translateX(-50%);animation:mascotGlow 4.2s ease-in-out infinite;}
+.mascot-action{position:absolute;z-index:7;left:50%;bottom:590px;transform:translate(-50%,10px) scale(.9);padding:7px 11px;border:1px solid #E8943A45;border-radius:999px;background:rgba(18,13,10,.82);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.2px;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25);}
+.mascot-action.show{animation:mascotBubble .8s cubic-bezier(.22,1,.36,1) both;}
+.mascot-action .ma-accent{color:var(--ac);}
+.noura-mascot.reacting img{animation:mascotReact .62s cubic-bezier(.34,1.56,.64,1) both!important;}
+.noura-mascot.wave img{animation:mascotWave 1.05s cubic-bezier(.22,1,.36,1) both!important;}
+.noura-mascot.thinking img{animation:mascotThink 1.3s ease-in-out infinite!important;}
+.noura-mascot.success img{animation:mascotCelebrate .8s cubic-bezier(.34,1.56,.64,1) both!important;}
+.noura-mascot.curious img{animation:mascotCurious 1.1s ease-in-out both!important;}
+@keyframes mascotHeroEnter{0%{opacity:0;transform:translate3d(-50%,42px,0) scale(.92)}70%{opacity:1;transform:translate3d(-50%,-6px,0) scale(1.015)}100%{opacity:1;transform:translate3d(-50%,0,0) scale(1)}}
+@keyframes mascotSideEnter{from{opacity:0;transform:translate3d(14px,16px,0) scale(.96)}to{opacity:.95;transform:translate3d(0,0,0) scale(1)}}
+@keyframes mascotIdle{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-7px) rotate(-.55deg)}}
+@keyframes mascotSideIdle{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(.5deg)}}
+@keyframes mascotWave{0%{transform:rotate(0) translateY(0)}22%{transform:rotate(-3deg) translateY(-4px)}45%{transform:rotate(2.5deg) translateY(-2px)}68%{transform:rotate(-2deg) translateY(-4px)}100%{transform:rotate(0) translateY(0)}}
+@keyframes mascotReact{0%{transform:scale(1)}35%{transform:scale(1.045) translateY(-7px)}65%{transform:scale(.99) translateY(1px)}100%{transform:scale(1)}}
+@keyframes mascotThink{0%,100%{transform:rotate(0) translateY(0)}50%{transform:rotate(2deg) translateY(-3px)}}
+@keyframes mascotCelebrate{0%{transform:translateY(0) scale(1)}45%{transform:translateY(-13px) scale(1.04) rotate(-2deg)}70%{transform:translateY(1px) scale(.99) rotate(1deg)}100%{transform:translateY(0) scale(1) rotate(0)}}
+@keyframes mascotCurious{0%{transform:rotate(0)}35%{transform:rotate(-4deg) translateY(-2px)}70%{transform:rotate(3deg)}100%{transform:rotate(0)}}
+@keyframes mascotGlow{0%,100%{opacity:.38;transform:translateX(-50%) scale(.94)}50%{opacity:.68;transform:translateX(-50%) scale(1.06)}}
+@keyframes mascotBubble{0%{opacity:0;transform:translate(-50%,10px) scale(.9)}20%{opacity:1;transform:translate(-50%,0) scale(1)}80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-5px) scale(.98)}}
+@media(max-width:600px){.splash-mascot{width:min(270px,72vw);height:min(500px,59vh);bottom:78px}.splash-mascot-glow{width:270px;height:270px;bottom:120px}.mascot-action{bottom:calc(59vh + 90px)}.onboarding-mascot{width:104px;height:185px;right:0;bottom:108px}}
+@media(max-height:720px){.splash-mascot{height:420px;bottom:64px}.splash-mascot-glow{bottom:95px;width:240px;height:240px}.mascot-action{bottom:490px}.swm{font-size:34px}.slm{width:60px;height:60px;font-size:28px;margin-bottom:10px}}
+@media(prefers-reduced-motion:reduce){.noura-mascot,.noura-mascot img,.mascot-glow,.mascot-action{animation:none!important;transition:none!important}}
 
 /* ── ONBOARDING ──────────────────────────────── */
 .osl{display:flex;width:300%;flex:1;transition:transform .4s cubic-bezier(.4,0,.2,1)}
@@ -522,8 +539,9 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <div class="stag">Eat smart &nbsp;·&nbsp; Live well</div>
   </div>
   <div class="mascot-glow splash-mascot-glow" aria-hidden="true"></div>
-  <div class="noura-mascot splash-mascot" aria-hidden="true">
-    <img src="mascot.png" alt="">
+  <div class="mascot-action" id="mascot-action" aria-hidden="true">Hey 👋 <span class="ma-accent">Ready to eat?</span></div>
+  <div class="noura-mascot splash-mascot" id="splash-mascot" aria-hidden="true">
+    <img src="mascot-cutout.png" alt="">
   </div>
   <div class="sdots">
     <div class="sdot a" id="sd0"></div>
@@ -540,7 +558,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <div class="osi"><div class="oic">📱</div><div class="ott">Discover &<br>Share Meals</div><div class="ost">Explore thousands of real recipes. Save your favourites and cook with confidence.</div></div>
   </div>
   <div class="noura-mascot onboarding-mascot" aria-hidden="true">
-    <img src="mascot.png" alt="">
+    <img src="mascot-cutout.png" alt="">
   </div>
   <div class="ofoot">
     <div class="odds"><div class="odd a" id="od0"></div><div class="odd" id="od1"></div><div class="odd" id="od2"></div></div>
@@ -3465,6 +3483,43 @@ function emojiFor(name){
 }
 
 // ══════════════════════════════════════════════════
+//  NOURA MASCOT — isolated interaction controller
+// ══════════════════════════════════════════════════
+(function initNouraMascot(){
+  const mascot=q('splash-mascot');
+  const bubble=q('mascot-action');
+  if(!mascot) return;
+  let bubbleTimer;
+  window.setMascotState=function(state, message){
+    mascot.classList.remove('wave','reacting','thinking','success','curious');
+    if(state) mascot.classList.add(state);
+    if(message && bubble){
+      bubble.innerHTML=message;
+      bubble.classList.remove('show');
+      void bubble.offsetWidth;
+      bubble.classList.add('show');
+      clearTimeout(bubbleTimer);
+      bubbleTimer=setTimeout(()=>bubble.classList.remove('show'),2200);
+    }
+  };
+  setTimeout(()=>setMascotState('wave','Hey 👋 <span class="ma-accent">I’m Noura.</span>'),900);
+  setTimeout(()=>setMascotState(null),2050);
+  const react=()=>{
+    if(q('scr-splash')?.classList.contains('active')){
+      setMascotState('reacting','<span class="ma-accent">Let’s find something good. 🍽️</span>');
+      setTimeout(()=>setMascotState(null),700);
+    }
+  };
+  document.addEventListener('click',react,{passive:true});
+  document.addEventListener('touchstart',react,{passive:true});
+  window.setNouraScreenState=function(screen){
+    if(screen==='onboarding') setMascotState('curious','<span class="ma-accent">Let’s build your food vibe.</span>');
+    else if(screen==='splash') setMascotState('wave');
+    else setMascotState(null);
+  };
+})();
+
+// ══════════════════════════════════════════════════
 //  NAVIGATION
 // ══════════════════════════════════════════════════
 const MAIN_TABS          = ['home','discover','mealplan','profile'];
@@ -3477,6 +3532,7 @@ function gt(screen, fromPopstate) {
   if (!nxt) return;
   if (old) old.classList.remove('active');
   curScreen = screen; nxt.classList.add('active');
+  if (window.setNouraScreenState) window.setNouraScreenState(screen);
   const nav = q('bnav');
   if (MAIN_TABS.includes(screen)) {
     nav.classList.add('on');
