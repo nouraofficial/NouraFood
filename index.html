@@ -12,22 +12,21 @@
 <meta name="keywords" content="Noura, Nigerian food app, African recipes, find local restaurants Nigeria, jollof rice recipe, food discovery app, Noura AI, Nigerian vendors near me, Ghanaian recipes, Kenyan recipes">
 <meta name="author" content="Fluxiq Labs">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://nourafood.vercel.app/">
+<link rel="canonical" href="https://noura.fluxiqlabs.com/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://nourafood.vercel.app/">
+<meta property="og:url" content="https://noura.fluxiqlabs.com/">
 <meta property="og:title" content="Noura — Discover Great Local Food Near You">
 <meta property="og:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Your African food companion — free to use.">
-<meta property="og:image" content="./og-image.jpg">
+<meta property="og:image" content="https://noura.fluxiqlabs.com/og-image.jpg">
 <meta property="og:site_name" content="Noura">
 <meta property="og:locale" content="en_NG">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://nourafood.vercel.app/">
+<meta name="twitter:url" content="https://noura.fluxiqlabs.com/">
 <meta name="twitter:title" content="Noura — Discover Great Local Food Near You">
 <meta name="twitter:description" content="Search food, discover nearby vendors, get recipes, and chat with Noura AI. Free for everyone.">
-<meta name="twitter:image" content="./og-image.jpg">
-<link rel="manifest" href="/manifest.json">
-<link rel="preload" as="image" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+<meta name="twitter:image" content="https://noura.fluxiqlabs.com/og-image.jpg">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="application-name" content="Noura">
 <meta name="mobile-web-app-capable" content="yes">
@@ -45,7 +44,7 @@
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:#0D0B09}
@@ -118,7 +117,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 #toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sfu);border:1px solid var(--bd);color:var(--t1);font-size:14px;font-weight:500;padding:12px 20px;border-radius:var(--rfl);opacity:0;transition:all .3s ease;pointer-events:none;white-space:nowrap;z-index:500;max-width:92vw;text-align:center}
 #install-banner{position:fixed;left:12px;right:12px;bottom:-140px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:14px;display:flex;align-items:center;gap:12px;z-index:600;box-shadow:0 8px 28px rgba(0,0,0,.4);transition:bottom .4s cubic-bezier(.16,1,.3,1)}
 #install-banner.on{bottom:88px}
-#install-banner .ib-icon{width:44px;height:44px;border-radius:12px;background:var(--acs);border:1px solid #E8943A40;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden}
+#install-banner .ib-icon{width:44px;height:44px;border-radius:12px;background:var(--acs);border:1px solid #E8943A40;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 #install-banner .ib-body{flex:1;min-width:0}
 #install-banner .ib-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--t1)}
 #install-banner .ib-sub{font-size:11px;color:var(--t2);margin-top:1px}
@@ -151,7 +150,6 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 #splash-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .splash-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .slm{width:96px;height:96px;border-radius:28px;background:var(--acs);border:1.5px solid #E8943A50;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 0 0 0 #E8943A40}
-.slm img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}.brand-icon{width:44px;height:44px;border-radius:13px;object-fit:cover;display:block}.alo-brand{display:flex;align-items:center;justify-content:center;margin-bottom:22px}.alo-brand img{width:58px;height:58px;border-radius:17px;object-fit:cover;display:block}.alo-brand .wordmark{margin-left:10px;font-family:'Sora',sans-serif;font-size:38px;font-weight:800;letter-spacing:-1.4px;color:var(--t1);line-height:1}.alo-brand .wordmark span{color:var(--ac)}
 .slm.pulse{animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both,ringPulse 1.8s 1s ease-out infinite}
 .swm{font-family:'Sora',sans-serif;font-size:48px;font-weight:800;color:var(--t1);letter-spacing:-1.5px;animation:splashFade .6s .35s ease both;line-height:1}
 .swm span{color:var(--ac)}
@@ -168,6 +166,21 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 @keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 #E8943A40}50%{box-shadow:0 0 0 18px #E8943A00}}
 @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
 @keyframes fup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* ── NOURA MASCOT — isolated enhancement only ─────────────── */
+.noura-mascot{position:absolute;z-index:3;pointer-events:none;user-select:none;will-change:transform,opacity;filter:drop-shadow(0 18px 32px rgba(0,0,0,.45));}
+.noura-mascot img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;mix-blend-mode:normal;}
+.splash-mascot{width:245px;height:635px;right:-20px;bottom:-115px;opacity:0;transform:translate3d(34px,30px,0) scale(.96);animation:mascotEnter .75s .35s cubic-bezier(.22,1,.36,1) forwards,mascotFloat 4.8s 1.15s ease-in-out infinite;}
+.onboarding-mascot{width:150px;height:250px;right:-18px;bottom:92px;opacity:.94;transform:translateY(18px);animation:mascotSoftEnter .55s .15s ease-out both,mascotFloatSmall 4.6s .7s ease-in-out infinite;}
+.mascot-glow{position:absolute;z-index:2;pointer-events:none;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.22),rgba(245,158,11,0) 68%);filter:blur(8px);}
+.splash-mascot-glow{right:42px;bottom:80px;animation:mascotGlow 4.8s ease-in-out infinite;}
+@keyframes mascotEnter{0%{opacity:0;transform:translate3d(34px,30px,0) scale(.96)}70%{opacity:1;transform:translate3d(-3px,-4px,0) scale(1.01)}100%{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+@keyframes mascotSoftEnter{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:.94;transform:translateY(0) scale(1)}}
+@keyframes mascotFloat{0%,100%{margin-bottom:0;transform:translate3d(0,0,0) rotate(0deg)}50%{margin-bottom:7px;transform:translate3d(-2px,-7px,0) rotate(-.6deg)}}
+@keyframes mascotFloatSmall{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(.5deg)}}
+@keyframes mascotGlow{0%,100%{opacity:.45;transform:scale(.96)}50%{opacity:.72;transform:scale(1.04)}}
+@media(max-width:380px){.splash-mascot{width:205px;height:540px;right:-28px;bottom:-105px}.splash-mascot-glow{right:18px;bottom:70px;width:190px;height:190px}.onboarding-mascot{width:125px;height:215px;right:-22px;bottom:96px}}
+@media(prefers-reduced-motion:reduce){.noura-mascot,.mascot-glow{animation:none!important;transition:none!important}}
+
 /* ── ONBOARDING ──────────────────────────────── */
 .osl{display:flex;width:300%;flex:1;transition:transform .4s cubic-bezier(.4,0,.2,1)}
 .osi{width:calc(100%/3);flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px 0;text-align:center}
@@ -329,17 +342,6 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 .mil.dg{color:var(--er)}
 .mchv svg{width:16px;height:16px;stroke-width:2;color:var(--t3)}
 .pver{text-align:center;font-size:12px;color:var(--t3);padding:0 20px 20px}
-.noura-onboard{padding:28px 20px 40px;overflow-y:auto}
-.onb-logo{display:flex;flex-direction:column;align-items:center;margin:18px 0 26px}
-.onb-logo img{width:76px;height:76px;border-radius:20px;object-fit:cover;border:1px solid var(--bd);box-shadow:0 10px 35px #0006}
-.onb-title{font-family:'Sora',sans-serif;font-size:25px;font-weight:800;text-align:center;color:var(--t1);margin-bottom:8px}
-.onb-sub{font-size:14px;line-height:1.6;text-align:center;color:var(--t2);max-width:340px;margin:0 auto 24px}
-.onb-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px;margin-bottom:18px}
-.onb-avatar{width:92px;height:92px;border-radius:50%;background:var(--acs);border:2px solid var(--ac);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Sora',sans-serif;font-size:34px;font-weight:800;color:var(--ac);cursor:pointer}
-.onb-avatar img{width:100%;height:100%;object-fit:cover;display:none}
-.onb-avatar-note{text-align:center;font-size:12px;color:var(--t2);margin-bottom:20px}
-.onb-skip{text-align:center;color:var(--t3);font-size:12px;margin-top:14px;cursor:pointer}
-
 
 /* ── EDIT PROFILE ────────────────────────────── */
 .eas{display:flex;flex-direction:column;align-items:center;padding:20px;gap:12px}
@@ -495,21 +497,6 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 .chat-suggestions::-webkit-scrollbar{display:none}
 .chat-sug{padding:8px 14px;border-radius:var(--rfl);border:1px solid var(--bd);background:var(--sfu);color:var(--t2);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .chat-sug:active{background:var(--acs);border-color:var(--ac);color:var(--ac)}
-/* ── AI MARKDOWN ────────────────────────────────── */
-.chat-bubble.ai .md-h1,.chat-bubble.ai .md-h2,.chat-bubble.ai .md-h3{font-family:'Sora',sans-serif;color:var(--t1);line-height:1.3;margin:4px 0 10px}
-.chat-bubble.ai .md-h1{font-size:20px}.chat-bubble.ai .md-h2{font-size:17px}.chat-bubble.ai .md-h3{font-size:15px}
-.chat-bubble.ai .md-p{margin:0 0 10px}.chat-bubble.ai .md-p:last-child{margin-bottom:0}
-.chat-bubble.ai .md-list{margin:6px 0 12px;padding-left:22px}.chat-bubble.ai .md-list li{margin:5px 0;padding-left:2px}
-.chat-bubble.ai .md-quote{border-left:3px solid var(--ac);padding:6px 12px;margin:8px 0;color:var(--t2);background:var(--acs);border-radius:0 8px 8px 0}
-.chat-bubble.ai .md-code{display:block;background:#090806;border:1px solid var(--bd);border-radius:10px;padding:12px;overflow:auto;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;margin:8px 0}
-.chat-bubble.ai .md-inline-code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--sfu);border:1px solid var(--bd);border-radius:5px;padding:1px 5px}
-.chat-bubble.ai .md-link{color:var(--ac);text-decoration:underline}
-.chat-bubble.ai .md-hr{border:0;border-top:1px solid var(--bd);margin:12px 0}
-.ai-history-card{display:flex;align-items:center;gap:12px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rlg);padding:14px;margin-bottom:10px;cursor:pointer}
-.ai-history-card:active{background:var(--sfu)}
-.ai-history-main{flex:1;min-width:0}.ai-history-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ai-history-time{font-size:11px;color:var(--t3);margin-top:4px}.ai-history-delete{background:none;border:0;color:var(--t3);font-size:17px;padding:8px}
-.ai-history-empty{text-align:center;padding:70px 24px;color:var(--t2)}
-
 /* ── SMART SEARCH ───────────────────────────────── */
 #scr-smart-search{background:var(--bg)}
 .ss-item{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s}
@@ -530,9 +517,13 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <div class="splash-ring"></div>
   <div class="splash-ring"></div>
   <div class="splash-center">
-    <div class="slm pulse" id="splash-logo"><img src="./icon-192.png" alt="Noura"></div>
+    <div class="slm pulse" id="splash-logo">🍽️</div>
     <div class="swm">noura<span>.</span></div>
     <div class="stag">Eat smart &nbsp;·&nbsp; Live well</div>
+  </div>
+  <div class="mascot-glow splash-mascot-glow" aria-hidden="true"></div>
+  <div class="noura-mascot splash-mascot" aria-hidden="true">
+    <img src="mascot.png" alt="">
   </div>
   <div class="sdots">
     <div class="sdot a" id="sd0"></div>
@@ -548,6 +539,9 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <div class="osi"><div class="oic">🍳</div><div class="ott">Cook With<br>What You Have</div><div class="ost">Type ingredients in your kitchen. Get a real recipe with instructions and nutrition.</div></div>
     <div class="osi"><div class="oic">📱</div><div class="ott">Discover &<br>Share Meals</div><div class="ost">Explore thousands of real recipes. Save your favourites and cook with confidence.</div></div>
   </div>
+  <div class="noura-mascot onboarding-mascot" aria-hidden="true">
+    <img src="mascot.png" alt="">
+  </div>
   <div class="ofoot">
     <div class="odds"><div class="odd a" id="od0"></div><div class="odd" id="od1"></div><div class="odd" id="od2"></div></div>
     <button class="btn bp" id="btn-ob" style="width:100%">Next</button>
@@ -558,7 +552,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 <!-- LOGIN -->
 <div class="screen ascr" id="scr-login">
   <div class="ascrl"><div class="ain">
-    <div class="alo-brand"><img src="./icon-192.png" alt="Noura logo"><div class="wordmark">noura<span>.</span></div></div>
+    <div class="alo">noura<span>.</span></div>
     <div class="ahe">Welcome back</div>
     <div class="asu">Log in to your account</div>
     <div class="ig"><label class="il">Email</label>
@@ -625,7 +619,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
       <div style="font-size:44px;margin-bottom:12px">🏪</div>
       <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:8px">Selling on Noura?</div>
       <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:20px">Vendor accounts are set up in the Vendor Portal — you'll get a digital menu, order management, and analytics built for your business.</div>
-      <button class="btn bp" onclick="window.open('/vendor#register','_blank')">Continue to Vendor Signup →</button>
+      <button class="btn bp" onclick="window.open('vendor.html#register','_blank')">Continue to Vendor Signup →</button>
     </div>
     <div class="afoo">Already have an account? <a onclick="gt('login')">Log in</a></div>
   </div></div>
@@ -1292,7 +1286,6 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
       <div class="pt" style="font-size:18px">Noura AI</div>
       <div style="font-size:11px;color:var(--ok);font-weight:500">● Online</div>
     </div>
-    <button class="pa" onclick="openAIHistory()" style="font-size:12px">History</button>
     <div style="font-size:28px">🤖</div>
   </div>
   <!-- What Should I Eat? — flagship feature -->
@@ -1327,16 +1320,6 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
       <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </div>
-</div>
-
-<!-- ══ AI CHAT HISTORY ═════════════════════════════ -->
-<div class="screen" id="scr-ai-history">
-  <div class="ph">
-    <div class="pbk" onclick="gb()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"/></svg></div>
-    <div class="pt">Chat History</div>
-    <button class="pa" onclick="newAIChat()">+ New Chat</button>
-  </div>
-  <div class="iscroll"><div id="ai-history-list" style="padding:0 20px 40px"></div></div>
 </div>
 
 <!-- ══ AI RECIPE GENERATOR ════════════════════════ -->
@@ -1827,37 +1810,11 @@ window.NOURA_ENV = {
     async login(email, password) {
       const sb = getSupabase();
       if (sb) {
-        try {
-          const { data, error } = await sb.auth.signInWithPassword({ email, password });
-          if (error) return { ok: false, user: null, reason: error.message || 'auth_error' };
-          if (!data?.session || !data?.user) return { ok: false, user: null, reason: 'no_session' };
-          AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
-
-          // Authentication must never be blocked by a profile-sync/RLS hiccup.
-          // The user is already authenticated; profile hydration can be repaired
-          // immediately after routing/onboarding.
-          const authUser = data.user;
-          const meta = authUser.user_metadata || {};
-          const fallbackUser = {
-            id: authUser.id,
-            name: meta.name || authUser.email?.split('@')[0] || '',
-            username: meta.username ? ('@' + String(meta.username).replace(/^@/,'')) : '',
-            email: authUser.email || email,
-            bio: '', country: '', cuisines: [], diet: '', allergies: [], avatarUrl: meta.avatar_url || meta.picture || '',
-            onboardingComplete: false,
-          };
-          try {
-            const loaded = await userProfileService.loadProfile();
-            return { ok: true, user: loaded.user || fallbackUser };
-          } catch (profileError) {
-            console.warn('[Noura] Profile hydration failed after successful login:', profileError);
-            userProfileService._cacheUser(fallbackUser);
-            return { ok: true, user: fallbackUser, reason: 'profile_sync' };
-          }
-        } catch (err) {
-          console.error('[Noura] Login error:', err);
-          return { ok: false, user: null, reason: 'network' };
-        }
+        const { data, error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) return { ok: false, user: null, reason: error.message || 'auth_error' };
+        AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
+        const { user } = await userProfileService.loadProfile();
+        return { ok: true, user };
       }
       const res = await apiRequest('/auth/login', { method: 'POST', body: { email, password } });
       if (res.ok) {
@@ -1926,18 +1883,11 @@ window.NOURA_ENV = {
      *  on return via Supabase's own auth state, not a direct return value. */
     async loginWithGoogle() {
       const sb = getSupabase();
-      if (!sb) return { ok: false, reason: 'supabase_unavailable' };
-      try {
-        const redirectTo = window.location.origin + window.location.pathname;
-        const { error } = await sb.auth.signInWithOAuth({
-          provider: 'google',
-          options: { redirectTo, skipBrowserRedirect: false }
-        });
+      if (sb) {
+        const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin } });
         return { ok: !error, reason: error?.message };
-      } catch (err) {
-        console.error('[Noura] Google OAuth error:', err);
-        return { ok: false, reason: 'oauth_start_failed' };
       }
+      return { ok: false, reason: 'not_configured' };
     },
 
     async refreshToken() {
@@ -1971,17 +1921,9 @@ window.NOURA_ENV = {
      *  into our own AuthStore so isLoggedIn() reflects it correctly. */
     async syncSession() {
       const sb = getSupabase();
-      if (!sb) return { ok: false, reason: 'supabase_unavailable' };
-      const { data, error } = await sb.auth.getSession();
-      if (error) {
-        console.warn('[Noura] Session restore failed:', error.message);
-        return { ok: false, reason: error.message };
-      }
-      if (data?.session) {
-        AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
-        return { ok: true, session: data.session };
-      }
-      return { ok: true, session: null };
+      if (!sb) return;
+      const { data } = await sb.auth.getSession();
+      if (data?.session) AuthStore.setTokens(data.session.access_token, data.session.refresh_token);
     },
   };
 
@@ -1989,7 +1931,7 @@ window.NOURA_ENV = {
    *  USER PROFILE SERVICE
    * ════════════════════════════════════════════════════════════ */
   const userProfileService = {
-    _blankUser: () => ({ id: '', name: '', username: '', email: '', bio: '', country: '', cuisines: [], diet: '', allergies: [], avatarUrl: '', onboardingComplete: false }),
+    _blankUser: () => ({ id: '', name: '', username: '', email: '', bio: '', country: '', cuisines: [], diet: '', allergies: [] }),
     _getCachedUser: () => lsGet('noura_user', null),
     _cacheUser: (u) => lsSet('noura_user', u),
 
@@ -1998,29 +1940,17 @@ window.NOURA_ENV = {
       const sb = getSupabase();
       if (sb) {
         const { data: sess } = await sb.auth.getSession();
-        const authUser = sess?.session?.user;
-        const uid = authUser?.id;
+        const uid = sess?.session?.user?.id;
         if (!uid) return { ok: false, user: null };
-        const meta = authUser.user_metadata || {};
-        const { data, error } = await sb.from('profiles').select('*').eq('id', uid).maybeSingle();
-        const base = data || {};
-        const hydrated = {
-          id: uid,
-          name: base.name || meta.name || authUser.email?.split('@')[0] || '',
-          username: base.username || (meta.username ? ('@'+String(meta.username).replace(/^@/,'')) : ''),
-          email: base.email || authUser.email || '',
-          bio: base.bio || '', country: base.country || '',
-          cuisines: base.cuisines || [], diet: base.diet || '', allergies: base.allergies || [],
-          avatarUrl: base.avatar_url || meta.avatar_url || meta.picture || '',
-          onboardingComplete: base.onboarding_complete === true,
+        const { data, error } = await sb.from('profiles').select('*').eq('id', uid).single();
+        if (error) return { ok: false, user: this._getCachedUser() };
+        const user = {
+          id: data.id, name: data.name || '', username: data.username || '', email: data.email || '',
+          bio: data.bio || '', country: data.country || '', cuisines: data.cuisines || [],
+          diet: data.diet || '', allergies: data.allergies || [], avatarUrl: data.avatar_url || '',
         };
-        // Keep the database row and Auth metadata aligned so refreshes never fall back to placeholders.
-        const patch = { id: uid, email: hydrated.email, name: hydrated.name, username: hydrated.username, avatar_url: hydrated.avatarUrl || null };
-        if (error || !data || !base.name || !base.username || !base.email) {
-          await sb.from('profiles').upsert(patch, { onConflict:'id' });
-        }
-        this._cacheUser(hydrated);
-        return { ok: true, user: hydrated };
+        this._cacheUser(user);
+        return { ok: true, user };
       }
       const res = await apiRequest('/user/profile', { method: 'GET' });
       if (res.ok) { this._cacheUser(res.data); return { ok: true, user: res.data }; }
@@ -2035,12 +1965,8 @@ window.NOURA_ENV = {
         const { data: sess } = await sb.auth.getSession();
         const uid = sess?.session?.user?.id;
         if (!uid) return { ok: false };
-        const { data: updatedRows, error } = await sb.from('profiles').upsert(
-          { id: uid, ...patch },
-          { onConflict: 'id' }
-        ).select().limit(1);
+        const { error } = await sb.from('profiles').update(patch).eq('id', uid);
         if (error) return { ok: false, reason: error.message };
-        const persisted = updatedRows?.[0];
         const merged = { ...(this._getCachedUser() || this._blankUser()), ...patch };
         this._cacheUser(merged);
         return { ok: true, user: merged };
@@ -2347,17 +2273,6 @@ window.NOURA_ENV = {
    *  NOTIFICATION SERVICE  — no seed/demo notifications. An empty
    *  inbox is a real, valid state until the backend sends one.
    * ════════════════════════════════════════════════════════════ */
-  const STATIC_NOTIFICATIONS = [
-    { id:'static-food', type:'food', icon:'🍽️', color:'var(--acs)', title:'New food inspiration', msg:'Discover something delicious today.', time:'Today', unread:true },
-    { id:'static-ai', type:'ai', icon:'✨', color:'var(--acs)', title:'Noura AI', msg:'Ask Noura what you can cook with the ingredients you already have.', time:'Today', unread:true },
-    { id:'static-challenge', type:'social', icon:'🏆', color:'var(--acs)', title:'Challenge reminder', msg:"Complete this week's food challenge and keep your streak alive.", time:'This week', unread:true },
-    { id:'static-welcome', type:'food', icon:'💜', color:'var(--acs)', title:'Welcome to Noura', msg:'Discover local restaurants, recipes and food inspiration.', time:'Welcome', unread:true },
-  ];
-  const getStaticNotifications = () => {
-    const saved = lsGet('noura_static_notification_state', {});
-    return STATIC_NOTIFICATIONS.map(n => ({ ...n, unread: saved[n.id] === undefined ? n.unread : saved[n.id] }));
-  };
-
   const notificationService = {
     async _uid() {
       const sb = getSupabase(); if (!sb) return null;
@@ -2371,21 +2286,17 @@ window.NOURA_ENV = {
         if (!error) {
           const notifications = (data || []).map((n) => ({ id: n.id, type: n.type, icon: n.icon, color: n.color, title: n.title, msg: n.message, time: n.created_at ? new Date(n.created_at).toLocaleString() : '', unread: n.unread }));
           lsSet('noura_notifications', notifications);
-          return { ok: true, notifications: [...getStaticNotifications(), ...notifications] };
+          return { ok: true, notifications };
         }
       }
       const res = await apiRequest('/notifications', { method: 'GET' });
-      if (res.ok && Array.isArray(res.data) && res.data.length) { lsSet('noura_notifications', res.data); return { ok: true, notifications: [...getStaticNotifications(), ...res.data] }; }
-      const cached = lsGet('noura_notifications', []);
-      return { ok: true, notifications: [...getStaticNotifications(), ...cached.filter(n => !String(n.id).startsWith('static-'))] };
+      if (res.ok) { lsSet('noura_notifications', res.data); return { ok: true, notifications: res.data }; }
+      return { ok: true, notifications: lsGet('noura_notifications', []) };
     },
     async markRead(id) {
       const sb = getSupabase();
       if (sb) await sb.from('notifications').update({ unread: false }).eq('id', id);
       else await apiRequest(`/notifications/${id}/read`, { method: 'POST' });
-      if (String(id).startsWith('static-')) {
-        const state = lsGet('noura_static_notification_state', {}); state[id] = false; lsSet('noura_static_notification_state', state); return;
-      }
       const ns = lsGet('noura_notifications', []);
       const n = ns.find((x) => x.id === id);
       if (n) { n.unread = false; lsSet('noura_notifications', ns); }
@@ -2394,7 +2305,6 @@ window.NOURA_ENV = {
       const sb = getSupabase(); const uid = await this._uid();
       if (sb && uid) await sb.from('notifications').update({ unread: false }).eq('user_id', uid);
       else await apiRequest('/notifications/read-all', { method: 'POST' });
-      const state = lsGet('noura_static_notification_state', {}); STATIC_NOTIFICATIONS.forEach(n => state[n.id] = false); lsSet('noura_static_notification_state', state);
       lsSet('noura_notifications', lsGet('noura_notifications', []).map((n) => ({ ...n, unread: false })));
     },
     async hasUnread() { const { notifications } = await this.list(); return notifications.some((n) => n.unread); },
@@ -2965,8 +2875,6 @@ window.NOURA_ENV = {
       const { data: pub } = sb.storage.from('vendor-photos').getPublicUrl(path);
       const { error: updErr } = await sb.from('profiles').update({ avatar_url: pub.publicUrl }).eq('id', uid);
       if (updErr) return { ok: false, reason: updErr.message };
-      const cached=lsGet('noura_user',null);
-      if(cached){ cached.avatarUrl=pub.publicUrl; lsSet('noura_user',cached); }
       return { ok: true, url: pub.publicUrl };
     },
   };
@@ -3370,51 +3278,27 @@ window.NOURA_ENV = {
   /* ════════════════════════════════════════════════════════════
    *  AI SERVICE  (Noura AI chat + ingredient-based recipe finder)
    * ════════════════════════════════════════════════════════════ */
-  const GEMINI_SYSTEM = `You are Noura AI, an expert food companion for the Noura app — an African and global food discovery platform. You are a genuine food expert, not a generic chatbot.
+  const GEMINI_SYSTEM = `You are Noura AI, an expert food companion for the Noura app — an African and global food discovery platform. You are a genuine food expert, not a generic chatbot. You can:
+- Recommend meals and dishes based on mood, budget, or occasion
+- Generate full recipes from ingredients or a dish name
+- Modify recipes for diets (vegan, spicy, low-carb, gluten-free, halal, etc.)
+- Suggest specific restaurants FROM THE "REAL NOURA VENDORS" LIST below when relevant — never invent a restaurant that isn't in that list
+- Explain nutrition facts and answer cooking/technique questions
+- Suggest groceries or ingredient substitutions
+- Help someone decide what to eat when they're unsure
+Be concise (max 4-6 lines unless a full recipe is requested), warm, and practical. Use emojis naturally. Bold key items with **text**. Currency: ₦ for Nigeria. If asked about restaurants and none are in the list below, say Noura doesn't have vendors in that area yet rather than inventing one.`;
 
-You can:
-- Recommend meals and dishes based on mood, budget, occasion, ingredients, diet, or cooking skill.
-- Generate complete recipes with ingredients, measurements, preparation, steps, timings, serving suggestions, and useful tips when appropriate.
-- Modify recipes for diets (vegan, spicy, low-carb, gluten-free, halal, etc.).
-- Suggest specific restaurants ONLY from the REAL NOURA RESTAURANTS context supplied below when relevant.
-- Explain nutrition facts and cooking techniques.
-- Suggest groceries and ingredient substitutions.
-- Help users decide what to eat.
-
-Response style:
-- Answer the user's actual question completely.
-- Do NOT impose a global 4–6 line limit.
-- Be concise for simple questions and detailed for complex questions or recipes.
-- Use clear Markdown headings, bullets, numbered lists, bold emphasis, blockquotes, tables only when genuinely useful, and code fences for code.
-- Never truncate a response merely to make it shorter.
-- Currency: ₦ for Nigeria.
-
-REAL NOURA RESTAURANTS are authoritative. Never invent a restaurant, price, rating, location, menu item, phone number, WhatsApp number, website, opening hour, or review. If the supplied Noura data has no matching vendor, say Noura does not currently have a matching vendor in that area.
-`;
-
-  const RESTAURANT_QUERY_RE = /\b(restaurant|restaurants|vendor|vendors|eat|food near|near me|nearby|where can i eat|order|menu|whatsapp|cafe|grill|kitchen|place to eat|food spot|available on noura)\b/i;
-  function restaurantScore(r, query) {
-    const hay = `${r.name||''} ${r.slug||''} ${r.cuisine||''} ${r.area||''} ${r.city||''} ${(r.tags||[]).join(' ')} ${(r.menu||[]).map(m=>m.name+' '+m.cat).join(' ')}`.toLowerCase();
-    const words = query.toLowerCase().split(/[^a-z0-9₦]+/).filter(w => w.length > 2);
-    return words.reduce((score,w) => score + (hay.includes(w) ? 2 : 0), 0) + (r.open ? 0.5 : 0);
-  }
-  async function buildLocalContext(query='') {
+  async function buildLocalContext() {
     try {
       const { restaurants } = await restaurantService.list();
-      if (!restaurants.length || !RESTAURANT_QUERY_RE.test(query)) return '';
-      const ranked = restaurants.map(r => ({r, score: restaurantScore(r, query)})).sort((a,b)=>b.score-a.score || Number(b.r.open)-Number(a.r.open)).slice(0,8);
-      const details = ranked.map(({r},i) => {
-        const menu = (r.menu||[]).slice(0,20).map(m => `${m.name}${m.price!=null?` — ₦${m.price}`:''}${m.cat?` [${m.cat}]`:''}${m.available===false?' [unavailable]':''}`).join('; ') || 'No published menu items';
-        return `${i+1}. ${r.name||'Unnamed vendor'}\nSlug: ${r.slug||'—'}\nCuisine: ${r.cuisine||'—'}\nLocation: ${r.area||r.city||'—'}\nStatus: ${r.open?'open':'closed'}\nHours: ${r.hours||'—'}\nRating: ${r.rating??'—'} (${r.reviews??0} reviews)\nPrice range: ${r.priceRange||'—'}\nVerified: ${r.verified?'yes':'no'}\nTags: ${(r.tags||[]).join(', ')||'—'}\nPhone: ${r.phone||'—'}\nWhatsApp: ${r.whatsapp||'—'}\nWebsite: ${r.website||'—'}\nMenu: ${menu}`;
-      }).join('\n\n');
-      return `\n\nREAL NOURA RESTAURANTS (authoritative; use only these vendors):\n${details}\n`;
+      if (!restaurants.length) return '';
+      const sample = restaurants.slice(0, 15).map(r => `${r.name} (${r.cuisine || 'food'}, ${r.area || 'location unknown'}, ${r.open ? 'open' : 'closed'})`).join('; ');
+      return `\n\nREAL NOURA VENDORS (only reference these by name, never invent others): ${sample}`;
     } catch { return ''; }
   }
 
   const aiService = {
     _history: [],
-    loadHistory(messages) { this._history = Array.isArray(messages) ? messages.map(m => ({ role: m.role === 'ai' ? 'model' : m.role, parts: [{ text: String(m.text || '') }] })) : []; },
-    resetHistory() { this._history = []; },
     isConfigured: () => !!(ENV.GEMINI_API_KEY && ENV.GEMINI_API_KEY !== 'YOUR_GEMINI_KEY_HERE'),
     /** True once a Supabase project is linked — chat then routes through
      *  the gemini-chat Edge Function so the Gemini key never reaches the
@@ -3427,7 +3311,7 @@ REAL NOURA RESTAURANTS are authoritative. Never invent a restaurant, price, rati
         return { ok: false, error: 'not_configured', text: '🔑 AI chat isn\'t connected yet — add a Gemini key in config.js.' };
       }
       this._history.push({ role: 'user', parts: [{ text: message }] });
-      const localContext = await buildLocalContext(message);
+      const localContext = await buildLocalContext();
       const startedAt = Date.now();
 
       try {
@@ -3443,7 +3327,7 @@ REAL NOURA RESTAURANTS are authoritative. Never invent a restaurant, price, rati
           const res = await fetch(`${ENV.SUPABASE_URL}/functions/v1/gemini-chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
-            body: JSON.stringify({ history: this._history.slice(-24), systemPrompt: GEMINI_SYSTEM + localContext, generationConfig: { temperature: 0.85, maxOutputTokens: 4096 } }),
+            body: JSON.stringify({ history: this._history.slice(-20), systemPrompt: GEMINI_SYSTEM + localContext }),
             signal: AbortSignal.timeout(12000),
           });
           const data = await res.json().catch(() => null);
@@ -3457,7 +3341,7 @@ REAL NOURA RESTAURANTS are authoritative. Never invent a restaurant, price, rati
         } else {
           // Fallback: direct call, only used if no Supabase project is linked yet.
           const url = `https://generativelanguage.googleapis.com/v1beta/models/${ENV.GEMINI_MODEL || 'gemini-flash-latest'}:generateContent?key=${ENV.GEMINI_API_KEY}`;
-          const body = { system_instruction: { parts: [{ text: GEMINI_SYSTEM + localContext }] }, contents: this._history.slice(-20), generationConfig: { temperature: 0.85, maxOutputTokens: 4096 } };
+          const body = { system_instruction: { parts: [{ text: GEMINI_SYSTEM + localContext }] }, contents: this._history.slice(-20), generationConfig: { temperature: 0.85, maxOutputTokens: 1400 } };
           const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(12000) });
           if (!res.ok) throw new Error('HTTP ' + res.status);
           const data = await res.json();
@@ -3610,7 +3494,6 @@ function gt(screen, fromPopstate) {
   if (screen==='settings')      renderUser();
   if (screen==='restaurants')   loadRestaurants();
   if (screen==='favorites')     renderFavorites(activeFavTab||'recipes');
-  if (screen==='ai-history')    renderAIHistory();
 }
 function gb(){ if (prevScreen) gt(prevScreen); }
 
@@ -3625,31 +3508,9 @@ function openMod(id){ q(id)?.classList.add('on'); activeModal = id; history.push
 function closeMod(id){ q(id)?.classList.remove('on'); activeModal = null; }
 
 // ══════════════════════════════════════════════════
-//  AUTH SESSION LISTENER
-//  Keeps Supabase OAuth/password sessions and the Noura
-//  routing state in sync across redirects and refreshes.
-// ══════════════════════════════════════════════════
-let nouraAuthListenerReady = false;
-function installAuthSessionListener(){
-  if (nouraAuthListenerReady) return;
-  const sb = (typeof getSupabase === 'function') ? getSupabase() : null;
-  if (!sb) return;
-  nouraAuthListenerReady = true;
-  sb.auth.onAuthStateChange(async (event, session) => {
-    if (session) {
-      AuthStore.setTokens(session.access_token, session.refresh_token);
-    } else if (event === 'SIGNED_OUT') {
-      AuthStore.clearTokens();
-    }
-  });
-}
-
-// ══════════════════════════════════════════════════
 //  INIT — runs after all JS parsed
 // ══════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
-
-  installAuthSessionListener();
 
   if (S.platform.isMaintenanceMode()) {
     document.body.innerHTML = `<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;background:#0D0B09;color:#F0EDE6;font-family:'Inter',sans-serif">
@@ -3673,17 +3534,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (Math.abs(dx)>50){ if(dx<0&&oIdx<2){oIdx++;updOb();} if(dx>0&&oIdx>0){oIdx--;updOb();} }
   });
 
-  const sessionState = await S.auth.syncSession();
-  if (sessionState?.session) {
-    await new Promise(r => setTimeout(r, 500));
+  await S.auth.syncSession();
+  if (S.auth.isLoggedIn()) {
     q('scr-splash')?.classList.remove('active');
-    try {
-      await routeAfterAuth(sessionState.session.user);
-    } catch (err) {
-      console.error('[Noura] Session routing failed:', err);
-      gt('login');
-      toast('Your session was restored, but Noura could not load your profile.');
-    }
+    gt('home', true);
     return;
   }
 
@@ -3719,15 +3573,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const iv = setInterval(() => {
     q(ids[si])?.classList.remove('a'); si=(si+1)%3; q(ids[si])?.classList.add('a');
   }, 320);
-
-  // Splash must never override a navigation that happened while it was visible.
-  // Previously this timer always sent the app to onboarding, which could make a
-  // successful login appear to jump back to the beginning.
-  setTimeout(() => {
-    clearInterval(iv);
-    if (curScreen !== 'splash') return;
-    gt('login');
-  }, 1800);
+  setTimeout(() => { clearInterval(iv); gt('onboarding'); }, 2600);
 });
 
 // ══════════════════════════════════════════════════
@@ -3756,78 +3602,10 @@ function pwstr(pw){
 }
 
 async function doGoogleLogin(){
-  const btn=document.querySelector('.btn.bs');
-  if(btn) btn.disabled=true;
-  try {
-    const res = await S.auth.loginWithGoogle();
-    if(!res.ok){
-      const reason=res.reason||'';
-      toast(reason==='supabase_unavailable' ? 'Noura could not connect to Supabase. Check your connection.' :
-            /provider.*not.*enabled|unsupported/i.test(reason) ? 'Google sign-in is not enabled in Noura yet. Enable Google under Supabase → Authentication → Providers.' :
-            'Could not start Google sign-in. Please try again.');
-    }
-  } finally {
-    if(btn) btn.disabled=false;
-  }
-}
-
-function profileNeedsOnboarding(user){
-  const u=user||{};
-  // Older Noura profiles may predate onboarding_complete. Do not treat a
-  // missing legacy flag as a reason to throw an already-complete user back
-  // to the first screen. Only require onboarding when essential identity
-  // fields are actually missing.
-  if (u.onboardingComplete === true) return false;
-  return !String(u.name||'').trim() || !String(u.username||'').trim();
-}
-async function routeAfterAuth(user){
-  const {user: fresh}=await S.profile.loadProfile();
-  const u=fresh||user||{};
-  if(profileNeedsOnboarding(u)){
-    populateOnboarding(u);
-    gt('onboarding');
-  }else{
-    gt('home');
-  }
-}
-function populateOnboarding(u){
-  const name=u?.name||''; const username=u?.username||'';
-  if(q('onb-name')) q('onb-name').value=name;
-  if(q('onb-username')) q('onb-username').value=username;
-  if(q('onb-bio')) q('onb-bio').value=u?.bio||'';
-  const init=(name||'?').charAt(0).toUpperCase();
-  if(q('onb-init')) q('onb-init').textContent=init;
-  if(q('onb-avatar-img')){
-    q('onb-avatar-img').src=u?.avatarUrl||'';
-    q('onb-avatar-img').style.display=u?.avatarUrl?'block':'none';
-  }
-  if(q('onb-init')) q('onb-init').style.display=u?.avatarUrl?'none':'';
-}
-async function uploadOnboardingPhoto(input){
-  const file=input.files?.[0]; if(!file) return;
-  if(file.size>5*1024*1024){toast('Please choose an image under 5 MB');return;}
-  const img=q('onb-avatar-img'), init=q('onb-init');
-  const local=URL.createObjectURL(file);
-  if(img){img.src=local;img.style.display='block';} if(init)init.style.display='none';
-  toast('Uploading photo… 📤');
-  const res=await S.media.uploadProfilePhoto(file);
-  if(!res.ok){toast(res.reason==='not_logged_in'?'Please log in again':'Photo upload failed — try again');return;}
-  if(img) img.src=res.url;
-  toast('Photo saved ✅');
-}
-async function completeOnboarding(){
-  const name=q('onb-name')?.value.trim()||'', username=(q('onb-username')?.value.trim()||'').replace(/^@/,'');
-  if(name.length<2){toast('Please enter your name');return;}
-  if(username.length<3){toast('Username must be at least 3 characters');return;}
-  const btn=q('btn-onb'); if(btn){btn.disabled=true;btn.textContent='Saving…';}
-  const res=await S.profile.updateProfile({name,username:'@'+username,bio:q('onb-bio')?.value.trim()||'',onboarding_complete:true});
-  if(btn){btn.disabled=false;btn.textContent='Continue to Noura →';}
-  if(!res.ok){toast('Could not save your profile — try again');return;}
-  await renderUser(); gt('home'); toast('Welcome to Noura, '+name.split(' ')[0]+'! 🎉');
-}
-async function skipOnboarding(){
-  await S.profile.updateProfile({onboarding_complete:true});
-  await renderUser(); gt('home');
+  const res = await S.auth.loginWithGoogle();
+  if(!res.ok) toast(res.reason==='not_configured' ? 'Google login needs a backend connected first' : 'Could not start Google login');
+  // On success the browser redirects to Google, then back here —
+  // syncSession() on the next load picks up the resulting session.
 }
 
 async function doLogin(){
@@ -3836,25 +3614,11 @@ async function doLogin(){
   serr('liPW','liPE',pw.length<6);          if(pw.length<6)          ok=false;
   if(!ok) return;
   const btn=q('btn-li'); btn.textContent='Logging in…'; btn.disabled=true;
-  try {
-    const res = await S.auth.login(email, pw);
-    if(!res.ok){
-      const msg = res.reason==='network' ? '📡 No connection — try again' :
-                  res.reason==='no_session' ? 'Could not create a session. Please try again.' :
-                  /invalid login credentials/i.test(res.reason||'') ? 'Incorrect email or password.' :
-                  'Login failed. Please check your details.';
-      toast(msg);
-      return;
-    }
-    recordLogin();
-    await routeAfterAuth(res.user);
-    toast('Welcome back, '+(res.user?.name||'there').split(' ')[0]+'! 👋');
-  } catch (err) {
-    console.error('[Noura] Login handler failed:', err);
-    toast('Could not complete login. Please try again.');
-  } finally {
-    btn.textContent='Log In'; btn.disabled=false;
-  }
+  const res = await S.auth.login(email, pw);
+  btn.textContent='Log In'; btn.disabled=false;
+  if(!res.ok){ toast(res.reason==='network'?'📡 No connection — try again':'Login failed. Check your details.'); return; }
+  recordLogin(); gt('home');
+  toast('Welcome back, '+(res.user.name||'there').split(' ')[0]+'! 👋');
 }
 
 function selectRegRole(role) {
@@ -3886,7 +3650,7 @@ async function doRegister(){
   btn.textContent='Create Account'; btn.disabled=false;
   if(!res.ok){ toast(res.reason==='network'?'📡 No connection — try again':'Could not create account.'); return; }
   if(res.reason==='confirm_email'){ toast('Check your email to confirm your account, then log in 📧'); gt('login'); return; }
-  recordLogin(); await routeAfterAuth(res.user);
+  recordLogin(); gt('home');
   toast('Welcome to Noura, '+n.split(' ')[0]+'! 🎉');
 }
 
@@ -3919,17 +3683,7 @@ async function renderUser(){
   if(q('hun')) q('hun').textContent=first;
   if(q('pinit')) q('pinit').textContent=init;
   const pav=q('pinit')?.parentElement;
-  const pimg=q('pavatar-img');
-  if(pav){
-    pav.style.backgroundImage='';
-    if(u.avatarUrl){
-      if(pimg){pimg.src=u.avatarUrl;pimg.style.display='block';}
-      if(q('pinit')) q('pinit').style.display='none';
-    }else{
-      if(pimg){pimg.removeAttribute('src');pimg.style.display='none';}
-      if(q('pinit')) q('pinit').style.display='';
-    }
-  }
+  if(pav){ if(u.avatarUrl){ pav.style.backgroundImage=`url('${u.avatarUrl}')`; pav.style.backgroundSize='cover'; pav.style.backgroundPosition='center'; q('pinit').style.display='none'; } else { pav.style.backgroundImage=''; q('pinit').style.display=''; } }
   if(q('pnm'))   q('pnm').textContent=u.name||'Your Name';
   if(q('pun'))   q('pun').textContent=u.username||'@username';
   if(q('pem'))   q('pem').textContent=u.email||'—';
@@ -4487,117 +4241,19 @@ Give ONE clear, warm, specific recommendation (not a list of options) in max 4 l
 // ══════════════════════════════════════════════════
 //  NOURA AI CHAT
 // ══════════════════════════════════════════════════
-// ══════════════════════════════════════════════════
-//  NOURA AI CHAT — SAFE MARKDOWN + PERSISTENT HISTORY
-// ══════════════════════════════════════════════════
-const AI_HISTORY_KEY = 'noura_ai_conversations';
-let activeAIConversationId = null;
-let aiSending = false;
-
-function escapeHTML(value){
-  return String(value ?? '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
-}
-function inlineMarkdown(text){
-  let x = escapeHTML(text);
-  x = x.replace(/`([^`\n]+)`/g,'<code class="md-inline-code">$1</code>');
-  x = x.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-  x = x.replace(/__(.+?)__/g,'<strong>$1</strong>');
-  x = x.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,'<em>$1</em>');
-  x = x.replace(/(?<!_)_([^_\n]+)_(?!_)/g,'<em>$1</em>');
-  x = x.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a class="md-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-  return x;
-}
-function renderMarkdown(source){
-  const text = String(source ?? '').replace(/\r\n?/g,'\n');
-  const lines = text.split('\n');
-  const out = [];
-  let inCode = false, code = [], listType = null;
-  const closeList = () => { if(listType){ out.push(`</${listType}>`); listType=null; } };
-  const flushCode = () => { if(inCode){ out.push(`<pre class="md-code"><code>${escapeHTML(code.join('\n'))}</code></pre>`); code=[]; inCode=false; } };
-  const isList = line => line.match(/^\s*([-*•])\s+(.+)$/) || line.match(/^\s*\d+[.)]\s+(.+)$/);
-  for(let i=0;i<lines.length;i++){
-    const line=lines[i];
-    if(/^\s*```/.test(line)){ if(inCode) flushCode(); else { closeList(); inCode=true; } continue; }
-    if(inCode){ code.push(line); continue; }
-    if(/^\s*(---+|___+|\*\*\*+)\s*$/.test(line)){ closeList(); out.push('<hr class="md-hr">'); continue; }
-    let m=line.match(/^\s*(#{1,3})\s+(.+)$/);
-    if(m){ closeList(); const level=m[1].length; out.push(`<h${level} class="md-h${level}">${inlineMarkdown(m[2])}</h${level}>`); continue; }
-    m=line.match(/^\s*>\s?(.*)$/);
-    if(m){ closeList(); out.push(`<blockquote class="md-quote">${inlineMarkdown(m[1])}</blockquote>`); continue; }
-    m=line.match(/^\s*([-*•])\s+(.+)$/);
-    if(m){ if(listType!=='ul'){ closeList(); out.push('<ul class="md-list">'); listType='ul'; } out.push(`<li>${inlineMarkdown(m[2])}</li>`); continue; }
-    m=line.match(/^\s*\d+[.)]\s+(.+)$/);
-    if(m){ if(listType!=='ol'){ closeList(); out.push('<ol class="md-list">'); listType='ol'; } out.push(`<li>${inlineMarkdown(m[1])}</li>`); continue; }
-    if(!line.trim()){ closeList(); continue; }
-    closeList(); out.push(`<p class="md-p">${inlineMarkdown(line)}</p>`);
-  }
-  flushCode(); closeList();
-  return out.join('');
-}
-function getAIConversations(){ return S.utils.lsGet(AI_HISTORY_KEY, []); }
-function saveAIConversations(list){ S.utils.lsSet(AI_HISTORY_KEY, list.slice(0,50)); }
-function makeChatTitle(text){
-  const cleaned=String(text||'').replace(/[#*_`]/g,'').trim();
-  if(!cleaned) return 'New Noura Chat';
-  const lower=cleaned.toLowerCase();
-  if(/rice.*egg|egg.*rice/.test(lower)) return 'Rice & Egg Ideas';
-  if(/jollof/.test(lower)) return 'Smoky Jollof Recipe';
-  if(/meal plan/.test(lower)) return '7-Day Meal Plan';
-  return cleaned.length>34 ? cleaned.slice(0,34).trim()+'…' : cleaned;
-}
-function ensureAIConversation(firstMessage=''){
-  let list=getAIConversations();
-  let c=list.find(x=>x.id===activeAIConversationId);
-  if(!c){
-    c={id:'chat_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),title:makeChatTitle(firstMessage),createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[]};
-    list.unshift(c); activeAIConversationId=c.id;
-  }
-  return c;
-}
-function persistAIMessage(role,text){
-  const c=ensureAIConversation(role==='user'?text:'');
-  c.messages.push({role,text:String(text||''),timestamp:new Date().toISOString()});
-  c.updatedAt=new Date().toISOString();
-  if(role==='user' && c.messages.filter(m=>m.role==='user').length===1) c.title=makeChatTitle(text);
-  const list=getAIConversations().filter(x=>x.id!==c.id); list.unshift(c); saveAIConversations(list);
-}
-function openAIHistory(){ renderAIHistory(); gt('ai-history'); }
-function renderAIHistory(){
-  const el=q('ai-history-list'); if(!el) return;
-  const list=getAIConversations().sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt));
-  if(!list.length){ el.innerHTML='<div class="ai-history-empty"><div style="font-size:44px">💬</div><div style="font-family:Sora,sans-serif;font-weight:700;color:var(--t1);margin:12px 0 6px">No chats yet</div><div>Start a conversation with Noura AI and your chats will appear here.</div><button class="btn bp" style="margin-top:18px" onclick="newAIChat()">+ Start a chat</button></div>'; return; }
-  el.innerHTML=list.map(c=>`<div class="ai-history-card" onclick="openAIConversation('${c.id}')"><div style="font-size:25px">🤖</div><div class="ai-history-main"><div class="ai-history-title">${escapeHTML(c.title)}</div><div class="ai-history-time">${new Date(c.updatedAt).toLocaleString()} · ${c.messages.length} messages</div></div><button class="ai-history-delete" aria-label="Delete chat" onclick="event.stopPropagation();deleteAIConversation('${c.id}')">🗑️</button></div>`).join('');
-}
-function clearChatUI(){ const el=q('chat-msgs'); if(el) el.innerHTML=''; q('chat-suggestions')?.style.removeProperty('display'); }
-function renderConversation(c){
-  activeAIConversationId=c.id; clearChatUI();
-  c.messages.forEach(m=>addChatMessage(m.text,m.role==='ai'?'ai':'user'));
-  S.ai.loadHistory(c.messages); q('chat-inp')?.focus();
-}
-function openAIConversation(id){ const c=getAIConversations().find(x=>x.id===id); if(!c)return; renderConversation(c); gt('ai-chat'); }
-function newAIChat(){ activeAIConversationId=null; S.ai.resetHistory(); clearChatUI(); addChatMessage("👋 Hi! I'm Noura AI, your personal food assistant.<br><br>Ask me anything — what to cook, where to eat, recipes from your ingredients, or meal plans. I'm here to help! 🍽️",'ai',true); gt('ai-chat'); }
-function deleteAIConversation(id){
-  saveAIConversations(getAIConversations().filter(x=>x.id!==id));
-  if(activeAIConversationId===id){ activeAIConversationId=null; S.ai.resetHistory(); }
-  renderAIHistory();
-}
+function renderMarkdown(t){ return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
 async function sendChat(){
-  const inp=q('chat-inp'); const msg=inp.value.trim(); if(!msg || aiSending) return;
-  aiSending=true; inp.value=''; inp.disabled=true; q('chat-send-btn')?.setAttribute('disabled','disabled');
-  ensureAIConversation(msg); persistAIMessage('user',msg); addChatMessage(msg,'user'); q('chat-suggestions').style.display='none';
-  const msgs=q('chat-msgs'); const tid='typ-'+Date.now();
-  msgs.insertAdjacentHTML('beforeend',`<div class="chat-bubble ai" id="${tid}"><div style="font-size:11px;color:var(--t3);margin-bottom:5px">Noura is thinking…</div><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`); msgs.scrollTop=msgs.scrollHeight;
-  let res;
-  try { res=await S.ai.chat(msg); } catch { res={ok:false,text:"I couldn't reach Noura AI right now. Please try again in a moment."}; }
-  q(tid)?.remove();
-  const text=res?.ok ? res.text : (res?.error==='network' ? "I couldn't reach Noura AI right now. Please try again in a moment." : (res?.text || "I couldn't reach Noura AI right now. Please try again in a moment."));
-  addChatMessage(text,'ai');
-  if(res?.ok) persistAIMessage('ai',text); else {
-    const c=ensureAIConversation(); c.messages.pop(); saveAIConversations(getAIConversations().map(x=>x.id===c.id?c:x));
-  }
-  aiSending=false; inp.disabled=false; q('chat-send-btn')?.removeAttribute('disabled'); inp.focus();
+  const inp=q('chat-inp'); const msg=inp.value.trim(); if(!msg) return;
+  inp.value=''; inp.disabled=true;
+  addChatMessage(msg,'user'); q('chat-suggestions').style.display='none';
+  const tid='typ-'+Date.now(); const msgs=q('chat-msgs');
+  msgs.innerHTML+=`<div class="chat-bubble ai" id="${tid}"><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  msgs.scrollTop=msgs.scrollHeight;
+  const res = await S.ai.chat(msg);
+  const tel=document.getElementById(tid); if(tel)tel.remove();
+  addChatMessage(res.text,'ai'); inp.disabled=false; inp.focus();
 }
-function addChatMessage(text,role,rawHtml=false){ const el=q('chat-msgs'),div=document.createElement('div'); div.className='chat-bubble '+role; div.innerHTML=rawHtml?String(text):role==='ai'?renderMarkdown(text):escapeHTML(text).replace(/\n/g,'<br>'); el.appendChild(div); el.scrollTop=el.scrollHeight; }
+function addChatMessage(text,role){ const el=q('chat-msgs'),div=document.createElement('div'); div.className='chat-bubble '+role; div.innerHTML=renderMarkdown(text); el.appendChild(div); el.scrollTop=el.scrollHeight; }
 function sendSuggestion(chip){ q('chat-inp').value=chip.textContent; sendChat(); }
 
 // ══════════════════════════════════════════════════
@@ -4642,17 +4298,18 @@ function toast(msg){ const t=q('toast'); t.textContent=msg; t.classList.add('on'
 // ══════════════════════════════════════════════════
 let deferredInstallPrompt = null;
 const INSTALL_DISMISS_KEY = 'noura_install_dismissed_at';
-const INSTALL_DISMISS_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
-const isStandalone = () => window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
+const INSTALL_DISMISS_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // don't re-nag for a week
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  if (isStandalone()) return;
   const row = q('ssec-install'); if (row) row.style.display = 'block';
+
   const dismissedAt = Number(localStorage.getItem(INSTALL_DISMISS_KEY) || 0);
   const recentlyDismissed = dismissedAt && (Date.now() - dismissedAt) < INSTALL_DISMISS_COOLDOWN_MS;
-  if (!recentlyDismissed) setTimeout(() => { if (deferredInstallPrompt && !isStandalone()) q('install-banner')?.classList.add('on'); }, 1800);
+  if (!recentlyDismissed) {
+    setTimeout(() => { if (deferredInstallPrompt) q('install-banner')?.classList.add('on'); }, 1800);
+  }
 });
 async function installNouraApp() {
   if (!deferredInstallPrompt) { toast('Already installed, or your browser doesn\'t support installing yet'); return; }
@@ -4673,22 +4330,15 @@ window.addEventListener('appinstalled', () => {
   toast('Noura installed! 🎉');
 });
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => { try { const reg=await navigator.serviceWorker.register('/sw.js',{scope:'/'} ); reg.update().catch(()=>{}); } catch(e) { console.warn('Noura service worker unavailable',e); } });
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
 if (S.auth.isLoggedIn()) recordLogin();
 
 // ── Cross-file navigation ────────────────────────────
-function openVendorPortal(){ window.open('/vendor','_blank'); }
-function openAdminPanel(){   window.open('/admin','_blank'); }
-function openLanding(){      window.open('/landing','_blank'); }
+function openVendorPortal(){ window.open('noura-vendor.html','_blank'); }
+function openAdminPanel(){   window.open('noura-admin.html','_blank');  }
+function openLanding(){      window.open('noura-landing.html','_blank');}
 
 </script>
-
-<div id="install-banner" aria-live="polite">
-  <div class="ib-icon"><img class="brand-icon" src="./icon-192.png" alt="Noura"></div>
-  <div class="ib-body"><div class="ib-title">Install Noura</div><div class="ib-sub">Get the full Noura experience on your phone.</div></div>
-  <button class="ib-install" onclick="installNouraApp()">Install</button>
-  <button class="ib-close" onclick="dismissInstallBanner()" aria-label="Not now">×</button>
-</div>
 </body>
 </html>
