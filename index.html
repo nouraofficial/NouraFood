@@ -148,7 +148,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 /* ── SPLASH ──────────────────────────────────── */
 #scr-splash{align-items:center;justify-content:center;overflow:hidden}
 #splash-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.splash-center{position:absolute;top:62px;left:0;right:0;z-index:8;display:flex;flex-direction:column;align-items:center;text-align:center}
+.splash-center{position:absolute;top:62px;left:0;right:0;z-index:30;display:flex;flex-direction:column;align-items:center;text-align:center}
 .slm{width:68px;height:68px;border-radius:28px;background:var(--acs);border:1.5px solid #E8943A50;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:13px;animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 0 0 0 #E8943A40}
 .slm.pulse{animation:splashPop .7s cubic-bezier(.34,1.56,.64,1) both,ringPulse 1.8s 1s ease-out infinite}
 .swm{font-family:'Sora',sans-serif;font-size:38px;font-weight:800;color:var(--t1);letter-spacing:-1.5px;animation:splashFade .6s .35s ease both;line-height:1}
@@ -167,15 +167,17 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 @keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
 @keyframes fup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 /* ── NOURA MASCOT — integrated character layer ───────────── */
-.noura-mascot{position:absolute;z-index:6;pointer-events:none;user-select:none;will-change:transform,opacity;filter:drop-shadow(0 22px 38px rgba(0,0,0,.55));}
+.noura-mascot{position:absolute;z-index:20;pointer-events:none;user-select:none;will-change:transform,opacity;filter:drop-shadow(0 22px 38px rgba(0,0,0,.55));}
 .noura-mascot img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;}
-.splash-mascot{width:270px;height:500px;left:50%;bottom:72px;opacity:0;transform:translate3d(-50%,42px,0) scale(.92);animation:mascotHeroEnter .85s .18s cubic-bezier(.22,1,.36,1) forwards;}
+.splash-mascot img{max-width:100%;max-height:100%;}.mascot-blink{position:absolute;z-index:2;width:14%;height:2.6%;background:#1a120f;border-radius:50%;opacity:0;transform:scaleY(.2);transform-origin:center;animation:mascotBlink 5.2s 2.2s infinite;pointer-events:none}.mascot-blink.b1{left:39%;top:24.5%}.mascot-blink.b2{left:56%;top:25.2%}@keyframes mascotBlink{0%,92%,100%{opacity:0;transform:scaleY(.2)}94%{opacity:.9;transform:scaleY(1)}96%{opacity:0;transform:scaleY(.2)}}
+
+.splash-mascot{width:min(330px,78vw);height:min(410px,56vh);left:50%;bottom:88px;opacity:0;transform:translate3d(-50%,48px,0) scale(.90);animation:mascotHeroEnter .85s .18s cubic-bezier(.22,1,.36,1) forwards;}
 .splash-mascot img{animation:mascotIdle 4.2s 1.05s ease-in-out infinite;transform-origin:50% 92%;}
 .onboarding-mascot{width:118px;height:205px;right:8px;bottom:104px;opacity:0;transform:translate3d(14px,16px,0) scale(.96);animation:mascotSideEnter .55s .12s cubic-bezier(.22,1,.36,1) forwards;}
 .onboarding-mascot img{animation:mascotSideIdle 4s .8s ease-in-out infinite;transform-origin:50% 90%;}
 .mascot-glow{position:absolute;z-index:5;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.22),rgba(245,158,11,0) 68%);filter:blur(10px);}
-.splash-mascot-glow{width:300px;height:300px;left:50%;bottom:120px;transform:translateX(-50%);animation:mascotGlow 4.2s ease-in-out infinite;}
-.mascot-action{position:absolute;z-index:7;left:50%;bottom:590px;transform:translate(-50%,10px) scale(.9);padding:7px 11px;border:1px solid #E8943A45;border-radius:999px;background:rgba(18,13,10,.82);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.2px;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25);}
+.splash-mascot-glow{width:330px;height:330px;left:50%;bottom:110px;transform:translateX(-50%);animation:mascotGlow 4.2s ease-in-out infinite;}
+.mascot-action{position:absolute;z-index:9;left:50%;bottom:calc(min(56vh,410px) + 82px);transform:translate(-50%,10px) scale(.9);padding:7px 11px;border:1px solid #E8943A45;border-radius:999px;background:rgba(18,13,10,.82);backdrop-filter:blur(8px);color:#fff;font-size:11px;font-weight:700;letter-spacing:.2px;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25);}
 .mascot-action.show{animation:mascotBubble .8s cubic-bezier(.22,1,.36,1) both;}
 .mascot-action .ma-accent{color:var(--ac);}
 .noura-mascot.reacting img{animation:mascotReact .62s cubic-bezier(.34,1.56,.64,1) both!important;}
@@ -194,8 +196,8 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
 @keyframes mascotCurious{0%{transform:rotate(0)}35%{transform:rotate(-4deg) translateY(-2px)}70%{transform:rotate(3deg)}100%{transform:rotate(0)}}
 @keyframes mascotGlow{0%,100%{opacity:.38;transform:translateX(-50%) scale(.94)}50%{opacity:.68;transform:translateX(-50%) scale(1.06)}}
 @keyframes mascotBubble{0%{opacity:0;transform:translate(-50%,10px) scale(.9)}20%{opacity:1;transform:translate(-50%,0) scale(1)}80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-5px) scale(.98)}}
-@media(max-width:600px){.splash-mascot{width:min(270px,72vw);height:min(500px,59vh);bottom:78px}.splash-mascot-glow{width:270px;height:270px;bottom:120px}.mascot-action{bottom:calc(59vh + 90px)}.onboarding-mascot{width:104px;height:185px;right:0;bottom:108px}}
-@media(max-height:720px){.splash-mascot{height:420px;bottom:64px}.splash-mascot-glow{bottom:95px;width:240px;height:240px}.mascot-action{bottom:490px}.swm{font-size:34px}.slm{width:60px;height:60px;font-size:28px;margin-bottom:10px}}
+@media(max-width:600px){.splash-mascot{width:min(330px,82vw);height:min(410px,54vh);bottom:82px}.splash-mascot-glow{width:300px;height:300px;bottom:92px}.mascot-action{bottom:calc(54vh + 86px);font-size:12px}.onboarding-mascot{width:104px;height:185px;right:0;bottom:108px}}
+@media(max-height:720px){.splash-mascot{width:min(300px,78vw);height:360px;bottom:64px}.splash-mascot-glow{bottom:82px;width:240px;height:240px}.mascot-action{bottom:430px}.swm{font-size:34px}.slm{width:60px;height:60px;font-size:28px;margin-bottom:10px}}
 @media(prefers-reduced-motion:reduce){.noura-mascot,.noura-mascot img,.mascot-glow,.mascot-action{animation:none!important;transition:none!important}}
 
 /* ── ONBOARDING ──────────────────────────────── */
@@ -541,7 +543,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
   <div class="mascot-glow splash-mascot-glow" aria-hidden="true"></div>
   <div class="mascot-action" id="mascot-action" aria-hidden="true">Hey 👋 <span class="ma-accent">Ready to eat?</span></div>
   <div class="noura-mascot splash-mascot" id="splash-mascot" aria-hidden="true">
-    <img src="mascot-cutout.png" alt="">
+    <img src="mascot-transparent.png" alt="">
   </div>
   <div class="sdots">
     <div class="sdot a" id="sd0"></div>
@@ -558,7 +560,7 @@ body.light{--bg:#F5F2EC;--sf:#FFFFFF;--sfu:#EDE9E2;--bd:#DDD8CF;--t1:#1A1612;--t
     <div class="osi"><div class="oic">📱</div><div class="ott">Discover &<br>Share Meals</div><div class="ost">Explore thousands of real recipes. Save your favourites and cook with confidence.</div></div>
   </div>
   <div class="noura-mascot onboarding-mascot" aria-hidden="true">
-    <img src="mascot-cutout.png" alt="">
+    <img src="mascot-transparent.png" alt="">
   </div>
   <div class="ofoot">
     <div class="odds"><div class="odd a" id="od0"></div><div class="odd" id="od1"></div><div class="odd" id="od2"></div></div>
